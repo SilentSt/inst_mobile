@@ -1,7 +1,15 @@
 class AppStrings{
   //logic strings
-  static const String api_url = "http://188.225.72.198";
+  static const String apiUrl = "http://188.225.72.198";
 
+  static const String networkTesterUrl = "example.com";
 
   //ui strings
+
+  //errors
+  static const String errorDialogTitle = "Произошла ошибка";
+  static const String wrongAuthData = "Ошибка в данных аутенификации";
+  static const String unhandledException = "Произошла непредвиденная ошибка";
+  static const String networkException = "Отсутствует интернет соединение";
+  //errors
 }

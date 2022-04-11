@@ -5,15 +5,15 @@ class RegistrationLoadingState extends RegistrationState {}
 class RegistrationLoadedState extends RegistrationState {}
 
 class RegistrationWrongDataState extends RegistrationState {
-  String exception;
+  String error;
 
-  RegistrationWrongDataState({required this.exception});
+  RegistrationWrongDataState({required this.error});
 }
 
 class RegistrationSuccessState extends RegistrationState {}
 
 class RegistrationErrorState extends RegistrationState {
-  Error error;
+  String error;
 
   RegistrationErrorState({required this.error});
 }

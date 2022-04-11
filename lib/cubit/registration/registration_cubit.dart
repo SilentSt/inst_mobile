@@ -2,8 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:inst_mobile/cubit/registration/cubit.dart';
 
 class RegistrationCubit extends Cubit<RegistrationState> {
-  RegistrationCubit(RegistrationState initialState)
-      : super(RegistrationLoadingState());
+  RegistrationCubit() : super(RegistrationLoadingState());
 
   String? username;
   String? password;

@@ -10,7 +10,7 @@ class PostApi {
       required String filePath}) async {
     var request = http.MultipartRequest(
         'POST',
-        Uri.parse(AppStrings.api_url +
+        Uri.parse(AppStrings.apiUrl +
             '/post?title=$title&description=$description&datetime=$datetime'));
     request.headers.addAll(HttpHeaders.fileUploadingHeaders);
     request.files.add(http.MultipartFile.fromString('document', filePath));
@@ -19,17 +19,17 @@ class PostApi {
   }
 
   Future<http.Response> getPosts()async{
-    var response = await http.get(Uri.parse(AppStrings.api_url+'/posts'), headers: HttpHeaders.baseHeaders);
+    var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts'), headers: HttpHeaders.baseHeaders);
     return response;
   }
 
   Future<http.Response> getAuthoredPosts(int authorId)async{
-    var response = await http.get(Uri.parse(AppStrings.api_url+'/posts/authored?author_id=$authorId'), headers: HttpHeaders.baseHeaders);
+    var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts/authored?author_id=$authorId'), headers: HttpHeaders.baseHeaders);
     return response;
   }
   
   Future<http.Response> getFollowingPosts()async{
-    var response = await http.get(Uri.parse('${AppStrings.api_url}/posts/followed'), headers: HttpHeaders.baseHeaders);
+    var response = await http.get(Uri.parse('${AppStrings.apiUrl}/posts/followed'), headers: HttpHeaders.baseHeaders);
     return response;
   }
 }

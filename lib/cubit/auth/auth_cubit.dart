@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:inst_mobile/cubit/auth/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState>{
-  AuthCubit(AuthState initialState) : super(AuthLoadingState());
+  AuthCubit() : super(AuthLoadingState());
 
 
   String? username;

@@ -20,4 +20,12 @@ class PostCommentary {
 
   PostCommentary(
       {required this.post_id, required this.text, required this.datetime});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'post_id': this.post_id,
+      'text': this.text,
+      'datetime': this.datetime
+    };
+  }
 }
