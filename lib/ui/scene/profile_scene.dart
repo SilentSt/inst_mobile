@@ -11,27 +11,50 @@ class ProfileScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          if(state is ProfileLoadingState)
-            {
-              return const CircularProgressIndicator();
-            }
-          if(state is ProfileLoadedState)
-            {
-              return Column();
-            }
-          if(state is ProfileEmptyState)
-            {
-              return const SizedBox.shrink();
-            }
-          if(state is ProfileErrorState)
-            {
-              return const custom_widget.ErrorWidget(error: AppStrings.unhandledException);
-            }
+        buildWhen: (previous, current) {
+      context.read<ProfileCubit>().loadData().then((value) {
+        return true;
+      });
+      return false;
+    }, builder: (context, state) {
+      var _cubit = context.read<ProfileCubit>();
+      if (state is ProfileLoadingState) {
+        return const CircularProgressIndicator();
+      }
+      if (state is ProfileLoadedState) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Column(),
+          bottomNavigationBar: const custom_widget.AppBottomBar(),
+        );
+      }
+      if (state is ProfileEmptyState) {
+        return const SizedBox.shrink();
+      }
+      if (state is ProfileErrorState) {
+        return ErrorWidget(
+          error: AppStrings.unhandledException,
+        );
+      }
+      return const Center(child: CircularProgressIndicator());
+    });
+  }
+}
 
-          return const custom_widget.ErrorWidget(
-            error: AppStrings.unhandledException,
-          );
-        });
+class ErrorWidget extends StatelessWidget {
+  const ErrorWidget({Key? key, required this.error}) : super(key: key);
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    var _cubit = context.read<ProfileCubit>();
+    return AlertDialog(
+      title: Text(AppStrings.errorDialogTitle),
+      content: Text(error),
+      actions: [
+        TextButton(onPressed: () => _cubit.acceptError(), child: Text('Ок'))
+      ],
+    );
   }
 }

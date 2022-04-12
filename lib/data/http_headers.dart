@@ -11,6 +11,11 @@ class HttpHeaders{
     'Authorization': 'Bearer ${TempData.token}'
   };
 
+  static Map<String, String> registerHeaders = {
+    'Accept': 'Application/json',
+    'Content-Type': 'application/json'
+  };
+
   static Map<String, String> fileUploadingHeaders = {
     'Accept': 'Application/json',
     'Authorization': 'Bearer ${TempData.token}',

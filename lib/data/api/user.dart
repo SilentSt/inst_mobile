@@ -5,21 +5,26 @@ import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:http/http.dart' as http;
 
 class UserApi {
-  static Future<Map<int, String>> authorize(
-      Map<String, String> loginInfo) async {
+  ///Authorize function
+  ///
+  /// awaiting for Map<String, String>{'username':<your_username>,'password':<your_password>}
+  ///
+  /// returning Response, where you`ll find status code and userId in body
+  static Future<http.Response> authorize(Map<String, String> loginInfo) async {
     var request =
         http.MultipartRequest('POST', Uri.parse(AppStrings.apiUrl + '/login'))
           ..headers.addAll(HttpHeaders.loginHeaders)
           ..fields.addAll(loginInfo);
     var resp = (await request.send());
-    var response = <int, String>{};
-    response[resp.statusCode] = await resp.stream.bytesToString();
+    var response = await http.Response.fromStream(resp);
     return response;
   }
 
   static Future<http.Response> createUser(PostUser user) async {
-    var response = await http.post(Uri.parse(AppStrings.apiUrl + '/user'),
-        body: jsonEncode(user.toJson()));
+    var response = await http.post(
+        Uri.parse(AppStrings.apiUrl + '/user'),
+        body: jsonEncode(user.toJson()),
+        headers: HttpHeaders.registerHeaders);
     return response;
   }
 
@@ -72,9 +77,7 @@ class UserApi {
 
   static Future<http.Response> updateMe(PatchUser user) async {
     var response = await http.patch(Uri.parse(AppStrings.apiUrl + '/me'),
-        body: jsonEncode(user.toJson()),
-        headers: HttpHeaders.baseHeaders);
+        body: jsonEncode(user.toJson()), headers: HttpHeaders.baseHeaders);
     return response;
   }
-
 }

@@ -5,6 +5,7 @@ class AppStrings{
   static const String networkTesterUrl = "example.com";
 
   //ui strings
+  static const String successRegistration = "Регистрация прошла успешно!";
 
   //errors
   static const String errorDialogTitle = "Произошла ошибка";
