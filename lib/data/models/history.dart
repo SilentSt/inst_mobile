@@ -8,5 +8,5 @@ class GetHistory {
       : this.id = json['id'],
         this.filePath = json['filePath'],
         this.authorId = json['authorId'],
-        this.datetime = json['datetime'];
+        this.datetime = DateTime.parse(json['datetime']);
 }

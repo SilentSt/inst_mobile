@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
+import 'package:inst_mobile/ui/widget/image_history.dart';
+import 'package:inst_mobile/ui/widget/video_history_player.dart';
 import 'package:inst_mobile/ui/widget/widget.dart' as custom_widget;
 
 import 'package:inst_mobile/resources/app_strings.dart';
@@ -11,21 +13,66 @@ class NewsScene extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewsCubit, NewsState>(
-      buildWhen: (previous, current) {
-        context.read<NewsCubit>().loadData().then((value) {
-          return true;
-        });
-        return false;
-      },
       builder: (context, state) {
         var _cubit = context.read<NewsCubit>();
+        var screenSize = MediaQuery.of(context).size;
         if (state is NewsLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
         if (state is NewsLoadedState) {
           return Scaffold(
             appBar: AppBar(),
-            body: Column(),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: screenSize.width - 50,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          IconButton(onPressed: (){}, icon: Icon(Icons.add)),
+                          Row(
+                            children: List.generate(
+                                _cubit.followingHistories.length,
+                                (index) => IconButton(
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            var fileType = _cubit
+                                                .followingHistories[index].filePath
+                                                .split('.')
+                                                .last;
+                                            if (fileType == 'mp4' ||
+                                                fileType == 'webm') {
+                                              return VideoHistoryPlayer(
+                                                  videoSrc: _cubit
+                                                      .followingHistories[index]
+                                                      .filePath);
+                                            } else if (fileType == 'png' ||
+                                                fileType == 'jpeg' ||
+                                                fileType == 'jpg') {
+                                              return ImageHistory(
+                                                  imageSrc: _cubit
+                                                      .followingHistories[index]
+                                                      .filePath);
+                                            }
+                                            else{
+                                              return const ErrorWidget(error: "Неизвестный формат файла");
+                                            }
+                                          });
+                                    },
+                                    icon: Icon(Icons.history))),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
             bottomNavigationBar: const custom_widget.AppBottomBar(),
           );
         }
@@ -35,9 +82,9 @@ class NewsScene extends StatelessWidget {
         if (state is NewsErrorState) {
           return ErrorWidget(
             error: state.error,
-
           );
         }
+        context.read<NewsCubit>().loadData();
         return const SizedBox.shrink();
       },
     );

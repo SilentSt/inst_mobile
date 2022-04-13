@@ -6,6 +6,8 @@ class NewsLoadedState extends NewsState {}
 
 class NewsEmptyState extends NewsState {}
 
+class NewsInitialState extends NewsState{}
+
 class NewsErrorState extends NewsState {
   String error;
 
