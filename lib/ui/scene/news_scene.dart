@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
+import 'package:inst_mobile/resources/app_lists.dart';
 import 'package:inst_mobile/ui/widget/image_history.dart';
+import 'package:inst_mobile/ui/widget/image_post.dart';
 import 'package:inst_mobile/ui/widget/video_history_player.dart';
+import 'package:inst_mobile/ui/widget/video_post_player.dart';
 import 'package:inst_mobile/ui/widget/widget.dart' as custom_widget;
 
 import 'package:inst_mobile/resources/app_strings.dart';
@@ -32,7 +35,7 @@ class NewsScene extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          IconButton(onPressed: (){}, icon: Icon(Icons.add)),
+                          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
                           Row(
                             children: List.generate(
                                 _cubit.followingHistories.length,
@@ -42,25 +45,26 @@ class NewsScene extends StatelessWidget {
                                           context: context,
                                           builder: (context) {
                                             var fileType = _cubit
-                                                .followingHistories[index].filePath
+                                                .followingHistories[index]
+                                                .filePath
                                                 .split('.')
                                                 .last;
-                                            if (fileType == 'mp4' ||
-                                                fileType == 'webm') {
+                                            if (AppLists.videoFormats
+                                                .contains(fileType)) {
                                               return VideoHistoryPlayer(
                                                   videoSrc: _cubit
                                                       .followingHistories[index]
                                                       .filePath);
-                                            } else if (fileType == 'png' ||
-                                                fileType == 'jpeg' ||
-                                                fileType == 'jpg') {
+                                            } else if (AppLists.imageFormats
+                                                .contains(fileType)) {
                                               return ImageHistory(
                                                   imageSrc: _cubit
                                                       .followingHistories[index]
                                                       .filePath);
-                                            }
-                                            else{
-                                              return const ErrorWidget(error: "Неизвестный формат файла");
+                                            } else {
+                                              return const ErrorWidget(
+                                                  error:
+                                                      "Неизвестный формат файла");
                                             }
                                           });
                                     },
@@ -68,6 +72,40 @@ class NewsScene extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children:
+                          List.generate(_cubit.followingPosts.length, (index) {
+                        var fileType = _cubit.followingPosts[index].filePath
+                            ?.split('.')
+                            .last;
+                        return Card(
+                          child: Column(children: [
+                            Text(_cubit.followingPosts[index].datetime
+                                .toString()),
+                            Text(_cubit.followingPosts[index].title),
+                            Text(_cubit.followingPosts[index].description!),
+                            if (AppLists.videoFormats.contains(fileType))
+                              VideoPostPlayer(
+                                  videoSrc:
+                                      _cubit.followingPosts[index].filePath!),
+                            if (AppLists.imageFormats.contains(fileType))
+                              ImagePost(
+                                  imageSrc:
+                                      _cubit.followingPosts[index].filePath!),
+                            Row(
+                              children: [
+                                Text(
+                                    'Likes: ${_cubit.followingPosts[index].likes.toString()}'),
+                                IconButton(onPressed: (){}, icon: const Icon(Icons.check))
+                              ],
+                            ),
+                            IconButton(onPressed: (){}, icon: const Icon(Icons.keyboard))
+                          ]),
+                        );
+                      }),
                     ),
                   )
                 ],

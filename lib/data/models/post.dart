@@ -13,7 +13,7 @@ class GetPost {
       : this.id = json['id'],
         this.title = json['title'],
         this.description = json['description'],
-        this.filePath = json['filepath'],
+        this.filePath = json['filePath'],
         this.datetime = DateTime.parse(json['datetime']),
         this.likes = json['likes'],
         this.commentaries = List.generate(json['commentaries'].length,

@@ -9,7 +9,7 @@ class GetCommentary {
       : this.id = json['id'],
         this.text = json['text'],
         this.likes = json['likes'],
-        this.datetime = json['datetime'],
+        this.datetime = DateTime.parse(json['datetime']),
         this.author_id = json['author_id'];
 }
 
