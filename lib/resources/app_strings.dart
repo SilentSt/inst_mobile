@@ -13,7 +13,10 @@ class AppStrings {
   static const String passwordTitle = "Пароль";
   static const String nickName = "Никнейм";
   static const String registerButton = "Зарегестрироваться";
+  static const String loginTitle = "Добро пожаловать!";
+  static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация:";
+  static const String registerSuggestion = "Еще нет аккаунта? Зарегестрируйтесь";
   //ui strings
 
   //errors
@@ -42,5 +45,6 @@ class AppStrings {
   static const String sendOutlinedPath = 'resources/images/send_outlined.png';
   static const String smallLikeFilledPath = 'resources/images/small_like_filled.png';
   static const String smallLikeOutlinedPath = 'resources/images/small_like_outlined.png';
+  static const String logonIconPath = 'resources/images/logon_icon.png';
   //asset image paths
 }
