@@ -25,7 +25,6 @@ class AuthCubit extends Cubit<AuthState>{
       }
     else{
       TempData.token = data['access_token'];
-      TempData.myId = data['user_id'];
       emit(AuthAuthorizedState());
     }
   }

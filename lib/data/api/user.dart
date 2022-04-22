@@ -9,7 +9,7 @@ class UserApi {
   ///
   /// awaiting for Map<String, String>{'username':<your_username>,'password':<your_password>}
   ///
-  /// returning Response, where you`ll find status code and userId in body
+  /// returning Response, where you`ll find status code and token in body
   static Future<http.Response> authorize(Map<String, String> loginInfo) async {
     var request =
         http.MultipartRequest('POST', Uri.parse(AppStrings.apiUrl + '/login'))

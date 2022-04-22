@@ -1,16 +1,20 @@
+import 'package:inst_mobile/data/models/user.dart';
+
 class GetCommentary {
-  int id;
-  String text;
+  String uuid;
+  String title;
   int likes;
-  DateTime datetime;
-  int author_id;
+  DateTime createdAt;
+  DateTime updatedAt;
+  GetSmallUser author;
 
   GetCommentary.fromJson(Map<String, dynamic> json)
-      : this.id = json['id'],
-        this.text = json['text'],
+      : this.uuid = json['uuid'],
+        this.title = json['title'],
         this.likes = json['likes'],
-        this.datetime = DateTime.parse(json['datetime']),
-        this.author_id = json['author_id'];
+        this.createdAt = DateTime.parse(json['createdAt']),
+        this.updatedAt = DateTime.parse(json['updatedAt']),
+        this.author = GetSmallUser.fromJson(json['author']);
 }
 
 class PostCommentary {

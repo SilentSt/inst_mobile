@@ -1,53 +1,52 @@
 import 'package:inst_mobile/data/models/post.dart';
 
-import 'history.dart';
+
+class GetFullUser {
+  final String uuid;
+  final String nickname;
+  final String photo;
+  final int postsCount;
+  final int followingCount;
+  final int followersCount;
+  final List<GetPostWithoutAuthor> posts;
+
+  GetFullUser.fromJson(Map<String, dynamic> json)
+      : this.uuid = json['uuid'],
+        this.nickname = json['nickname'],
+        this.photo = json['photo'],
+        this.postsCount = json['posts_count'],
+        this.followingCount = json['following_count'],
+        this.followersCount = json['followers_count'],
+        this.posts = List.generate(json['posts'].length,
+            (index) => GetPostWithoutAuthor.fromJson(json['posts'][index]));
+}
 
 class GetUser {
-  int id;
-  String login;
-  String nickname;
-  String? status;
-  String? telegram;
-  List<GetPost>? posts;
-  List<GetHistory>? histories;
-  List<GetUser>? followed;
-  List<GetUser>? followers;
-
-  // GetUser(
-  //     String? status,
-  //     String? telegram,
-  //     List<GetPost>? posts,
-  //     List<GetHistory> histories,
-  //     List<GetUser>? followed,
-  //     List<GetUser>? followers,
-  //     {required this.id,
-  //     required this.login,
-  //     required this.nickname}) {
-  //   this.id = id;
-  //   this.login = login;
-  //   this.nickname = nickname;
-  //   this.status = status;
-  //   this.telegram = telegram;
-  //   this.posts = posts;
-  //   this.histories = histories;
-  //   this.followed = followed;
-  //   this.followers = followers;
-  // }
+  final String uuid;
+  final String nickname;
+  final String photo;
+  final int postsCount;
+  final int followingCount;
+  final int followersCount;
 
   GetUser.fromJson(Map<String, dynamic> json)
-      : this.id = json['id'],
-        this.login = json['login'],
+      : this.uuid = json['uuid'],
         this.nickname = json['nickname'],
-        this.status = json['status'],
-        this.telegram = json['telegram'],
-        this.posts = List.generate(json['posts'].length,
-            (index) => GetPost.fromJson(json['posts'][index])),
-        this.histories = List.generate(json['histories'].length,
-            (index) => GetHistory.fromJson(json['histories'][index])),
-        this.followed = List.generate(json['followed'].length,
-            (index) => GetUser.fromJson(json['followed'][index])),
-        this.followers = List.generate(json['followers'].length,
-            (index) => GetUser.fromJson(json['followers'][index]));
+        this.photo = json['photo'],
+        this.postsCount = json['posts_count'],
+        this.followingCount = json['following_count'],
+        this.followersCount = json['followers_count'];
+}
+
+class GetSmallUser {
+  final String uuid;
+  final String nickname;
+  final String photo;
+
+  GetSmallUser.fromJson(Map<String, dynamic> json)
+      : this.uuid = json['uuid'],
+        this.nickname = json['nickname'],
+        this.photo = json['photo'];
 }
 
 class PostUser {
