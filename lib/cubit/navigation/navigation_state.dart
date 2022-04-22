@@ -12,6 +12,8 @@ class NavigationProfileState extends NavigationState{}
 
 class NavigationRegistrationState extends NavigationState{}
 
+class NavigationCreatePostState extends NavigationState{}
+
 class NavigationPostDetailsState extends NavigationState{
   final GetPostFull post;
 

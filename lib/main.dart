@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inst_mobile/cubit/auth/auth_cubit.dart';
+import 'package:inst_mobile/cubit/create_post/create_post_cubit.dart';
 import 'package:inst_mobile/cubit/global_search/cubit.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
@@ -28,6 +29,7 @@ class Starter extends StatelessWidget {
         BlocProvider<RegistrationCubit>(
           create: (context) => RegistrationCubit(),
         ),
+        BlocProvider<CreatePostCubit>(create: (context)=>CreatePostCubit()),
         BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
         BlocProvider<PostDetailsCubit>(create: (context) => PostDetailsCubit())
       ],

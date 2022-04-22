@@ -15,6 +15,8 @@ class NavigationCubit extends Cubit<NavigationState>{
 
   void pushToRegistrationScene() => emit(NavigationRegistrationState());
 
+  void pushToCreatePostScene()=>emit(NavigationCreatePostState());
+
   void pushToPostDetailsScene(GetPostFull post) => emit(NavigationPostDetailsState(post: post));
 
 }

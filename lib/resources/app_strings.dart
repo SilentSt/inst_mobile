@@ -17,6 +17,10 @@ class AppStrings {
   static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация:";
   static const String registerSuggestion = "Еще нет аккаунта? Зарегестрируйтесь";
+  static const String createPostTitle = "Создание публикации";
+  static const String title = "Заголовок";
+  static const String description = "Описание";
+  static const String fileChoose = "Выбранный файл";
   //ui strings
 
   //errors

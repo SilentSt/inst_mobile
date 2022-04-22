@@ -22,3 +22,8 @@ class NewsSceneControllers{
 class GlobalSearchControllers{
 
 }
+
+class CreatePostControllers{
+  static TextEditingController titleController = TextEditingController();
+  static TextEditingController descriptionController = TextEditingController();
+}

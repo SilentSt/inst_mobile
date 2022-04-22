@@ -43,6 +43,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   video_player: ^2.3.0
   image_network: ^2.5.0
+  image_picker: ^0.8.5
 
 dev_dependencies:
   flutter_test:

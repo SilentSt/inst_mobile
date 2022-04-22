@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 
 import '../../resources/app_strings.dart';
@@ -21,7 +23,9 @@ class AppBottomBar extends StatelessWidget {
             children: [
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.homePath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.chatPath)),
-              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.addPath)),
+              IconButton(onPressed: (){
+                context.read<NavigationCubit>().pushToCreatePostScene();
+              }, icon: Image.asset(AppStrings.addPath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.searchPath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.whiteBellPath))
             ],
