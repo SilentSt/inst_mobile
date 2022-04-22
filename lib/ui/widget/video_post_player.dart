@@ -18,8 +18,7 @@ class _VideoPostPlayerState extends State<VideoPostPlayer> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        '${AppStrings.apiUrl}/file?file_path=${widget.videoSrc}')
+    _controller = VideoPlayerController.network(widget.videoSrc)
       ..initialize().then((value) => setState(() {}));
   }
 

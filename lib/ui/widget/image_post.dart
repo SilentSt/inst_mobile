@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inst_mobile/resources/app_strings.dart';
+import 'package:image_network/image_network.dart';
+import '../../resources/app_colors.dart';
 
 class ImagePost extends StatelessWidget {
   const ImagePost({Key? key, required this.imageSrc}) : super(key: key);
@@ -8,6 +9,21 @@ class ImagePost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network('${AppStrings.apiUrl}/file?file_path=$imageSrc');
+    return SizedBox(child: ImageNetwork(
+      height: 300,
+      width: MediaQuery.of(context).size.width*0.9,
+      image: imageSrc,
+      duration: 1500,
+      curve: Curves.easeIn,
+      fitAndroidIos: BoxFit.cover,
+      fitWeb: BoxFitWeb.cover,
+      onLoading: const CircularProgressIndicator(
+        color: AppColors.darkGreen,
+      ),
+      onError: const Icon(
+        Icons.error,
+        color: Colors.red,
+      ),
+    ));
   }
 }

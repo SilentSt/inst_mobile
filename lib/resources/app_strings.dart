@@ -8,6 +8,7 @@ class AppStrings {
   static const String successRegistration = "Регистрация прошла успешно!";
   static const String newsAppBarTitle = 'Новости';
   static const String acceptError = 'Ок';
+  static const String postDetailsTitle = 'Комментарии';
   static const String emailTitle = "E-Mail";
   static const String passwordTitle = "Пароль";
   static const String nickName = "Никнейм";
@@ -35,7 +36,7 @@ class AppStrings {
   static const String searchPath = 'resources/images/search.png';
   static const String sendPath = 'resources/images/share.png';
   static const String whiteBellPath = 'resources/images/white_bell.png';
-
+  static const String addPath = 'resources/images/add.png';
   //asset image paths
 
   //TODO: remove after connected API

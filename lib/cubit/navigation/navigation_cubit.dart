@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:inst_mobile/data/models/post.dart';
 import 'navigation_state.dart';
 
 class NavigationCubit extends Cubit<NavigationState>{
@@ -13,5 +14,7 @@ class NavigationCubit extends Cubit<NavigationState>{
   void pushToProfileScene() => emit(NavigationProfileState());
 
   void pushToRegistrationScene() => emit(NavigationRegistrationState());
+
+  void pushToPostDetailsScene(GetPostFull post) => emit(NavigationPostDetailsState(post: post));
 
 }

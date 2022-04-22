@@ -23,4 +23,8 @@ class AppTextStyles {
 
   static final TextStyle h2White = h2.copyWith(
       color: Colors.white);
+
+  static final TextStyle h2Green = h2.copyWith(
+    color: AppColors.darkGreen
+  );
 }
