@@ -11,7 +11,7 @@ import 'news_state.dart';
 class NewsCubit extends Cubit<NewsState>{
   NewsCubit() : super(NewsInitialState());
   List<GetHistory> followingHistories = [];
-  List<GetPostWithoutAuthor> followingPosts = [];
+  List<GetPostFull> followingPosts = [];
 
   Future<void> loadData()async{
     emit(NewsLoadingState());
@@ -38,7 +38,7 @@ class NewsCubit extends Cubit<NewsState>{
       List<dynamic> data = jsonDecode(followingPostsResponse.body);
       for(Map<String, dynamic> history in data)
       {
-        followingPosts.add(GetPostWithoutAuthor.fromJson(history));
+        followingPosts.add(GetPostFull.fromJson(history));
       }
       emit(NewsLoadedState());
     }

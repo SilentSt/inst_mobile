@@ -29,6 +29,7 @@ class AppStrings{
   static const String searchPath = 'resources/images/search.png';
   static const String sendPath = 'resources/images/share.png';
   static const String whiteBellPath = 'resources/images/white_bell.png';
+  static const String addPath = 'resources/images/add.png';
   //asset image paths
 
   //TODO: remove after connected API

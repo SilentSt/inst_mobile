@@ -36,12 +36,6 @@ class NewsScene extends StatelessWidget {
                 ],
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-                onPressed: () {},
-                backgroundColor: AppColors.lightGreen,
-                child: const Icon(Icons.add, size: 30)),
             bottomNavigationBar: const custom_widget.AppBottomBar(),
           );
         }

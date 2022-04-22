@@ -17,43 +17,38 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _cubit = context.read<NewsCubit>();
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      elevation: 0,
-      color: AppColors.lightGreen,
-      margin: const EdgeInsets.all(5),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(children: [
-          Row(
-            children: [
-              //TODO: change to dynamic from NewsCubit
-              const UserIcon(path: _cubit.followingPosts[index]., size: 36),
-              const SizedBox(
-                width: 5,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  //TODO: change to dynamic from NewsCubit
-                  Text(
-                    AppStrings.userName,
-                    style: AppTextStyles.h1,
-                  ),
-                  //TODO: change to dynamic from NewsCubit
-                  Text(
-                    AppStrings.userNickName,
-                    style: AppTextStyles.h2,
-                    textAlign: TextAlign.left,
-                  )
-                ],
-              )
-            ],
-          ),
-          const SizedBox(height: 15),
-          //TODO: change to network loading, change to dynamic linc from NewsCubit
-          ContentCard(postIndex: index)
-        ]),
+    var _post = _cubit.followingPosts[index];
+    return SizedBox(
+      width: MediaQuery.of(context).size.width*0.98,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        elevation: 0,
+        color: AppColors.lightGreen,
+        margin: const EdgeInsets.all(5),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(children: [
+            Row(
+              children: [
+                UserIcon(path: _post.author.photo, size: 36),
+                const SizedBox(
+                  width: 5,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '@'+_post.author.nickname,
+                      style: AppTextStyles.h1,
+                    ),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 15),
+            ContentCard(postIndex: index)
+          ]),
+        ),
       ),
     );
   }
