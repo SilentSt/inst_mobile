@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../resources/app_strings.dart';
+import 'package:flutter/material.dart';
+import 'package:image_network/image_network.dart';
+import 'package:inst_mobile/resources/app_colors.dart';
 
 class UserIcon extends StatelessWidget {
   const UserIcon({
@@ -15,10 +16,21 @@ class UserIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
         borderRadius: BorderRadius.circular(90),
-        child: Image.asset(
-          AppStrings.userPhotoPath,
+        child: ImageNetwork(
           height: size,
           width: size,
+          image: path,
+          duration: 1500,
+          curve: Curves.easeIn,
+          fitAndroidIos: BoxFit.cover,
+          fitWeb: BoxFitWeb.cover,
+          onLoading: const CircularProgressIndicator(
+            color: AppColors.darkGreen,
+          ),
+          onError: const Icon(
+            Icons.error,
+            color: Colors.red,
+          ),
         ));
   }
 }

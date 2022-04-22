@@ -29,10 +29,16 @@ class CustomDarkButton extends StatelessWidget {
           child: SizedBox(
             width: size.width * 0.55,
             height: 30,
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.h2White,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  style: AppTextStyles.h2White,
+                ),
+              ],
             ),
           )),
     );

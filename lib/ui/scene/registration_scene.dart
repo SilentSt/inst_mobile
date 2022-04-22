@@ -7,11 +7,9 @@ import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/registration/cubit.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
-import 'package:inst_mobile/ui/scene/auth_scene.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/custom_buttons.dart';
 import 'package:inst_mobile/ui/widget/custom_text_field.dart';
-import 'package:inst_mobile/ui/widget/widget.dart' as custom_widget;
 import 'package:inst_mobile/resources/app_strings.dart';
 
 class RegistrationScene extends StatelessWidget {
@@ -28,48 +26,71 @@ class RegistrationScene extends StatelessWidget {
         }
         if (state is RegistrationLoadedState) {
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              leading: IconButton(icon:Image.asset(AppStrings.arrowBackPath,), onPressed: (){ context.read<NavigationCubit>().pushToAuthScene(); },),
+            ),
             body: SafeArea(
-                child: Column(
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    height: size.height*0.9,
+                    child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FlutterLogo(size: 90),
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  color: AppColors.lightGreen,
-                  child: Column(children: [
-                    Text(AppStrings.registrationTitle,
-                        style: AppTextStyles.h1.copyWith(
-                            fontSize: 38, fontWeight: FontWeight.w900)),
-                    CustomTextField(
-                        title: AppStrings.emailTitle,
-                        controller:
-                            RegistrationSceneControllers.loginController),
-                    CustomTextField(
-                        title: AppStrings.passwordTitle,
-                        controller:
-                            RegistrationSceneControllers.passwordController),
-                    CustomTextField(
-                        title: AppStrings.nickName,
-                        controller:
-                            RegistrationSceneControllers.nicknameController),
-                    CustomDarkButton(func: (){ _cubit.registrate(
-                        username: RegistrationSceneControllers
-                            .loginController.text,
-                        password: RegistrationSceneControllers
-                            .passwordController.text,
-                        nickname: RegistrationSceneControllers
-                            .nicknameController.text);},
-                      size: size,
-                      text: AppStrings.registerButton,)
-                  ]),
-                ),
-                SizedBox(
-                  height: size.height * 0.2,
-                )
+                    Image.asset(AppStrings.logonIconPath),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        color: AppColors.lightGreen,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25),
+                          child: Column(children: [
+                            Text(AppStrings.registrationTitle,
+                                style: AppTextStyles.h1.copyWith(
+                                    fontSize: 38,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.darkGreen)),
+                            CustomTextField(
+                                title: AppStrings.emailTitle,
+                                controller:
+                                    RegistrationSceneControllers.loginController),
+                            CustomTextField(
+                                title: AppStrings.passwordTitle,
+                                controller:
+                                    RegistrationSceneControllers.passwordController,
+                                obfuscation: true,),
+                            CustomTextField(
+                                title: AppStrings.nickName,
+                                controller:
+                                    RegistrationSceneControllers.nicknameController),
+                            CustomDarkButton(
+                              func: () {
+                                _cubit.registrate(
+                                    username: RegistrationSceneControllers
+                                        .loginController.text,
+                                    password: RegistrationSceneControllers
+                                        .passwordController.text,
+                                    nickname: RegistrationSceneControllers
+                                        .nicknameController.text);
+                              },
+                              size: size,
+                              text: AppStrings.registerButton,
+                            )
+                          ]),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.2,
+                    )
               ],
-            )),
+            ),
+                  ),
+                )),
           );
         }
         if (state is RegistrationWrongDataState) {
@@ -99,8 +120,6 @@ class RegistrationScene extends StatelessWidget {
     );
   }
 }
-
-
 
 class ErrorWidget extends StatelessWidget {
   const ErrorWidget({Key? key, required this.error}) : super(key: key);

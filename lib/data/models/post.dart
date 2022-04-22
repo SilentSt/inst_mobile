@@ -65,7 +65,7 @@ class GetPostFull {
   final int likesCount;
   final int commentsCount;
   final GetSmallUser author;
-  final List<GetCommentary> commentaries;
+  final List<GetCommentary>? commentaries;
   final List<GetLike> likes;
   final List<GetFile> files;
 
@@ -80,9 +80,9 @@ class GetPostFull {
         this.likesCount = json['likes_count'],
         this.commentsCount = json['comments_count'],
         this.author = GetSmallUser.fromJson(json['author']),
-        this.commentaries = List.generate(json['comments'].length,
+        this.commentaries = json['comments']==null?null: List.generate(json['comments'].length,
             (index) => GetCommentary.fromJson(json['comments'][index])),
-        this.likes = List.generate(json['likes'].length,
+        this.likes = json['likes']==null?[]:List.generate(json['likes'].length,
             (index) => GetLike.fromJson(json['likes'][index])),
         this.files = List.generate(json['files'].length,
             (index) => GetFile.fromJson(json['files'][index]));

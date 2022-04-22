@@ -8,11 +8,15 @@ class AppStrings {
   static const String successRegistration = "Регистрация прошла успешно!";
   static const String newsAppBarTitle = 'Новости';
   static const String acceptError = 'Ок';
+  static const String postDetailsTitle = 'Комментарии';
   static const String emailTitle = "E-Mail";
   static const String passwordTitle = "Пароль";
   static const String nickName = "Никнейм";
   static const String registerButton = "Зарегестрироваться";
+  static const String loginTitle = "Добро пожаловать!";
+  static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация:";
+  static const String registerSuggestion = "Еще нет аккаунта? Зарегестрируйтесь";
   //ui strings
 
   //errors
@@ -35,14 +39,12 @@ class AppStrings {
   static const String searchPath = 'resources/images/search.png';
   static const String sendPath = 'resources/images/share.png';
   static const String whiteBellPath = 'resources/images/white_bell.png';
-
+  static const String addPath = 'resources/images/add.png';
+  static const String arrowBackPath = 'resources/images/arrow_back.png';
+  static const String largeLikeOutlinedPath = 'resources/images/large_like_outlined.png';
+  static const String sendOutlinedPath = 'resources/images/send_outlined.png';
+  static const String smallLikeFilledPath = 'resources/images/small_like_filled.png';
+  static const String smallLikeOutlinedPath = 'resources/images/small_like_outlined.png';
+  static const String logonIconPath = 'resources/images/logon_icon.png';
   //asset image paths
-
-  //TODO: remove after connected API
-  //deprecated
-  static const String userPhotoPath = 'resources/images/user_photo.png';
-  static const String userName = 'Витя Заводской';
-  static const String userNickName = '@Кила';
-  static const String postPhotoPath = 'resources/images/post.png';
-//deprecated
 }

@@ -21,8 +21,7 @@ class AppBottomBar extends StatelessWidget {
             children: [
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.homePath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.chatPath)),
-              const SizedBox(),
-              const SizedBox(),
+              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.addPath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.searchPath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.whiteBellPath))
             ],

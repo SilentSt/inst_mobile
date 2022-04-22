@@ -21,6 +21,51 @@ class AppTextStyles {
     fontWeight: FontWeight.normal
   );
 
+  static const TextStyle h4 = TextStyle(
+      color: AppColors.darkGrey,
+      fontSize: 13,
+      fontFamily: 'Popins',
+      fontWeight: FontWeight.normal
+  );
+
   static final TextStyle h2White = h2.copyWith(
       color: Colors.white);
+
+  static final TextStyle h2Green = h2.copyWith(
+    color: AppColors.darkGreen
+  );
+
+}
+
+extension AppTextExtension on TextStyle{
+  TextStyle green(){
+    return copyWith(
+        color: AppColors.darkGreen
+    );
+  }
+  TextStyle white(){
+    return copyWith(
+        color: Colors.white
+    );
+  }
+  TextStyle bold900(){
+    return copyWith(
+      fontWeight: FontWeight.w900
+    );
+  }
+  TextStyle bold500(){
+    return copyWith(
+        fontWeight: FontWeight.w500
+    );
+  }
+  TextStyle bold(){
+    return copyWith(
+      fontWeight: FontWeight.bold
+    );
+  }
+  TextStyle size(double size){
+    return copyWith(
+      fontSize: size
+    );
+  }
 }
