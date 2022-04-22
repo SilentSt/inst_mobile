@@ -49,35 +49,35 @@ class GetSmallUser {
         this.photo = json['photo'];
 }
 
-class PostUser {
-  String login;
+class CreateUser {
+  String email;
   String password;
   String nickname;
 
-  PostUser(
-      {required this.login, required this.password, required this.nickname});
+  CreateUser(
+      {required this.email, required this.password, required this.nickname});
 
   Map<String, dynamic> toJson() {
     return {
-      'login': this.login,
+      'email': this.email,
       'password': this.password,
       'nickname': this.nickname
     };
   }
 }
 
-class PatchUser {
-  String? login;
+class UpdateUser {
+  String? email;
   String? nickname;
-  String? status;
-  String? telegram;
+  String? password;
+  //String? telegram;
 
   Map<String, dynamic> toJson() {
     return {
-      'login': this.login,
+      'login': this.email,
       'nickname': this.nickname,
-      'status': this.status,
-      'telegram': this.telegram
+      'status': this.password,
+      //'telegram': this.telegram
     };
   }
 }

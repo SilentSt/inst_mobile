@@ -12,8 +12,7 @@ class NewsFeed extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: List.generate(_cubit.followingPosts.length, (index) {
-          var fileType = _cubit.followingPosts[index].filePath?.split('.').last;
-          return NewsCard(index: index, fileType: fileType!);
+          return NewsCard(index: index);
         }),
       ),
     );

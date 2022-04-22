@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:inst_mobile/data/models/files.dart';
 import 'package:inst_mobile/data/models/likes.dart';
 import 'package:inst_mobile/data/models/user.dart';
 
@@ -12,6 +15,7 @@ class GetPost {
   final int likesCount;
   final int commentsCount;
   final GetSmallUser author;
+  final List<GetFile> files;
 
   GetPost.fromJson(Map<String, dynamic> json)
       : this.uuid = json['uuid'],
@@ -21,7 +25,9 @@ class GetPost {
         this.updatedAt = DateTime.parse(json['updated_at']),
         this.likesCount = json['likes_count'],
         this.commentsCount = json['comments_count'],
-        this.author = GetSmallUser.fromJson(json['author']);
+        this.author = GetSmallUser.fromJson(json['author']),
+        this.files = List.generate(json['files'].length,
+            (index) => GetFile.fromJson(json['files'][index]));
 }
 
 class GetPostWithoutAuthor {
@@ -32,6 +38,7 @@ class GetPostWithoutAuthor {
   final DateTime updatedAt;
   final int likesCount;
   final int commentsCount;
+  final List<GetFile> files;
 
   GetPostWithoutAuthor.fromJson(Map<String, dynamic> json)
       : this.uuid = json['uuid'],
@@ -40,7 +47,9 @@ class GetPostWithoutAuthor {
         this.createdAt = DateTime.parse(json['created_at']),
         this.updatedAt = DateTime.parse(json['updated_at']),
         this.likesCount = json['likes_count'],
-        this.commentsCount = json['comments_count'];
+        this.commentsCount = json['comments_count'],
+        this.files = List.generate(json['files'].length,
+                (index) => GetFile.fromJson(json['files'][index]));
 }
 
 class GetPostFull {
@@ -54,6 +63,7 @@ class GetPostFull {
   final GetSmallUser author;
   final List<GetCommentary> commentaries;
   final List<GetLike> likes;
+  final List<GetFile> files;
 
   GetPostFull.fromJson(Map<String, dynamic> json)
       : this.uuid = json['uuid'],
@@ -67,7 +77,18 @@ class GetPostFull {
         this.commentaries = List.generate(json['comments'].length,
             (index) => GetCommentary.fromJson(json['comments'][index])),
         this.likes = List.generate(json['likes'].length,
-            (index) => GetLike.fromJson(json['likes'][index]));
+            (index) => GetLike.fromJson(json['likes'][index])),
+        this.files = List.generate(json['files'].length,
+                (index) => GetFile.fromJson(json['files'][index]));
+}
+
+class CreatePostBody {
+  final List<File> files;
+  final String title;
+  final String description;
+
+  CreatePostBody(
+      {required this.files, required this.title, required this.description});
 }
 
 class UpdatePost {
