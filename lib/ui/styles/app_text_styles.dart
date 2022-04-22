@@ -14,6 +14,13 @@ class AppTextStyles {
       fontFamily: 'Popins',
       fontWeight: FontWeight.w100);
 
+  static const TextStyle h3 = TextStyle(
+    color: AppColors.darkGrey,
+    fontSize: 16,
+    fontFamily: 'Popins',
+    fontWeight: FontWeight.normal
+  );
+
   static final TextStyle h2White = h2.copyWith(
       color: Colors.white);
 

@@ -1,4 +1,4 @@
-class AppStrings{
+class AppStrings {
   //logic strings
   static const String apiUrl = "https://penta.shitposting.team";
 
@@ -9,6 +9,11 @@ class AppStrings{
   static const String newsAppBarTitle = 'Новости';
   static const String acceptError = 'Ок';
   static const String postDetailsTitle = 'Комментарии';
+  static const String emailTitle = "E-Mail";
+  static const String passwordTitle = "Пароль";
+  static const String nickName = "Никнейм";
+  static const String registerButton = "Зарегестрироваться";
+  static const String registrationTitle = "Регистрация:";
   //ui strings
 
   //errors
@@ -17,6 +22,7 @@ class AppStrings{
   static const String unhandledException = "Произошла непредвиденная ошибка";
   static const String networkException = "Отсутствует интернет соединение";
   static const String unknownFileType = "Неизвестный формат файла";
+
   //errors
 
   //asset image paths
@@ -39,5 +45,5 @@ class AppStrings{
   static const String userName = 'Витя Заводской';
   static const String userNickName = '@Кила';
   static const String postPhotoPath = 'resources/images/post.png';
-  //deprecated
+//deprecated
 }
