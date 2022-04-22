@@ -28,7 +28,7 @@ class NewsCard extends StatelessWidget {
           Row(
             children: [
               //TODO: change to dynamic from NewsCubit
-              const UserIcon(path: _cubit.followingPosts[index]., size: 36),
+              //const UserIcon(path: _cubit.followingPosts[index]., size: 36),
               const SizedBox(
                 width: 5,
               ),

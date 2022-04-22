@@ -12,7 +12,7 @@ class AppStrings {
   static const String passwordTitle = "Пароль";
   static const String nickName = "Никнейм";
   static const String registerButton = "Зарегестрироваться";
-  static const String registrationTitle = "Регистрация";
+  static const String registrationTitle = "Регистрация:";
   //ui strings
 
   //errors
