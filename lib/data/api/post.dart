@@ -23,13 +23,13 @@ class PostApi {
     return response;
   }
 
-  Future<http.Response> getAuthoredPosts(int authorId)async{
-    var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts/authored?author_id=$authorId'), headers: HttpHeaders.baseHeaders);
-    return response;
-  }
-  
-  Future<http.Response> getFollowingPosts()async{
-    var response = await http.get(Uri.parse('${AppStrings.apiUrl}/posts/followed'), headers: HttpHeaders.baseHeaders);
-    return response;
-  }
+  // Future<http.Response> getAuthoredPosts(int authorId)async{
+  //   var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts/authored?author_id=$authorId'), headers: HttpHeaders.baseHeaders);
+  //   return response;
+  // }
+  //
+  // Future<http.Response> getFollowingPosts()async{
+  //   var response = await http.get(Uri.parse('${AppStrings.apiUrl}/posts/followed'), headers: HttpHeaders.baseHeaders);
+  //   return response;
+  // }
 }

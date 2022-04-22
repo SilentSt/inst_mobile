@@ -22,22 +22,18 @@ class NewsScene extends StatelessWidget {
         }
         if (state is NewsLoadedState) {
           return Scaffold(
-            body: Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(AppStrings.backgroundPath),
-                      fit: BoxFit.cover)),
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    PreferredSize(
-                        preferredSize:
-                            Size(MediaQuery.of(context).size.width, 50),
-                        child: const CustomAppBar()),
-                    const HistoryBar(),
-                    const NewsFeed()
-                  ],
-                ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  PreferredSize(
+                      preferredSize:
+                          Size(MediaQuery.of(context).size.width, 50),
+                      child: const CustomAppBar()),
+                  _cubit.followingHistories.isEmpty
+                      ? const SizedBox.shrink()
+                      : const HistoryBar(),
+                  const NewsFeed()
+                ],
               ),
             ),
             floatingActionButtonLocation:

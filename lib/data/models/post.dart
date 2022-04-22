@@ -11,7 +11,7 @@ class GetPost {
   final String title;
   final String description;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   final int likesCount;
   final int commentsCount;
   final GetSmallUser author;
@@ -22,7 +22,9 @@ class GetPost {
         this.title = json['title'],
         this.description = json['description'],
         this.createdAt = DateTime.parse(json['created_at']),
-        this.updatedAt = DateTime.parse(json['updated_at']),
+        this.updatedAt = json['updated_at'] == null
+            ? null
+            : DateTime.parse(json['updated_at']),
         this.likesCount = json['likes_count'],
         this.commentsCount = json['comments_count'],
         this.author = GetSmallUser.fromJson(json['author']),
@@ -35,7 +37,7 @@ class GetPostWithoutAuthor {
   final String title;
   final String description;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   final int likesCount;
   final int commentsCount;
   final List<GetFile> files;
@@ -45,11 +47,13 @@ class GetPostWithoutAuthor {
         this.title = json['title'],
         this.description = json['description'],
         this.createdAt = DateTime.parse(json['created_at']),
-        this.updatedAt = DateTime.parse(json['updated_at']),
+        this.updatedAt = json['updated_at'] == null
+            ? null
+            : DateTime.parse(json['updated_at']),
         this.likesCount = json['likes_count'],
         this.commentsCount = json['comments_count'],
         this.files = List.generate(json['files'].length,
-                (index) => GetFile.fromJson(json['files'][index]));
+            (index) => GetFile.fromJson(json['files'][index]));
 }
 
 class GetPostFull {
@@ -57,7 +61,7 @@ class GetPostFull {
   final String title;
   final String description;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   final int likesCount;
   final int commentsCount;
   final GetSmallUser author;
@@ -70,7 +74,9 @@ class GetPostFull {
         this.title = json['title'],
         this.description = json['description'],
         this.createdAt = DateTime.parse(json['created_at']),
-        this.updatedAt = DateTime.parse(json['updated_at']),
+        this.updatedAt = json['updated_at'] == null
+            ? null
+            : DateTime.parse(json['updated_at']),
         this.likesCount = json['likes_count'],
         this.commentsCount = json['comments_count'],
         this.author = GetSmallUser.fromJson(json['author']),
@@ -79,7 +85,7 @@ class GetPostFull {
         this.likes = List.generate(json['likes'].length,
             (index) => GetLike.fromJson(json['likes'][index])),
         this.files = List.generate(json['files'].length,
-                (index) => GetFile.fromJson(json['files'][index]));
+            (index) => GetFile.fromJson(json['files'][index]));
 }
 
 class CreatePostBody {
