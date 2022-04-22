@@ -24,56 +24,61 @@ class AuthScene extends StatelessWidget {
       if (state is AuthLoadedState) {
         return Scaffold(
           body: SafeArea(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: size.height*0.9,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset(AppStrings.logonIconPath),
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                color: AppColors.lightGreen,
-                child: Column(children: [
-                  Text(AppStrings.loginTitle,
-                      style: AppTextStyles.h1.copyWith(
-                          fontSize: 36,
-                          fontWeight: FontWeight.w900,
-                        color: AppColors.darkGreen
-                      )),
-                  CustomTextField(
-                      title: AppStrings.emailTitle,
-                      controller:
-                      AuthSceneControllers.loginController),
-                  CustomTextField(
-                      title: AppStrings.passwordTitle,
-                      controller:
-                      AuthSceneControllers.passwordController),
-                  CustomDarkButton(
-                    func: () {
-                      _cubit.login(
-                          username: AuthSceneControllers
-                              .loginController.text,
-                          password: AuthSceneControllers
-                              .passwordController.text);
-                    },
-                    size: size,
-                    text: AppStrings.loginButton,
-                  )
-                ]),
-              ),
-              SizedBox(
-                height: size.height * 0.12,
-              ),
-              TextButton(
-                  onPressed: () {
-                    context.read<NavigationCubit>().pushToRegistrationScene();
-                  },
-                  child: Text(
-                    AppStrings.registerSuggestion,
-                    style: AppTextStyles.h3.green(),
-                  ))
+                  Image.asset(AppStrings.logonIconPath),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    color: AppColors.lightGreen,
+                    child: Column(children: [
+                      Text(AppStrings.loginTitle,
+                          style: AppTextStyles.h1.copyWith(
+                              fontSize: 36,
+                              fontWeight: FontWeight.w900,
+                            color: AppColors.darkGreen
+                          )),
+                      CustomTextField(
+                          title: AppStrings.emailTitle,
+                          controller:
+                          AuthSceneControllers.loginController),
+                      CustomTextField(
+                          title: AppStrings.passwordTitle,
+                          controller:
+                          AuthSceneControllers.passwordController),
+                      CustomDarkButton(
+                        func: () {
+                          _cubit.login(
+                              username: AuthSceneControllers
+                                  .loginController.text,
+                              password: AuthSceneControllers
+                                  .passwordController.text);
+                        },
+                        size: size,
+                        text: AppStrings.loginButton,
+                      )
+                    ]),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.12,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        context.read<NavigationCubit>().pushToRegistrationScene();
+                      },
+                      child: Text(
+                        AppStrings.registerSuggestion,
+                        style: AppTextStyles.h3.green(),
+                      ))
             ],
-          )),
+          ),
+                ),
+              )),
         );
       }
       if (state is AuthErrorState) {
