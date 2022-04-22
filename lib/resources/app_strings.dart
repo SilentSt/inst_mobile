@@ -40,14 +40,11 @@ class AppStrings {
   static const String sendPath = 'resources/images/share.png';
   static const String whiteBellPath = 'resources/images/white_bell.png';
   static const String addPath = 'resources/images/add.png';
+  static const String arrowBackPath = 'resources/images/arrow_back.png';
+  static const String largeLikeOutlinedPath = 'resources/images/large_like_outlined.png';
+  static const String sendOutlinedPath = 'resources/images/send_outlined.png';
+  static const String smallLikeFilledPath = 'resources/images/small_like_filled.png';
+  static const String smallLikeOutlinedPath = 'resources/images/small_like_outlined.png';
   static const String logonIconPath = 'resources/images/logon_icon.png';
   //asset image paths
-
-  //TODO: remove after connected API
-  //deprecated
-  static const String userPhotoPath = 'resources/images/user_photo.png';
-  static const String userName = 'Витя Заводской';
-  static const String userNickName = '@Кила';
-  static const String postPhotoPath = 'resources/images/post.png';
-//deprecated
 }
