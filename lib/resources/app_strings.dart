@@ -1,6 +1,6 @@
 class AppStrings{
   //logic strings
-  static const String apiUrl = "https://penta.shitposting.team/";
+  static const String apiUrl = "https://penta.shitposting.team";
 
   static const String networkTesterUrl = "example.com";
 

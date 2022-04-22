@@ -28,7 +28,7 @@ class NewsCubit extends Cubit<NewsState>{
           followingHistories.add(GetHistory.fromJson(history));
         }
     }
-    var followingPostsResponse = await PostApi().getFollowingPosts();
+    var followingPostsResponse = await PostApi().getPosts();
     if(followingPostsResponse.statusCode>299)
     {
       Map<String, dynamic> data = jsonDecode(followingPostsResponse.body);

@@ -20,7 +20,7 @@ class NewsCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       elevation: 0,
-      color: AppColors.snowGreen,
+      color: AppColors.lightGreen,
       margin: const EdgeInsets.all(5),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -28,7 +28,7 @@ class NewsCard extends StatelessWidget {
           Row(
             children: [
               //TODO: change to dynamic from NewsCubit
-              const UserIcon(path: '', size: 36),
+              const UserIcon(path: _cubit.followingPosts[index]., size: 36),
               const SizedBox(
                 width: 5,
               ),

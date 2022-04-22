@@ -20,7 +20,7 @@ class AppBarButton extends StatelessWidget {
         width: 44,
         height: 44,
         decoration: BoxDecoration(
-          color: AppColors.snowGreen,
+          color: AppColors.snow,
           borderRadius: BorderRadius.circular(90),
         ),
         child: Image.asset(iconPath),

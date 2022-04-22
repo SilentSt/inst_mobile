@@ -15,6 +15,7 @@ class UserApi {
         http.MultipartRequest('POST', Uri.parse(AppStrings.apiUrl + '/login'))
           ..headers.addAll(HttpHeaders.loginHeaders)
           ..fields.addAll(loginInfo);
+    print(request);
     var resp = (await request.send());
     var response = await http.Response.fromStream(resp);
     return response;
