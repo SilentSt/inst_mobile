@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/post_details_cubit/cubit.dart';
 import 'package:inst_mobile/data/models/post.dart';
-import 'package:inst_mobile/resources/app_colors.dart';
-import 'package:inst_mobile/resources/app_strings.dart';
-import 'package:inst_mobile/ui/styles/app_text_styles.dart';
-import 'package:inst_mobile/ui/widget/content_card.dart';
 import 'package:inst_mobile/ui/widget/custom_error_widget.dart';
 
+import '../widget/content_slider.dart';
 import '../widget/post_details_app_bar.dart';
 
 class PostDetailsScene extends StatelessWidget {
   const PostDetailsScene({Key? key, required this.post}) : super(key: key);
 
   final GetPostFull post;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PostDetailsCubit, PostDetailsState>(
@@ -26,9 +23,23 @@ class PostDetailsScene extends StatelessWidget {
         return Scaffold(
           body: SafeArea(
             child: Column(
-              children: const [
-                PostDetailsAppBar(),
+              children: [
+                const PostDetailsAppBar(),
+                const SizedBox(
+                  height: 20,
+                ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: ContentSlider(post: post))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
 
+                  ],
+                )
               ],
             ),
           ),
@@ -42,5 +53,3 @@ class PostDetailsScene extends StatelessWidget {
     });
   }
 }
-
-

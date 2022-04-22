@@ -46,7 +46,7 @@ class NewsCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 15),
-            ContentCard(postIndex: index)
+            ContentCard(post: _post)
           ]),
         ),
       ),
