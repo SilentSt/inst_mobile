@@ -31,7 +31,9 @@ class Starter extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
+        color: Colors.white,
         home: Scaffold(
+          backgroundColor: Colors.white,
           body: AppNavigator(),
         ),
       ),
