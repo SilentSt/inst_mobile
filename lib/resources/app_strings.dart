@@ -8,6 +8,7 @@ class AppStrings{
   static const String successRegistration = "Регистрация прошла успешно!";
   static const String newsAppBarTitle = 'Новости';
   static const String acceptError = 'Ок';
+  static const String postDetailsTitle = 'Комментарии';
   //ui strings
 
   //errors

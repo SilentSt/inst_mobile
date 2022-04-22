@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/ui/widget/video_post_player.dart';
 
@@ -25,9 +26,7 @@ class ContentCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
-          child: //Image.asset(AppStrings.postPhotoPath),
-              //TODO: add back when API wil be ready
-              SingleChildScrollView(
+          child: SingleChildScrollView(
             physics: const PageScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -61,7 +60,9 @@ class ContentCard extends StatelessWidget {
                     IconButton(
                       icon: Image.asset(AppStrings.commentaryPath,
                           color: AppColors.darkGreen),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<NavigationCubit>().pushToPostDetailsScene(_post);
+                      },
                     ),
                     //TODO: change to real commentary count from NewsCubit
                     Text(
