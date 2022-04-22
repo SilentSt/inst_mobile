@@ -17,14 +17,19 @@ class AuthCubit extends Cubit<AuthState>{
 
   Future<void> login({required String username, required String password})async{
     emit(AuthLoadingState());
+    // print(username);
+    // print(password);
     http.Response response = await UserApi.authorize({'username':username, 'password':password});
     Map<String, dynamic> data = jsonDecode(response.body);
     if(response.statusCode>299)
       {
+        print(response.statusCode);
+        print(response.body);
         emit(AuthErrorState(error: data['detail']));
       }
     else{
       TempData.token = data['access_token'];
+      TempData.myId = data['user_id'];
       emit(AuthAuthorizedState());
     }
   }

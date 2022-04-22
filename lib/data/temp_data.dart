@@ -1,4 +1,4 @@
 class TempData{
-  static int? myId;
+  static String? myId;
   static String? token;
 }
