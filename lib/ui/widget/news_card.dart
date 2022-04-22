@@ -6,12 +6,13 @@ import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/user_icon.dart';
 
+import 'content_card.dart';
+
 class NewsCard extends StatelessWidget {
-  const NewsCard({Key? key, required this.index, required this.fileType})
+  const NewsCard({Key? key, required this.index})
       : super(key: key);
 
   final int index;
-  final String fileType;
 
   @override
   Widget build(BuildContext context) {
@@ -49,41 +50,13 @@ class NewsCard extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(height: 15),
           //TODO: change to network loading, change to dynamic linc from NewsCubit
-          ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: Column(
-                children: [
-                  Image.asset(AppStrings.postPhotoPath),
-                  Container(
-                    height: 50,
-                    color: AppColors.darkGrey,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(icon: Image.asset(AppStrings.commentaryPath), onPressed: () {},),
-                              //TODO: change to real commentary count from NewsCubit
-                              Text('10', style: AppTextStyles.h2White,),
-                              IconButton(icon: Image.asset(AppStrings.likePath), onPressed: () {},),
-                              //TODO: change to real likes count from NewsCubit
-                              Text('122', style: AppTextStyles.h2White,),
-                            ],
-                          ),
-                          IconButton(icon: Image.asset(AppStrings.sendPath), onPressed: () {},)
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ))
+          ContentCard(postIndex: index)
         ]),
       ),
     );
   }
 }
+
+

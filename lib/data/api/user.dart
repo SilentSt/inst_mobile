@@ -20,7 +20,7 @@ class UserApi {
     return response;
   }
 
-  static Future<http.Response> createUser(PostUser user) async {
+  static Future<http.Response> createUser(CreateUser user) async {
     var response = await http.post(
         Uri.parse(AppStrings.apiUrl + '/user'),
         body: jsonEncode(user.toJson()),
@@ -34,23 +34,23 @@ class UserApi {
     return response;
   }
 
-  static Future<http.Response> getUserByLogin(String login) async {
-    var response = await http.get(
-        Uri.parse(AppStrings.apiUrl + '/user/login?login=$login)'),
-        headers: HttpHeaders.baseHeaders);
-    return response;
-  }
+  // static Future<http.Response> getUserByLogin(String login) async {
+  //   var response = await http.get(
+  //       Uri.parse(AppStrings.apiUrl + '/user/login?login=$login)'),
+  //       headers: HttpHeaders.baseHeaders);
+  //   return response;
+  // }
+  //
+  // static Future<http.Response> getUserByNickname(String nickname) async {
+  //   var response = await http.get(
+  //       Uri.parse(AppStrings.apiUrl + '/user/nickname?nickname=$nickname'),
+  //       headers: HttpHeaders.baseHeaders);
+  //   return response;
+  // }
 
-  static Future<http.Response> getUserByNickname(String nickname) async {
+  static Future<http.Response> getUserByUuid(String uuid) async {
     var response = await http.get(
-        Uri.parse(AppStrings.apiUrl + '/user/nickname?nickname=$nickname'),
-        headers: HttpHeaders.baseHeaders);
-    return response;
-  }
-
-  static Future<http.Response> getUserById(int id) async {
-    var response = await http.get(
-        Uri.parse(AppStrings.apiUrl + '/user/id?id=$id'),
+        Uri.parse(AppStrings.apiUrl + '/user/id?id=$uuid'),
         headers: HttpHeaders.baseHeaders);
     return response;
   }
@@ -75,7 +75,7 @@ class UserApi {
     return response;
   }
 
-  static Future<http.Response> updateMe(PatchUser user) async {
+  static Future<http.Response> updateMe(UpdateUser user) async {
     var response = await http.patch(Uri.parse(AppStrings.apiUrl + '/me'),
         body: jsonEncode(user.toJson()), headers: HttpHeaders.baseHeaders);
     return response;

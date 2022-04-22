@@ -18,7 +18,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       required String nickname}) async {
     emit(RegistrationLoadingState());
     var user =
-        PostUser(login: username, password: password, nickname: nickname);
+        CreateUser(email: username, password: password, nickname: nickname);
     var response = await UserApi.createUser(user);
     Map<String, dynamic> data = jsonDecode(response.body);
     if (response.statusCode > 299) {
