@@ -7,11 +7,9 @@ import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/registration/cubit.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
-import 'package:inst_mobile/ui/scene/auth_scene.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/custom_buttons.dart';
 import 'package:inst_mobile/ui/widget/custom_text_field.dart';
-import 'package:inst_mobile/ui/widget/widget.dart' as custom_widget;
 import 'package:inst_mobile/resources/app_strings.dart';
 
 class RegistrationScene extends StatelessWidget {
@@ -33,7 +31,7 @@ class RegistrationScene extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                FlutterLogo(size: 90),
+                    Image.asset(AppStrings.logonIconPath),
                 Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
@@ -41,7 +39,9 @@ class RegistrationScene extends StatelessWidget {
                   child: Column(children: [
                     Text(AppStrings.registrationTitle,
                         style: AppTextStyles.h1.copyWith(
-                            fontSize: 38, fontWeight: FontWeight.w900)),
+                            fontSize: 38,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.darkGreen)),
                     CustomTextField(
                         title: AppStrings.emailTitle,
                         controller:
@@ -54,15 +54,19 @@ class RegistrationScene extends StatelessWidget {
                         title: AppStrings.nickName,
                         controller:
                             RegistrationSceneControllers.nicknameController),
-                    CustomDarkButton(func: (){ _cubit.registrate(
-                        username: RegistrationSceneControllers
-                            .loginController.text,
-                        password: RegistrationSceneControllers
-                            .passwordController.text,
-                        nickname: RegistrationSceneControllers
-                            .nicknameController.text);},
+                    CustomDarkButton(
+                      func: () {
+                        _cubit.registrate(
+                            username: RegistrationSceneControllers
+                                .loginController.text,
+                            password: RegistrationSceneControllers
+                                .passwordController.text,
+                            nickname: RegistrationSceneControllers
+                                .nicknameController.text);
+                      },
                       size: size,
-                      text: AppStrings.registerButton,)
+                      text: AppStrings.registerButton,
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -99,8 +103,6 @@ class RegistrationScene extends StatelessWidget {
     );
   }
 }
-
-
 
 class ErrorWidget extends StatelessWidget {
   const ErrorWidget({Key? key, required this.error}) : super(key: key);

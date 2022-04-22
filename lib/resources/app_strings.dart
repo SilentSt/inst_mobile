@@ -13,7 +13,10 @@ class AppStrings {
   static const String passwordTitle = "Пароль";
   static const String nickName = "Никнейм";
   static const String registerButton = "Зарегестрироваться";
+  static const String loginTitle = "Добро пожаловать!";
+  static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация:";
+  static const String registerSuggestion = "Еще нет аккаунта? Зарегестрируйтесь";
   //ui strings
 
   //errors
@@ -37,6 +40,7 @@ class AppStrings {
   static const String sendPath = 'resources/images/share.png';
   static const String whiteBellPath = 'resources/images/white_bell.png';
   static const String addPath = 'resources/images/add.png';
+  static const String logonIconPath = 'resources/images/logon_icon.png';
   //asset image paths
 
   //TODO: remove after connected API

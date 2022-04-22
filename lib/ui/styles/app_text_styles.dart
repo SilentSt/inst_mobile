@@ -27,4 +27,18 @@ class AppTextStyles {
   static final TextStyle h2Green = h2.copyWith(
     color: AppColors.darkGreen
   );
+
+}
+
+extension AppTextExtension on TextStyle{
+  TextStyle green(){
+    return copyWith(
+        color: AppColors.darkGreen
+    );
+  }
+  TextStyle white(){
+    return copyWith(
+        color: Colors.white
+    );
+  }
 }
