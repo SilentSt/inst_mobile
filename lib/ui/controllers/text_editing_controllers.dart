@@ -22,3 +22,7 @@ class NewsSceneControllers{
 class GlobalSearchControllers{
 
 }
+
+class CommentaryControllers{
+  static TextEditingController commentaryTitle = TextEditingController();
+}

@@ -4,33 +4,36 @@ import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:inst_mobile/cubit/auth/auth_state.dart';
 import 'package:inst_mobile/data/api/user.dart';
+import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 
 import '../../resources/app_strings.dart';
 
 class AuthCubit extends Cubit<AuthState>{
   AuthCubit() : super(AuthLoadingState());
-
-
   String? username;
   String? password;
 
   Future<void> login({required String username, required String password})async{
     emit(AuthLoadingState());
-    // print(username);
-    // print(password);
     http.Response response = await UserApi.authorize({'username':username, 'password':password});
     Map<String, dynamic> data = jsonDecode(response.body);
     if(response.statusCode>299)
       {
-        print(response.statusCode);
-        print(response.body);
         emit(AuthErrorState(error: data['detail']));
       }
     else{
       TempData.token = data['access_token'];
       TempData.myId = data['user_id'];
-      emit(AuthAuthorizedState());
+      http.Response myResponse = await UserApi.getMe();
+      if(myResponse.statusCode>299)
+        {
+          emit(AuthErrorState(error: myResponse.statusCode.toString()));
+        }
+      else{
+        TempData.me = GetFullUser.fromJson(json.decode(utf8.decode(myResponse.bodyBytes)));
+        emit(AuthAuthorizedState());
+      }
     }
   }
 

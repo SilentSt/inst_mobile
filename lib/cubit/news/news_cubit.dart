@@ -15,27 +15,28 @@ class NewsCubit extends Cubit<NewsState>{
 
   Future<void> loadData()async{
     emit(NewsLoadingState());
-    var historiesResponse = await HistoryApi().getFollowingHistory();
-    if(historiesResponse.statusCode>299)
-      {
-        Map<String, dynamic> data = jsonDecode(historiesResponse.body);
-        emit(NewsErrorState(error: data['detail'].toString()));
-      }
-    else{
-      List<dynamic> data = jsonDecode(historiesResponse.body);
-      for(Map<String, dynamic> history in data)
-        {
-          followingHistories.add(GetHistory.fromJson(history));
-        }
-    }
+    // var historiesResponse = await HistoryApi().getFollowingHistory();
+    // if(historiesResponse.statusCode>299)
+    //   {
+    //     Map<String, dynamic> data = jsonDecode(historiesResponse.body);
+    //     emit(NewsErrorState(error: data['detail'].toString()));
+    //   }
+    // else{
+    //   List<dynamic> data = jsonDecode(historiesResponse.body);
+    //   for(Map<String, dynamic> history in data)
+    //     {
+    //       followingHistories.add(GetHistory.fromJson(history));
+    //     }
+    // }
     var followingPostsResponse = await PostApi().getPosts();
     if(followingPostsResponse.statusCode>299)
     {
-      Map<String, dynamic> data = jsonDecode(followingPostsResponse.body);
+      Map<String, dynamic> data = json.decode(followingPostsResponse.body);
       emit(NewsErrorState(error: data['detail'].toString()));
     }
     else{
-      List<dynamic> data = jsonDecode(followingPostsResponse.body);
+      List<dynamic> data = json.decode(utf8.decode(followingPostsResponse.bodyBytes));
+      followingPosts.clear();
       for(Map<String, dynamic> history in data)
       {
         followingPosts.add(GetPostFull.fromJson(history));
