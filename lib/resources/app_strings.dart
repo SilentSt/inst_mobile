@@ -17,6 +17,18 @@ class AppStrings {
   static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация:";
   static const String registerSuggestion = "Еще нет аккаунта? Зарегестрируйтесь";
+  static const String sendCommentary = 'Отправить';
+  static const String createPostTitle = "Создание публикации";
+  static const String title = "Заголовок";
+  static const String description = "Описание";
+  static const String fileChoose = "Выбранный файл";
+  static const String followed = 'Подписки';
+  static const String followers = 'Подпичики';
+  static const String insights = 'Статистика';
+  static const String editProfile = 'Редактировать';
+  static const String follow = 'Подписаться';
+  static const String unfollow = 'Отписаться';
+  static const String noImages = 'Мы не нашли ваших публикаций';
   //ui strings
 
   //errors
@@ -25,7 +37,8 @@ class AppStrings {
   static const String unhandledException = "Произошла непредвиденная ошибка";
   static const String networkException = "Отсутствует интернет соединение";
   static const String unknownFileType = "Неизвестный формат файла";
-
+  static const String errorLoadingCommentaries = "Не удалось загрузить комментарии";
+  static const String errorLoadingProfile = "Не удалось загрузить профиль";
   //errors
 
   //asset image paths
@@ -46,5 +59,6 @@ class AppStrings {
   static const String smallLikeFilledPath = 'resources/images/small_like_filled.png';
   static const String smallLikeOutlinedPath = 'resources/images/small_like_outlined.png';
   static const String logonIconPath = 'resources/images/logon_icon.png';
+  static const String userPath = 'resources/images/user.png';
   //asset image paths
 }

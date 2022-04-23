@@ -1,19 +1,23 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:inst_mobile/data/http_headers.dart';
 import 'package:inst_mobile/data/models/commentary.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 
 class CommentaryApi {
-  Future<http.Response> createCommentary(PostCommentary commentary) async {
+  Future<http.Response> createCommentary(PostCommentary commentary, String postUuid) async {
+    print(jsonEncode(commentary.toJson()));
+    print('${AppStrings.apiUrl}/comments/$postUuid');
     var response = await http.post(
-        Uri.parse('${AppStrings.apiUrl}/commentary',),
+        Uri.parse('${AppStrings.apiUrl}/comments/$postUuid'),
         headers: HttpHeaders.baseHeaders,
-        body: commentary.toJson());
+        body: jsonEncode(commentary.toJson()));
     return response;
   }
 
-  Future<http.Response> getPostsCommentary(int postId) async {
-    var response = await http.get(Uri.parse('${AppStrings.apiUrl}/commentaries'));
+  Future<http.Response> getPostsCommentary(String postUuid) async {
+    var response = await http.get(Uri.parse('${AppStrings.apiUrl}/comments/$postUuid'), headers: HttpHeaders.baseHeaders);
     return response;
   }
 }

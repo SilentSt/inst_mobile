@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inst_mobile/cubit/navigation/cubit.dart';
+import 'package:inst_mobile/cubit/news/cubit.dart';
+import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 
 import '../../resources/app_strings.dart';
@@ -19,11 +23,19 @@ class AppBottomBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.homePath)),
+              IconButton(onPressed: (){
+                context.read<NewsCubit>().loadData();
+                context.read<NavigationCubit>().pushToNewsScene();
+              }, icon: Image.asset(AppStrings.homePath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.chatPath)),
-              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.addPath)),
+              IconButton(onPressed: (){
+                context.read<NavigationCubit>().pushToCreatePostScene();
+              }, icon: Image.asset(AppStrings.addPath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.searchPath)),
-              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.whiteBellPath))
+              IconButton(onPressed: (){
+                print(TempData.me!.uuid);
+                context.read<NavigationCubit>().pushToProfileScene(TempData.me!, null);
+              }, icon: Image.asset(AppStrings.userPath))
             ],
           ),
         ),

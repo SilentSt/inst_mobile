@@ -18,18 +18,26 @@ class PostApi {
     return response;
   }
 
-  Future<http.Response> getPosts()async{
-    var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts'), headers: HttpHeaders.baseHeaders);
+  Future<http.Response> getPosts() async {
+    var response = await http.get(Uri.parse(AppStrings.apiUrl + '/posts'),
+        headers: HttpHeaders.baseHeaders);
     return response;
   }
 
-  // Future<http.Response> getAuthoredPosts(int authorId)async{
-  //   var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts/authored?author_id=$authorId'), headers: HttpHeaders.baseHeaders);
-  //   return response;
-  // }
-  //
-  // Future<http.Response> getFollowingPosts()async{
-  //   var response = await http.get(Uri.parse('${AppStrings.apiUrl}/posts/followed'), headers: HttpHeaders.baseHeaders);
-  //   return response;
-  // }
+  Future<http.Response> getDetailedPost(String uuid) async {
+    var response = await http.get(
+        Uri.parse(AppStrings.apiUrl + '/posts/' + uuid),
+        headers: HttpHeaders.baseHeaders);
+    return response;
+  }
+
+// Future<http.Response> getAuthoredPosts(int authorId)async{
+//   var response = await http.get(Uri.parse(AppStrings.apiUrl+'/posts/authored?author_id=$authorId'), headers: HttpHeaders.baseHeaders);
+//   return response;
+// }
+//
+// Future<http.Response> getFollowingPosts()async{
+//   var response = await http.get(Uri.parse('${AppStrings.apiUrl}/posts/followed'), headers: HttpHeaders.baseHeaders);
+//   return response;
+// }
 }
