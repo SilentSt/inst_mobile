@@ -12,8 +12,8 @@ class NavigationCubit extends Cubit<NavigationState> {
 
   void pushToNewsScene() => emit(NavigationNewsState());
 
-  void pushToProfileScene(GetFullUser user) =>
-      emit(NavigationProfileState(user: user));
+  void pushToProfileScene(GetFullUser? user, GetSmallUser? smallUser) =>
+      emit(NavigationProfileState(user: user, smallUser: smallUser));
 
   void pushToRegistrationScene() => emit(NavigationRegistrationState());
 

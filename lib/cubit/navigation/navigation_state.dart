@@ -10,9 +10,9 @@ class NavigationGlobalSearchState extends NavigationState{}
 class NavigationNewsState extends NavigationState{}
 
 class NavigationProfileState extends NavigationState{
-  final GetFullUser user;
-
-  NavigationProfileState({required this.user});
+  final GetFullUser? user;
+  final GetSmallUser? smallUser;
+  NavigationProfileState({required this.smallUser, required this.user});
 
 }
 

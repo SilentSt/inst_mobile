@@ -33,7 +33,8 @@ class AppBottomBar extends StatelessWidget {
               }, icon: Image.asset(AppStrings.addPath)),
               IconButton(onPressed: (){}, icon: Image.asset(AppStrings.searchPath)),
               IconButton(onPressed: (){
-                context.read<NavigationCubit>().pushToProfileScene(TempData.me!);
+                print(TempData.me!.uuid);
+                context.read<NavigationCubit>().pushToProfileScene(TempData.me!, null);
               }, icon: Image.asset(AppStrings.userPath))
             ],
           ),

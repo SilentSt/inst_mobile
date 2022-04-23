@@ -38,7 +38,7 @@ class AppStrings {
   static const String networkException = "Отсутствует интернет соединение";
   static const String unknownFileType = "Неизвестный формат файла";
   static const String errorLoadingCommentaries = "Не удалось загрузить комментарии";
-
+  static const String errorLoadingProfile = "Не удалось загрузить профиль";
   //errors
 
   //asset image paths

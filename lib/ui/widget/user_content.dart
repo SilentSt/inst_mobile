@@ -18,7 +18,7 @@ class UserContent extends StatelessWidget {
       elevation: 10,
       margin: const EdgeInsets.all(0),
       child: SizedBox(
-        height: 450,
+        height: 400,
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
           child: _cubit.images.isEmpty
