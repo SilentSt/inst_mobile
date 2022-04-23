@@ -46,5 +46,7 @@ extension AppTextExtension on TextStyle {
 
   TextStyle bold() => copyWith(fontWeight: FontWeight.bold);
 
+  TextStyle font() => copyWith(fontFamily: 'Arial');
+
   TextStyle size(double size) => copyWith(fontSize: size);
 }
