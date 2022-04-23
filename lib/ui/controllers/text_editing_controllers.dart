@@ -26,6 +26,7 @@ class GlobalSearchControllers{
 class CommentaryControllers {
   static TextEditingController commentaryTitle = TextEditingController();
 }
+
 class CreatePostControllers{
   static TextEditingController titleController = TextEditingController();
   static TextEditingController descriptionController = TextEditingController();

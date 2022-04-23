@@ -7,7 +7,7 @@ class ProfileLoadedState extends ProfileState {}
 class ProfileEmptyState extends ProfileState {}
 
 class ProfileErrorState extends ProfileState {
-  Error error;
+  String error;
 
   ProfileErrorState({required this.error});
 }

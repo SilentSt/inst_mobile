@@ -43,7 +43,7 @@ class CommentaryInputCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(90),
                       ),
                       Container(
-                        width: 300,
+                        width: MediaQuery.of(context).size.width*0.85,
                         height: 70,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18),
@@ -56,7 +56,7 @@ class CommentaryInputCard extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: SizedBox(
                                   height: 70,
-                                  width: 180,
+                                  width: MediaQuery.of(context).size.width*0.5,
                                   child: SingleChildScrollView(
                                     child: TextField(
                                       controller:

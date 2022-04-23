@@ -38,6 +38,8 @@ extension AppTextExtension on TextStyle {
 
   TextStyle black() => copyWith(color: Colors.black);
 
+  TextStyle grey() => copyWith(color: AppColors.darkGrey);
+
   TextStyle bold900() => copyWith(fontWeight: FontWeight.w900);
 
   TextStyle bold500() => copyWith(fontWeight: FontWeight.w500);
