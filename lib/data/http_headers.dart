@@ -8,7 +8,8 @@ class HttpHeaders{
 
   static Map<String, String> baseHeaders = {
     'Accept': 'Application/json',
-    'Authorization': 'Bearer ${TempData.token}'
+    'Authorization': 'Bearer ${TempData.token}',
+    'Content-Type': 'application/json',
   };
 
   static Map<String, String> registerHeaders = {

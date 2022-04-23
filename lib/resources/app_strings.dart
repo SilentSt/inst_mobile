@@ -17,6 +17,7 @@ class AppStrings {
   static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация:";
   static const String registerSuggestion = "Еще нет аккаунта? Зарегестрируйтесь";
+  static const String sendCommentary = 'Отправить';
   static const String createPostTitle = "Создание публикации";
   static const String title = "Заголовок";
   static const String description = "Описание";
@@ -29,6 +30,7 @@ class AppStrings {
   static const String unhandledException = "Произошла непредвиденная ошибка";
   static const String networkException = "Отсутствует интернет соединение";
   static const String unknownFileType = "Неизвестный формат файла";
+  static const String errorLoadingCommentaries = "Не удалось загрузить комментарии";
 
   //errors
 
