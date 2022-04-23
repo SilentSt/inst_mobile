@@ -37,7 +37,8 @@ class RegistrationScene extends StatelessWidget {
                     height: size.height*0.9,
                     child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //TODO: need fix
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                     Image.asset(AppStrings.logonIconPath),
                     Padding(
@@ -84,9 +85,10 @@ class RegistrationScene extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: size.height * 0.2,
-                    )
+                    //TODO: работает не очень, на некоторых экранах вылезает за край
+                    // SizedBox(
+                    //   height: size.height * 0.2,
+                    // )
               ],
             ),
                   ),
