@@ -26,51 +26,63 @@ class RegistrationScene extends StatelessWidget {
         }
         if (state is RegistrationLoadedState) {
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              leading: IconButton(icon:Image.asset(AppStrings.arrowBackPath,), onPressed: (){ context.read<NavigationCubit>().pushToAuthScene(); },),
+            ),
             body: SafeArea(
                 child: SingleChildScrollView(
                   child: SizedBox(
                     height: size.height*0.9,
                     child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                     Image.asset(AppStrings.logonIconPath),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      color: AppColors.lightGreen,
-                      child: Column(children: [
-                        Text(AppStrings.registrationTitle,
-                            style: AppTextStyles.h1.copyWith(
-                                fontSize: 38,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.darkGreen)),
-                        CustomTextField(
-                            title: AppStrings.emailTitle,
-                            controller:
-                                RegistrationSceneControllers.loginController),
-                        CustomTextField(
-                            title: AppStrings.passwordTitle,
-                            controller:
-                                RegistrationSceneControllers.passwordController),
-                        CustomTextField(
-                            title: AppStrings.nickName,
-                            controller:
-                                RegistrationSceneControllers.nicknameController),
-                        CustomDarkButton(
-                          func: () {
-                            _cubit.registrate(
-                                username: RegistrationSceneControllers
-                                    .loginController.text,
-                                password: RegistrationSceneControllers
-                                    .passwordController.text,
-                                nickname: RegistrationSceneControllers
-                                    .nicknameController.text);
-                          },
-                          size: size,
-                          text: AppStrings.registerButton,
-                        )
-                      ]),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        color: AppColors.lightGreen,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25),
+                          child: Column(children: [
+                            Text(AppStrings.registrationTitle,
+                                style: AppTextStyles.h1.copyWith(
+                                    fontSize: 38,
+                                    fontWeight: FontWeight.w900,
+                                    color: AppColors.darkGreen)),
+                            CustomTextField(
+                                title: AppStrings.emailTitle,
+                                controller:
+                                    RegistrationSceneControllers.loginController),
+                            CustomTextField(
+                                title: AppStrings.passwordTitle,
+                                controller:
+                                    RegistrationSceneControllers.passwordController,
+                                obfuscation: true,),
+                            CustomTextField(
+                                title: AppStrings.nickName,
+                                controller:
+                                    RegistrationSceneControllers.nicknameController),
+                            CustomDarkButton(
+                              func: () {
+                                _cubit.registrate(
+                                    username: RegistrationSceneControllers
+                                        .loginController.text,
+                                    password: RegistrationSceneControllers
+                                        .passwordController.text,
+                                    nickname: RegistrationSceneControllers
+                                        .nicknameController.text);
+                              },
+                              size: size,
+                              text: AppStrings.registerButton,
+                            )
+                          ]),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: size.height * 0.2,

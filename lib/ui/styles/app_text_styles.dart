@@ -15,30 +15,34 @@ class AppTextStyles {
       fontWeight: FontWeight.w100);
 
   static const TextStyle h3 = TextStyle(
-    color: AppColors.darkGrey,
-    fontSize: 16,
-    fontFamily: 'Popins',
-    fontWeight: FontWeight.normal
-  );
+      color: AppColors.darkGrey,
+      fontSize: 16,
+      fontFamily: 'Popins',
+      fontWeight: FontWeight.normal);
 
-  static final TextStyle h2White = h2.copyWith(
-      color: Colors.white);
+  static const TextStyle h4 = TextStyle(
+      color: AppColors.darkGrey,
+      fontSize: 13,
+      fontFamily: 'Popins',
+      fontWeight: FontWeight.normal);
 
-  static final TextStyle h2Green = h2.copyWith(
-    color: AppColors.darkGreen
-  );
+  static final TextStyle h2White = h2.copyWith(color: Colors.white);
 
+  static final TextStyle h2Green = h2.copyWith(color: AppColors.darkGreen);
 }
 
-extension AppTextExtension on TextStyle{
-  TextStyle green(){
-    return copyWith(
-        color: AppColors.darkGreen
-    );
-  }
-  TextStyle white(){
-    return copyWith(
-        color: Colors.white
-    );
-  }
+extension AppTextExtension on TextStyle {
+  TextStyle green() => copyWith(color: AppColors.darkGreen);
+
+  TextStyle white() => copyWith(color: Colors.white);
+
+  TextStyle black() => copyWith(color: Colors.black);
+
+  TextStyle bold900() => copyWith(fontWeight: FontWeight.w900);
+
+  TextStyle bold500() => copyWith(fontWeight: FontWeight.w500);
+
+  TextStyle bold() => copyWith(fontWeight: FontWeight.bold);
+
+  TextStyle size(double size) => copyWith(fontSize: size);
 }

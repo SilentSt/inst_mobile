@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/ui/scene/auth_scene.dart';
+import 'package:inst_mobile/ui/scene/create_post_scene.dart';
 import 'package:inst_mobile/ui/scene/global_search_scene.dart';
 import 'package:inst_mobile/ui/scene/news_scene.dart';
 import 'package:inst_mobile/ui/scene/post_details_scene.dart';
@@ -26,6 +27,8 @@ class AppNavigator extends StatelessWidget {
                   const MaterialPage(child: ProfileScene()),
                 if (state is NavigationRegistrationState)
                   const MaterialPage(child: RegistrationScene()),
+                if(state is NavigationCreatePostState)
+                  const MaterialPage(child: CreatePostScene()),
                 if (state is NavigationPostDetailsState)
                   MaterialPage(child: PostDetailsScene(post: state.post,))
               ],
