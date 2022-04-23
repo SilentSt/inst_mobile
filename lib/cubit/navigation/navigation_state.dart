@@ -1,4 +1,5 @@
 import 'package:inst_mobile/data/models/post.dart';
+import 'package:inst_mobile/data/models/user.dart';
 
 abstract class NavigationState{}
 
@@ -8,7 +9,12 @@ class NavigationGlobalSearchState extends NavigationState{}
 
 class NavigationNewsState extends NavigationState{}
 
-class NavigationProfileState extends NavigationState{}
+class NavigationProfileState extends NavigationState{
+  final GetFullUser user;
+
+  NavigationProfileState({required this.user});
+
+}
 
 class NavigationRegistrationState extends NavigationState{}
 

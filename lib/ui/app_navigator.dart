@@ -24,7 +24,7 @@ class AppNavigator extends StatelessWidget {
                 if (state is NavigationNewsState)
                   const MaterialPage(child: NewsScene()),
                 if (state is NavigationProfileState)
-                  const MaterialPage(child: ProfileScene()),
+                  MaterialPage(child: ProfileScene(user: state.user,)),
                 if (state is NavigationRegistrationState)
                   const MaterialPage(child: RegistrationScene()),
                 if(state is NavigationCreatePostState)
