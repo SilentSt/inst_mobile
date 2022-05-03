@@ -1,3 +1,4 @@
+
 abstract class ProfileState {}
 
 class ProfileLoadingState extends ProfileState {}

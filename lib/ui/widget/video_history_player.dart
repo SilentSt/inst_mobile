@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:video_player/video_player.dart';

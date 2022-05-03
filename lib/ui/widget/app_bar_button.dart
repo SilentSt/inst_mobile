@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../resources/app_colors.dart';
 
@@ -23,7 +24,7 @@ class AppBarButton extends StatelessWidget {
           color: AppColors.snow,
           borderRadius: BorderRadius.circular(90),
         ),
-        child: Image.asset(iconPath),
+        child: SvgPicture.asset(iconPath,),
       ),
     );
   }

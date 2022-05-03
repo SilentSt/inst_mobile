@@ -13,6 +13,7 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      elevation: 0,
       leading: AppBarButton(iconPath: AppStrings.cameraPath, action: () {}),
       centerTitle: true,
       title: const Text(AppStrings.newsAppBarTitle, style: AppTextStyles.h1),

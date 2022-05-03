@@ -19,28 +19,28 @@ class History extends StatelessWidget {
     return SizedBox(
       height: 60,
       width: 60,
-      child: IconButton(
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  var fileType =
-                      _cubit.followingHistories[index].filePath.split('.').last;
-                  if (AppLists.videoFormats.contains(fileType)) {
-                    return VideoHistoryPlayer(
-                        videoSrc: _cubit.followingHistories[index].filePath);
-                  } else if (AppLists.imageFormats.contains(fileType)) {
-                    return ImageHistory(
-                        imageSrc: _cubit.followingHistories[index].filePath);
-                  } else {
-                    return CustomErrorWidget(
-                      error: AppStrings.unknownFileType,
-                      action: () {},
-                    );
-                  }
-                });
-          },
-          icon: const UserIcon(size: 60, path: '',)),
+      // child: IconButton(
+      //     onPressed: () {
+      //       showDialog(
+      //           context: context,
+      //           builder: (context) {
+      //             var fileType =
+      //                 _cubit.followingHistories[index].filePath.split('.').last;
+      //             if (AppLists.videoFormats.contains(fileType)) {
+      //               return VideoHistoryPlayer(
+      //                   videoSrc: _cubit.followingHistories[index].filePath);
+      //             } else if (AppLists.imageFormats.contains(fileType)) {
+      //               return ImageHistory(
+      //                   imageSrc: _cubit.followingHistories[index].filePath);
+      //             } else {
+      //               return CustomErrorWidget(
+      //                 error: AppStrings.unknownFileType,
+      //                 action: () {},
+      //               );
+      //             }
+      //           });
+      //     },
+      //     icon: const UserIcon(size: 60, path: '',)),
     );
   }
 }

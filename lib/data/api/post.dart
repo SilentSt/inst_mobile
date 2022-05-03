@@ -6,15 +6,20 @@ class PostApi {
   Future<http.Response> createPost(
       {required String title,
       required String description,
-      required DateTime datetime,
-      required String filePath}) async {
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(AppStrings.apiUrl +
-            '/post?title=$title&description=$description&datetime=$datetime'));
-    request.headers.addAll(HttpHeaders.fileUploadingHeaders);
-    request.files.add(http.MultipartFile.fromString('document', filePath));
+      required List<String> files}) async {
+    var request =
+        http.MultipartRequest('POST', Uri.parse(AppStrings.apiUrl + '/posts'))
+          ..headers.addAll(HttpHeaders.fileUploadingHeaders)
+          ..fields.addAll({'title': title, 'description': description});
+    for (var f in files) {
+      request.files.add(await http.MultipartFile.fromPath('file', f));
+    }
+    print(request);
+    print(request.fields);
+    print(request.files);
     var response = await http.Response.fromStream(await request.send());
+    print(response.statusCode);
+    print(response.body);
     return response;
   }
 
@@ -27,6 +32,27 @@ class PostApi {
   Future<http.Response> getDetailedPost(String uuid) async {
     var response = await http.get(
         Uri.parse(AppStrings.apiUrl + '/posts/' + uuid),
+        headers: HttpHeaders.baseHeaders);
+    return response;
+  }
+
+  Future<http.Response> likePost(String uuid) async {
+    var response = await http.post(
+        Uri.parse('${AppStrings.apiUrl}/posts/$uuid/like'),
+        headers: HttpHeaders.baseHeaders);
+    return response;
+  }
+
+  Future<http.Response> removeLikePost(String uuid) async {
+    var response = await http.delete(
+        Uri.parse('${AppStrings.apiUrl}/posts/$uuid/like'),
+        headers: HttpHeaders.baseHeaders);
+    return response;
+  }
+
+  Future<http.Response> getUsersPost(String uuid) async {
+    var response = await http.get(
+        Uri.parse(AppStrings.apiUrl + '/posts?user_uuid=' + uuid),
         headers: HttpHeaders.baseHeaders);
     return response;
   }

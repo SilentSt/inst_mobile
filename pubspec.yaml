@@ -44,12 +44,21 @@ dependencies:
   video_player: ^2.3.0
   image_network: ^2.5.0
   image_picker: ^0.8.5
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^1.1.2
   build_runner: ^2.1.8
+  flutter_launcher_icons: "^0.9.0"
+
+flutter_icons:
+  image_path: "resources/images/logon_icon.png"
+  android: true
+  ios: true
+    # optionally, as transparency is not allowed on app store
+    # remove_alpha_ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

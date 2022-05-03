@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
 import '../../cubit/navigation/navigation_cubit.dart';
 import '../../resources/app_strings.dart';
@@ -20,7 +21,7 @@ class PostDetailsAppBar extends StatelessWidget {
               context.read<NewsCubit>().loadData();
               context.read<NavigationCubit>().pushToNewsScene();
             },
-            icon: Image.asset(AppStrings.arrowBackPath)),
+            icon: SvgPicture.asset(AppStrings.arrowBackPath)),
         const Text(
           AppStrings.postDetailsTitle,
           style: AppTextStyles.h1,

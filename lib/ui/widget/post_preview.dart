@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:inst_mobile/ui/widget/video_preview_player.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../resources/app_lists.dart';
 
@@ -15,11 +17,12 @@ class PostPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
       child: Center(
         child: SizedBox(
-          width: 262,
+          width: 300,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: SingleChildScrollView(
@@ -33,12 +36,19 @@ class PostPreview extends StatelessWidget {
                     if (AppLists.imageFormats.contains(fileType)) {
                       return
                         SizedBox(
-                          height: 350,
+                          height: 400,
                           child: Image.file(
                             File(file.path),
 
                           ),
                         );
+                    }
+                    if(AppLists.videoFormats.contains(fileType)){
+                      return
+                          SizedBox(
+                            height: 400,
+                            child: VideoPreviewPlayer(videoSrc: File(file.path)),
+                          );
                     }
                     else return SizedBox.shrink();
                   }):[],

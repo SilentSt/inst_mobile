@@ -54,10 +54,7 @@ class PostDetailsScene extends StatelessWidget {
                     ),
                     Container(
                         width: 340, height: 2, color: AppColors.lightGrey),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CommentariesFeed(post: post, cubit: _cubit),
+                    Expanded(child: CommentariesFeed(post: post)),
                     CommentaryInputCard(postUuid: post.uuid,)
                   ],
                 ),

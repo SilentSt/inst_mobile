@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
+import 'package:inst_mobile/cubit/post_details_cubit/cubit.dart';
 import 'package:inst_mobile/data/models/post.dart';
 import '../../resources/app_colors.dart';
 import '../../resources/app_strings.dart';
@@ -30,38 +32,49 @@ class ContentCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Image.asset(AppStrings.commentaryPath,
-                          color: AppColors.darkGreen),
-                      onPressed: () {
-                        context
-                            .read<NavigationCubit>()
-                            .pushToPostDetailsScene(post);
-                      },
-                    ),
-                    //TODO: change to real commentary count from NewsCubit
-                    Text(
-                      post.commentsCount.toString(),
-                      style: AppTextStyles.h2Green,
-                    ),
-                    IconButton(
-                      icon: Image.asset(AppStrings.likePath,
-                          color: AppColors.darkGreen),
-                      onPressed: () {},
-                    ),
-                    //TODO: change to real likes count from NewsCubit
-                    Text(
-                      post.likesCount.toString(),
-                      style: AppTextStyles.h2Green,
-                    ),
-                  ],
+                BlocBuilder<NewsCubit, NewsState>(
+                  builder: (context, state) {
+                    if(state is NewsLikesLoadingState)
+                      {
+                        return const CircularProgressIndicator();
+                      }
+                    return Row(
+                      children: [
+                        IconButton(
+                          icon: SvgPicture.asset(AppStrings.commentaryPath,
+                              color: AppColors.darkGreen),
+                          onPressed: () {
+                            context.read<PostDetailsCubit>().dropScene();
+                            context
+                                .read<NavigationCubit>()
+                                .pushToPostDetailsScene(post);
+                          },
+                        ),
+                        Text(
+                          post.commentsCount.toString(),
+                          style: AppTextStyles.h2Green,
+                        ),
+                        IconButton(
+                          icon: SvgPicture.asset(post.isLiked!?AppStrings.likeFilledPath:AppStrings.likePath,
+                              color: AppColors.darkGreen),
+                          onPressed: () {
+                            post.isLiked!?_cubit.removeLikePost(post.uuid):_cubit.likePost(post.uuid);
+                          },
+                        ),
+                        Text(
+                          post.likesCount.toString(),
+                          style: AppTextStyles.h2Green,
+                        ),
+                      ],
+                    );
+                  }
                 ),
                 IconButton(
-                  icon: Image.asset(AppStrings.sendPath,
+                  icon: SvgPicture.asset(AppStrings.sendPath,
                       color: AppColors.darkGreen),
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                 )
               ],
             ),

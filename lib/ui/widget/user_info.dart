@@ -9,7 +9,7 @@ class UserInfo extends StatelessWidget {
     required this.user,
   }) : super(key: key);
 
-  final GetFullUser user;
+  final GetFullMe user;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class UserInfo extends StatelessWidget {
       children: [
         Text(
           '@' + user.nickname,
-          style: AppTextStyles.h2.black(),
+          style: AppTextStyles.h2.black().bold900(),
         ),
         const SizedBox(
           height: 20,
@@ -25,8 +25,8 @@ class UserInfo extends StatelessWidget {
         SizedBox(
           width: 280,
           child: Text(
-            'Если у тебя получилось обмануть человека, это не значит, что он дурак, это значит, что тебе доверяли больше, чем ты этого заслуживаешь',
-            style: AppTextStyles.h4.grey(),
+            user.bio==null?'Здесь мог бы быть замечательный статус':user.bio!,
+            style: AppTextStyles.h3.grey(),
             textAlign: TextAlign.center,
           ),
         ),

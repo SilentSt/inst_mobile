@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
+import 'package:inst_mobile/cubit/profile/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 
@@ -17,7 +19,7 @@ class AppBottomBar extends StatelessWidget {
       shape: const CircularNotchedRectangle(),
       color: AppColors.darkGreen,
       child: SizedBox(
-        height: 90,
+        height: 50,
         child: Align(
           alignment: Alignment.topCenter,
           child: Row(
@@ -26,16 +28,18 @@ class AppBottomBar extends StatelessWidget {
               IconButton(onPressed: (){
                 context.read<NewsCubit>().loadData();
                 context.read<NavigationCubit>().pushToNewsScene();
-              }, icon: Image.asset(AppStrings.homePath)),
-              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.chatPath)),
+              }, icon: SvgPicture.asset(AppStrings.homePath)),
+              IconButton(onPressed: (){}, icon: SvgPicture.asset(AppStrings.chatPath)),
               IconButton(onPressed: (){
                 context.read<NavigationCubit>().pushToCreatePostScene();
-              }, icon: Image.asset(AppStrings.addPath)),
-              IconButton(onPressed: (){}, icon: Image.asset(AppStrings.searchPath)),
+              }, icon: SvgPicture.asset(AppStrings.addPath)),
               IconButton(onPressed: (){
-                print(TempData.me!.uuid);
-                context.read<NavigationCubit>().pushToProfileScene(TempData.me!, null);
-              }, icon: Image.asset(AppStrings.userPath))
+                context.read<NavigationCubit>().pushToGlobalSearchScene();
+              }, icon: SvgPicture.asset(AppStrings.searchPath)),
+              IconButton(onPressed: (){
+                context.read<ProfileCubit>().clearData();
+                context.read<NavigationCubit>().pushToProfileScene(TempData.me!.toSmallUser());
+              }, icon: SvgPicture.asset(AppStrings.userPath))
             ],
           ),
         ),

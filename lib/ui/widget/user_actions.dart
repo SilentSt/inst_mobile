@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/data/models/user.dart';
 
 import '../../resources/app_colors.dart';
@@ -11,7 +13,7 @@ class UserActions extends StatelessWidget {
     required this.user,
   }) : super(key: key);
 
-  final GetFullUser user;
+  final GetFullMe user;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class UserActions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {context.read<NavigationCubit>().pushToProfileEditScene();},
             child: Text(
               AppStrings.editProfile,
               style: AppTextStyles.h3

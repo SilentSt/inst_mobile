@@ -11,7 +11,7 @@ class ProfileHeader extends StatelessWidget {
     required this.user,
   }) : super(key: key);
 
-  final GetFullUser user;
+  final GetFullMe user;
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +22,28 @@ class ProfileHeader extends StatelessWidget {
         Column(children: [
           Text(
             user.followersCount.toString(),
-            style: AppTextStyles.h4.black(),
+            style: AppTextStyles.h3.black(),
           ),
           const SizedBox(
             height: 20,
           ),
           Text(
             AppStrings.followers,
-            style: AppTextStyles.h4.black(),
+            style: AppTextStyles.h3.black(),
           )
         ]),
-        ImageNetwork(image: user.photo, height: 100, width: 100),
+        ImageNetwork(image: user.photo, height: 100, width: 100, borderRadius: BorderRadius.circular(90)),
         Column(children: [
           Text(
-            user.followersCount.toString(),
-            style: AppTextStyles.h4.black(),
+            user.followingCount.toString(),
+            style: AppTextStyles.h3.black(),
           ),
           const SizedBox(
             height: 20,
           ),
           Text(
             AppStrings.followed,
-            style: AppTextStyles.h4.black(),
+            style: AppTextStyles.h3.black(),
           )
         ]),
       ],

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:inst_mobile/data/http_headers.dart';
 import 'package:inst_mobile/data/models/user.dart';
+import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,10 +23,8 @@ class UserApi {
   }
 
   static Future<http.Response> createUser(CreateUser user) async {
-    var response = await http.post(
-        Uri.parse(AppStrings.apiUrl + '/user'),
-        body: jsonEncode(user.toJson()),
-        headers: HttpHeaders.registerHeaders);
+    var response = await http.post(Uri.parse(AppStrings.apiUrl + '/users'),
+        body: jsonEncode(user.toJson()), headers: HttpHeaders.registerHeaders);
     return response;
   }
 
@@ -50,35 +49,43 @@ class UserApi {
   // }
 
   static Future<http.Response> getUserByUuid(String uuid) async {
-    var response = await http.get(
-        Uri.parse(AppStrings.apiUrl + '/user/id?id=$uuid'),
-        headers: HttpHeaders.baseHeaders);
+    var response = await http.get(Uri.parse(AppStrings.apiUrl + '/users/$uuid'),
+        headers: HttpHeaders.noContentHeaders);
     return response;
   }
 
   static Future<http.Response> getMe() async {
     var response = await http.get(Uri.parse(AppStrings.apiUrl + '/me'),
-        headers: HttpHeaders.baseHeaders);
+        headers: HttpHeaders.noContentHeaders);
     return response;
   }
 
-  static Future<http.Response> followUser(int followedId) async {
-    var response = await http.patch(
-        Uri.parse(AppStrings.apiUrl + '/follow?followed_id=$followedId'),
-        headers: HttpHeaders.baseHeaders);
+  static Future<http.Response> followUser(String followedId) async {
+    var response = await http.post(
+        Uri.parse(AppStrings.apiUrl + '/users/$followedId/follow'),
+        headers: HttpHeaders.noContentHeaders);
     return response;
   }
 
-  static Future<http.Response> unfollowUser(int unfollowedId) async {
-    var response = await http.patch(
-        Uri.parse(AppStrings.apiUrl + '/unfollow?unfollowed_id=$unfollowedId'),
-        headers: HttpHeaders.baseHeaders);
+  static Future<http.Response> unfollowUser(String unfollowedId) async {
+    var response = await http.delete(
+        Uri.parse(AppStrings.apiUrl + '/users/$unfollowedId/follow'),
+        headers: HttpHeaders.noContentHeaders);
     return response;
   }
 
-  static Future<http.Response> updateMe(UpdateUser user) async {
-    var response = await http.patch(Uri.parse(AppStrings.apiUrl + '/me'),
-        body: jsonEncode(user.toJson()), headers: HttpHeaders.baseHeaders);
+  static Future<http.Response> updateMe(
+      {required String filePath,
+      required String email,
+      required String password,
+      required String bio}) async {
+    var request = http.MultipartRequest(
+        'PATCH', Uri.parse(AppStrings.apiUrl + '/users/${TempData.me!.uuid}'))
+      ..headers.addAll(HttpHeaders.fileUploadingHeaders)
+      ..fields.addAll({'email': email, 'password': password, 'bio': bio})
+      ..files.add(await http.MultipartFile.fromPath('file', filePath));
+    var resp = await request.send();
+    var response = http.Response.fromStream(resp);
     return response;
   }
 }

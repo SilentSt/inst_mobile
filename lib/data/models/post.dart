@@ -6,32 +6,6 @@ import 'package:inst_mobile/data/models/user.dart';
 
 import 'commentary.dart';
 
-class GetPost {
-  final String uuid;
-  final String title;
-  final String description;
-  final DateTime createdAt;
-  final DateTime? updatedAt;
-  final int likesCount;
-  final int commentsCount;
-  final GetSmallUser author;
-  final List<GetFile> files;
-
-  GetPost.fromJson(Map<String, dynamic> json)
-      : this.uuid = json['uuid'],
-        this.title = json['title'],
-        this.description = json['description'],
-        this.createdAt = DateTime.parse(json['created_at']),
-        this.updatedAt = json['updated_at'] == null
-            ? null
-            : DateTime.parse(json['updated_at']),
-        this.likesCount = json['likes_count'],
-        this.commentsCount = json['comments_count'],
-        this.author = GetSmallUser.fromJson(json['author']),
-        this.files = List.generate(json['files'].length,
-            (index) => GetFile.fromJson(json['files'][index]));
-}
-
 class GetPostWithoutAuthor {
   final String uuid;
   final String title;
@@ -58,11 +32,12 @@ class GetPostWithoutAuthor {
 
 class GetPostFull {
   final String uuid;
-  final String title;
+  final String? title;
   final String description;
   final DateTime createdAt;
   final DateTime? updatedAt;
   final int likesCount;
+  final bool? isLiked;
   final int commentsCount;
   final GetSmallUser author;
   final List<GetCommentary>? commentaries;
@@ -79,6 +54,7 @@ class GetPostFull {
             : DateTime.parse(json['updated_at']),
         this.likesCount = json['likes_count'],
         this.commentsCount = json['comments_count'],
+        this.isLiked = json['is_liked'],
         this.author = GetSmallUser.fromJson(json['author']),
         this.commentaries = json['comments']==null?null: List.generate(json['comments'].length,
             (index) => GetCommentary.fromJson(json['comments'][index])),

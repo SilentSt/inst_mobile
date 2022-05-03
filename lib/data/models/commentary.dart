@@ -4,6 +4,7 @@ class GetCommentary {
   final String uuid;
   final String title;
   final int? likes;
+  final bool? isLiked;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final GetSmallUser author;
@@ -11,7 +12,8 @@ class GetCommentary {
   GetCommentary.fromJson(Map<String, dynamic> json)
       : this.uuid = json['uuid'],
         this.title = json['title'],
-        this.likes = json['likes'],
+        this.likes = json['likes_count'],
+        this.isLiked = json['is_liked'],
         this.createdAt = json['createdAt']==null?null:DateTime.parse(json['createdAt']),
         this.updatedAt = json['updatedAt']==null?null:DateTime.parse(json['updatedAt']),
         this.author = GetSmallUser.fromJson(json['author']);

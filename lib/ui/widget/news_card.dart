@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
-import 'package:inst_mobile/cubit/profile/cubit.dart';
-import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
-import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/user_icon.dart';
 
@@ -32,11 +28,7 @@ class NewsCard extends StatelessWidget {
           child: Column(children: [
             Row(
               children: [
-                IconButton(
-                    onPressed: () {
-                      context.read<NavigationCubit>().pushToProfileScene(TempData.me, _post.author);
-                    },
-                    icon: UserIcon(path: _post.author.photo, size: 36)),
+                    UserIcon(user: _post.author, size: 36),
                 const SizedBox(
                   width: 5,
                 ),

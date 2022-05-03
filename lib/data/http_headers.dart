@@ -6,6 +6,11 @@ class HttpHeaders{
     'Content-Type': 'application/x-www-urlencoded'
   };
 
+  static Map<String, String> noContentHeaders = {
+    'Accept': 'Application/json',
+    'Authorization': 'Bearer ${TempData.token}',
+  };
+
   static Map<String, String> baseHeaders = {
     'Accept': 'Application/json',
     'Authorization': 'Bearer ${TempData.token}',

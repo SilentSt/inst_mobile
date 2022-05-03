@@ -9,13 +9,15 @@ class NewsFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _cubit = context.read<NewsCubit>();
-    return SizedBox(
-      height: MediaQuery.of(context).size.height-180,
-      child: SingleChildScrollView(
-        child: Column(
-          children: List.generate(_cubit.followingPosts.length, (index) {
-            return NewsCard(index: index);
-          }),
+    return Expanded(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height*0.8,
+        child: SingleChildScrollView(
+          child: Column(
+            children: List.generate(_cubit.followingPosts.length, (index) {
+              return NewsCard(index: index);
+            }),
+          ),
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:inst_mobile/ui/scene/create_post_scene.dart';
 import 'package:inst_mobile/ui/scene/global_search_scene.dart';
 import 'package:inst_mobile/ui/scene/news_scene.dart';
 import 'package:inst_mobile/ui/scene/post_details_scene.dart';
+import 'package:inst_mobile/ui/scene/profile_edit_scene.dart';
 import 'package:inst_mobile/ui/scene/profile_scene.dart';
 import 'package:inst_mobile/ui/scene/registration_scene.dart';
 
@@ -24,13 +25,20 @@ class AppNavigator extends StatelessWidget {
                 if (state is NavigationNewsState)
                   const MaterialPage(child: NewsScene()),
                 if (state is NavigationProfileState)
-                  MaterialPage(child: ProfileScene(user: state.user!,smallUser: state.smallUser!)),
+                  MaterialPage(
+                      child: ProfileScene(
+                          smallUser: state.smallUser == null ? null : state.smallUser!)),
                 if (state is NavigationRegistrationState)
                   const MaterialPage(child: RegistrationScene()),
-                if(state is NavigationCreatePostState)
+                if (state is NavigationCreatePostState)
                   const MaterialPage(child: CreatePostScene()),
+                if(state is NavigationProfileEditState)
+                  MaterialPage(child: ProfileEditScene()),
                 if (state is NavigationPostDetailsState)
-                  MaterialPage(child: PostDetailsScene(post: state.post,))
+                  MaterialPage(
+                      child: PostDetailsScene(
+                    post: state.post,
+                  ))
               ],
               onPopPage: (route, result) {
                 return route.didPop(result);

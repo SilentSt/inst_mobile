@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../cubit/profile/profile_cubit.dart';
+import '../../resources/app_colors.dart';
 import '../../resources/app_strings.dart';
 import '../styles/app_text_styles.dart';
 
@@ -31,8 +32,12 @@ class UserContent extends StatelessWidget {
                   textAlign: TextAlign.center,
                 )),
           )
-              : GridView.count(
-              crossAxisCount: 3, children: _cubit.images),
+              : SizedBox(
+            height: 400,
+                width: MediaQuery.of(context).size.width,
+                child: GridView.count(
+                crossAxisCount: 3, children: _cubit.images),
+              ),
         ),
       ),
     );

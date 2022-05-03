@@ -19,8 +19,14 @@ class NewsSceneControllers{
 
 }
 
-class GlobalSearchControllers{
+class ProfileEditControllers{
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController passwordController = TextEditingController();
+  static TextEditingController descriptionController = TextEditingController();
+}
 
+class GlobalSearchControllers{
+  static TextEditingController searchController = TextEditingController();
 }
 
 class CommentaryControllers {

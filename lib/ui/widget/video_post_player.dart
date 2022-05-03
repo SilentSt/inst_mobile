@@ -37,9 +37,13 @@ class _VideoPostPlayerState extends State<VideoPostPlayer> {
                   ? _controller.pause()
                   : _controller.play();
             },
-            child: AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
+            child: SizedBox(
+              height: 150,
+              width: 300,
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ),
             ),
           )
         : Container();

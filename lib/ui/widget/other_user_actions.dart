@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:inst_mobile/cubit/profile/cubit.dart';
 import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 
@@ -8,41 +11,52 @@ import '../styles/app_text_styles.dart';
 
 class OtherUserActions extends StatelessWidget {
   const OtherUserActions({
-    Key? key, required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
-  final GetFullUser user;
+  final GetFullMe user;
 
   @override
   Widget build(BuildContext context) {
+    var _cubit = context.read<ProfileCubit>();
+    print(_cubit.followed);
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              _cubit.followed
+                  ? _cubit.unfollow(user.uuid)
+                  : _cubit.follow(user.uuid);
+            },
             child: Text(
-              AppStrings.follow,
-              style: AppTextStyles.h3.white().copyWith(
-                  fontSize: 15, fontWeight: FontWeight.w300),
+              _cubit.followed ? AppStrings.unfollow : AppStrings.follow,
+              style: _cubit.followed
+                  ? AppTextStyles.h3
+                      .green()
+                      .copyWith(fontSize: 15, fontWeight: FontWeight.w300)
+                  : AppTextStyles.h3
+                      .white()
+                      .copyWith(fontSize: 15, fontWeight: FontWeight.w300),
             ),
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                    AppColors.darkGreen),
-                shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.circular(18))))),
+                    _cubit.followed ? Colors.transparent : AppColors.darkGreen),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18), side: BorderSide(color: AppColors.darkGreen))))),
         IconButton(
             onPressed: () {},
             icon: SizedBox(
               height: 150,
+              width: 150,
               child: Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      color: AppColors.darkGreen,
+                      border: Border.all(color: AppColors.darkGreen, width: 1),
                       borderRadius: BorderRadius.circular(90)),
-                  child: Image.asset(AppStrings.sendPath)),
+                  child: SvgPicture.asset(AppStrings.sendPath)),
             ))
       ],
     );

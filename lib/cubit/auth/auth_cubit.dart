@@ -9,35 +9,43 @@ import 'package:inst_mobile/data/temp_data.dart';
 
 import '../../resources/app_strings.dart';
 
-class AuthCubit extends Cubit<AuthState>{
+class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthLoadingState());
   String? username;
   String? password;
 
-  Future<void> login({required String username, required String password})async{
+  Future<void> login(
+      {required String username, required String password}) async {
     emit(AuthLoadingState());
-    http.Response response = await UserApi.authorize({'username':username, 'password':password});
-    Map<String, dynamic> data = jsonDecode(response.body);
-    if(response.statusCode>299)
-      {
-        emit(AuthErrorState(error: data['detail']));
-      }
-    else{
+    http.Response response = await UserApi.authorize({
+      'username': username.replaceAll(' ', ''),
+      'password': password.replaceAll(' ', '')
+    });
+    Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
+    if (response.statusCode > 299) {
+      print(response.body);
+      emit(AuthErrorState(error: data['detail']));
+    } else {
       TempData.token = data['access_token'];
       TempData.myId = data['user_id'];
       http.Response myResponse = await UserApi.getMe();
-      if(myResponse.statusCode>299)
-        {
-          emit(AuthErrorState(error: myResponse.statusCode.toString()));
+      if (myResponse.statusCode > 299) {
+        if (myResponse.statusCode > 499) {
+          emit(AuthErrorState(error: AppStrings.serverError));
+        } else {
+          Map<String, dynamic> mData =
+              json.decode(utf8.decode(myResponse.bodyBytes));
+          emit(AuthErrorState(error: mData['detail']));
         }
-      else{
-        TempData.me = GetFullUser.fromJson(json.decode(utf8.decode(myResponse.bodyBytes)));
+      } else {
+        TempData.me =
+            GetFullMe.fromJson(json.decode(utf8.decode(myResponse.bodyBytes)));
         emit(AuthAuthorizedState());
       }
     }
   }
 
-  Future<void> checkAppReadyToStart()async {
+  Future<void> checkAppReadyToStart() async {
     emit(AuthLoadingState());
     try {
       final result = await InternetAddress.lookup(AppStrings.networkTesterUrl);
@@ -52,8 +60,7 @@ class AuthCubit extends Cubit<AuthState>{
     emit(AuthErrorState(error: AppStrings.unhandledException));
   }
 
-  Future<void> acceptError()async{
+  Future<void> acceptError() async {
     emit(AuthLoadedState());
   }
-
 }

@@ -16,7 +16,7 @@ class CustomDarkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 0, 25),
+      padding: const EdgeInsets.only(top: 12, bottom: 25),
       child: TextButton(
           onPressed: () {
             func();
@@ -27,7 +27,7 @@ class CustomDarkButton extends StatelessWidget {
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)))),
           child: SizedBox(
-            width: size.width * 0.55,
+            width: size.width * 0.75,
             height: 30,
             child: Row(
               mainAxisSize: MainAxisSize.max,

@@ -6,6 +6,7 @@ import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/cubit/post_details_cubit/cubit.dart';
 import 'package:inst_mobile/cubit/profile/cubit.dart';
+import 'package:inst_mobile/cubit/profile_edit/cubit.dart';
 import 'package:inst_mobile/cubit/registration/cubit.dart';
 import 'package:inst_mobile/ui/app_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,8 @@ class Starter extends StatelessWidget {
         ),
         BlocProvider<CreatePostCubit>(create: (context)=>CreatePostCubit()),
         BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
-        BlocProvider<PostDetailsCubit>(create: (context) => PostDetailsCubit())
+        BlocProvider<PostDetailsCubit>(create: (context) => PostDetailsCubit()),
+        BlocProvider<ProfileEditCubit>(create: (context)=>ProfileEditCubit())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

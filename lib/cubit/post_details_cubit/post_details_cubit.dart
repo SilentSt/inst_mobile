@@ -34,6 +34,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
   Future<void> getPostDetailed(String postUuid) async {
     emit(PostDetailsLoadingState());
     var response = await PostApi().getDetailedPost(postUuid);
+    print(response.body);
     if(response.statusCode>299)
       {
         emit(PostDetailsErrorState(error: AppStrings.errorLoadingCommentaries));
@@ -50,12 +51,71 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       return;
     }
     emit(PostDetailsLoadingState());
-    CommentaryApi()
-        .createCommentary(
-            PostCommentary(text: CommentaryControllers.commentaryTitle.text),
-            postUuid)
-        .then((value) => getCommentaries(postUuid)
-            .then((value) => emit(PostDetailsLoadedState())));
-    print(commentaries.length);
+    var response = await CommentaryApi().createCommentary(PostCommentary(text: CommentaryControllers.commentaryTitle.text), postUuid);
+    if(response.statusCode>299)
+      {
+        emit(PostDetailsErrorState(error: AppStrings.unhandledException));
+      }
+    else{
+      await getPostDetailed(postUuid);
+      await getCommentaries(postUuid);
+    }
+    emit(PostDetailsLoadedState());
+  }
+
+  Future<void> likePost(String postUuid) async {
+    emit(PostDetailsLoadingState());
+    var response = await PostApi().likePost(postUuid);
+    if(response.statusCode>299)
+    {
+      emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));
+    }
+    else{
+      await getPostDetailed(postUuid);
+      emit(PostDetailsLoadedState());
+    }
+  }
+
+  Future<void> removeLikePost(String postUuid) async {
+    emit(PostDetailsLoadingState());
+    var response = await PostApi().removeLikePost(postUuid);
+    if(response.statusCode>299)
+    {
+      emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));
+    }
+    else{
+      await getPostDetailed(postUuid);
+      emit(PostDetailsLoadedState());
+    }
+  }
+
+  Future<void> likeCommentary(String postUuid) async {
+    emit(PostDetailsLoadingState());
+    var response = await CommentaryApi().likeComment(postUuid);
+    if(response.statusCode>299)
+    {
+      emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));
+    }
+    else{
+      await getPostDetailed(postUuid);
+      emit(PostDetailsLoadedState());
+    }
+  }
+
+  Future<void> removeLikeCommentary(String postUuid) async {
+    emit(PostDetailsLoadingState());
+    var response = await CommentaryApi().removeCommentLike(postUuid);
+    if(response.statusCode>299)
+    {
+      emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));
+    }
+    else{
+      await getPostDetailed(postUuid);
+      emit(PostDetailsLoadedState());
+    }
+  }
+
+  Future<void> dropScene()async{
+    emit(PostDetailsEmptyState());
   }
 }

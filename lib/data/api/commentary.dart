@@ -20,4 +20,18 @@ class CommentaryApi {
     var response = await http.get(Uri.parse('${AppStrings.apiUrl}/comments/$postUuid'), headers: HttpHeaders.baseHeaders);
     return response;
   }
+
+  Future<http.Response> likeComment(String uuid) async {
+    var response = await http.post(
+        Uri.parse('${AppStrings.apiUrl}/comments/$uuid/like'),
+        headers: HttpHeaders.baseHeaders);
+    return response;
+  }
+
+  Future<http.Response> removeCommentLike(String uuid) async {
+    var response = await http.delete(
+        Uri.parse('${AppStrings.apiUrl}/comments/$uuid/like'),
+        headers: HttpHeaders.baseHeaders);
+    return response;
+  }
 }
