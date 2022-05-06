@@ -5,6 +5,7 @@ class AppStrings {
   static const String networkTesterUrl = "example.com";
 
   //ui strings
+  static const String appName = "kama";
   static const String successRegistration = "Регистрация прошла успешно!";
   static const String newsAppBarTitle = 'Новости';
   static const String acceptError = 'Ок';
@@ -53,6 +54,7 @@ class AppStrings {
   //errors
 
   //asset image paths
+  static const String testImage = 'resources/images/test_image.png';
   static const String cameraPath = 'resources/images/camera.svg';
   static const String bellPath = 'resources/images/bell.svg';
   static const String chatPath = 'resources/images/chat.svg';

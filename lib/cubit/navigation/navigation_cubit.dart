@@ -4,7 +4,7 @@ import 'package:inst_mobile/data/models/user.dart';
 import 'navigation_state.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {
-  NavigationCubit() : super(NavigationAuthState());
+  NavigationCubit() : super(NavigationStartPageState());
 
   void pushToAuthScene() => emit(NavigationAuthState());
 

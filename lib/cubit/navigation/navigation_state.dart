@@ -15,6 +15,8 @@ class NavigationProfileState extends NavigationState{
 
 }
 
+class NavigationStartPageState extends NavigationState{}
+
 class NavigationProfileEditState extends NavigationState{}
 
 class NavigationRegistrationState extends NavigationState{}
