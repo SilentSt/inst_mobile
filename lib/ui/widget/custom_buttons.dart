@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inst_mobile/cubit/registration/cubit.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
-import 'package:inst_mobile/resources/app_strings.dart';
-import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 
 class CustomDarkButton extends StatelessWidget {

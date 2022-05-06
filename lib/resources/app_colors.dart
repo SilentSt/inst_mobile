@@ -6,4 +6,7 @@ class AppColors{
   static const Color snow = Color(0xffffffff);
   static const Color lightGreen = Color(0xffF1FFFC);
   static const Color darkGreen = Color(0xff648D80);
+  static const Color accentColor = Color(0xff56A4F2);
+  static const Color borderColor = Color(0x3F000000);
+  static const Color inputBorderColor = Color(0x3F000000);
 }

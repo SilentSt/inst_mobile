@@ -22,7 +22,7 @@ class AppTextStyles {
 
   static const TextStyle h4 = TextStyle(
       color: AppColors.darkGrey,
-      fontSize: 13,
+      fontSize: 14,
       fontFamily: 'Popins',
       fontWeight: FontWeight.normal);
 
@@ -38,9 +38,15 @@ extension AppTextExtension on TextStyle {
 
   TextStyle black() => copyWith(color: Colors.black);
 
+  TextStyle accent() => copyWith(color: AppColors.accentColor);
+
   TextStyle grey() => copyWith(color: AppColors.darkGrey);
 
   TextStyle bold900() => copyWith(fontWeight: FontWeight.w900);
+
+  TextStyle bold600() => copyWith(fontWeight: FontWeight.w600);
+
+  TextStyle bold700() => copyWith(fontWeight: FontWeight.w700);
 
   TextStyle bold500() => copyWith(fontWeight: FontWeight.w500);
 

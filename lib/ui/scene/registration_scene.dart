@@ -6,9 +6,11 @@ import 'package:inst_mobile/cubit/registration/cubit.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
+import 'package:inst_mobile/ui/widget/buttons/app_button.dart';
 import 'package:inst_mobile/ui/widget/custom_buttons.dart';
 import 'package:inst_mobile/ui/widget/custom_text_field.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
+import 'package:inst_mobile/ui/widget/text_fields/app_textfield.dart';
 
 import '../widget/custom_error_widget.dart';
 
@@ -19,88 +21,94 @@ class RegistrationScene extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RegistrationCubit, RegistrationState>(
       builder: (context, state) {
-        var size = MediaQuery.of(context).size;
         var _cubit = context.read<RegistrationCubit>();
         if (state is RegistrationLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
         if (state is RegistrationLoadedState) {
           return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              shadowColor: Colors.transparent,
-              leading: IconButton(icon:SvgPicture.asset(AppStrings.arrowBackPath,), onPressed: (){ context.read<NavigationCubit>().pushToAuthScene(); },),
+            appBar: PreferredSize(
+              preferredSize: Size(MediaQuery.of(context).size.width, 50),
+              child: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                shadowColor: Colors.transparent,
+                title: Text(
+                  AppStrings.registrationTitle,
+                  style: AppTextStyles.h2.black().bold700(),
+                ),
+                centerTitle: true,
+              ),
             ),
+            backgroundColor: Colors.white,
             body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Expanded(
-                    child: SizedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                      SvgPicture.asset(AppStrings.logonIconPath),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          color: AppColors.lightGreen,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 25,horizontal: 15),
-                            child: Column(children: [
-                              Text(AppStrings.registrationTitle,
-                                  style: AppTextStyles.h1.copyWith(
-                                      fontSize: 38,
-                                      fontWeight: FontWeight.w900,
-                                      color: AppColors.darkGreen)),
-                              CustomTextField(
-                                  title: AppStrings.emailTitle,
-                                  controller:
-                                      RegistrationSceneControllers.loginController),
-                              CustomTextField(
-                                  title: AppStrings.passwordTitle,
-                                  controller:
-                                      RegistrationSceneControllers.passwordController,
-                                  obfuscation: true,),
-                              CustomTextField(
-                                  title: AppStrings.nickName,
-                                  controller:
-                                      RegistrationSceneControllers.nicknameController),
-                              CustomDarkButton(
-                                func: () {
-                                  _cubit.registrate(
-                                      username: RegistrationSceneControllers
-                                          .loginController.text,
-                                      password: RegistrationSceneControllers
-                                          .passwordController.text,
-                                      nickname: RegistrationSceneControllers
-                                          .nicknameController.text);
-                                },
-                                size: size,
-                                text: AppStrings.registerButton,
-                              )
-                            ]),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox.shrink(),
+                      Column(
+                        children: [
+                          AppTextField(
+                              label: AppStrings.nickName,
+                              controller: RegistrationSceneControllers
+                                  .nicknameController),
+                          AppTextField(
+                              label: AppStrings.emailTitle,
+                              controller:
+                                  RegistrationSceneControllers.loginController),
+                          AppTextField(
+                            label: AppStrings.passwordTitle,
+                            controller:
+                                RegistrationSceneControllers.passwordController,
+                            obscuredField: true,
+                            obscureWidgetActive: Icon(
+                              Icons.visibility,
+                            ),
+                            obscureWidgetDisabled: Icon(
+                              Icons.visibility_off,
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                      
-              ],
-            ),
-                    ),
+                      AppButton.accent(
+                        action: _cubit.createUser,
+                        size: Size(343, 30),
+                        text: AppStrings.registerButton,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.alreadyHaveAccount,
+                            style: AppTextStyles.h4.black(),
+                          ),
+                          GestureDetector(
+                            onTap:
+                                context.read<NavigationCubit>().pushToAuthScene,
+                            child: Text(
+                              AppStrings.loginButton,
+                              style: AppTextStyles.h4.accent().underline(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox.shrink(),
+                    ],
                   ),
-                )),
+                ),
+              ),
+            ),
           );
         }
         if (state is RegistrationWrongDataState) {
           return CustomErrorWidget(
             error: state.error,
-            action: (){
+            action: () {
               context.read<NavigationCubit>().pushToAuthScene();
             },
           );
@@ -108,7 +116,7 @@ class RegistrationScene extends StatelessWidget {
         if (state is RegistrationErrorState) {
           return CustomErrorWidget(
             error: state.error,
-            action: (){
+            action: () {
               context.read<NavigationCubit>().pushToAuthScene();
             },
           );

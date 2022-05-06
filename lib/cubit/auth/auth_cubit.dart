@@ -6,6 +6,7 @@ import 'package:inst_mobile/cubit/auth/auth_state.dart';
 import 'package:inst_mobile/data/api/user.dart';
 import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
+import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 
 import '../../resources/app_strings.dart';
 
@@ -14,12 +15,11 @@ class AuthCubit extends Cubit<AuthState> {
   String? username;
   String? password;
 
-  Future<void> login(
-      {required String username, required String password}) async {
+  Future<void> login() async {
     emit(AuthLoadingState());
     http.Response response = await UserApi.authorize({
-      'username': username.replaceAll(' ', ''),
-      'password': password.replaceAll(' ', '')
+      'username': AuthSceneControllers.loginController.text.replaceAll(' ', ''),
+      'password': AuthSceneControllers.passwordController.text.replaceAll(' ', '')
     });
     Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
     if (response.statusCode > 299) {

@@ -13,10 +13,12 @@ class AppStrings {
   static const String passwordTitle = "Пароль";
   static const String nickName = "Никнейм";
   static const String registerButton = "Зарегестрироваться";
-  static const String loginTitle = "Добро пожаловать!";
+  static const String loginTitle = "Авторизация";
   static const String loginButton = "Войти";
   static const String registrationTitle = "Регистрация";
   static const String notAccount = "Еще нет аккаунта? ";
+  static const String alreadyHaveAccount = "Уже есть аккаунт? ";
+  static const String forgotPassword = "Забыли пароль? ";
   static const String registerSuggestion = "Зарегестрируйтесь";
   static const String sendCommentary = 'Отправить';
   static const String createPostTitle = "Создание публикации";
