@@ -41,32 +41,35 @@ class ProfileHeader extends StatelessWidget {
         const SizedBox(
           height: 12,
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-              width: (MediaQuery.of(context).size.width) / 3,
-              child: ProfileStatColumn(
-                title: AppStrings.publications,
-                count: user.postsCount,
+        SizedBox(
+          width: (MediaQuery.of(context).size.width),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: (MediaQuery.of(context).size.width-90) / 3,
+                child: ProfileStatColumn(
+                  title: AppStrings.publications,
+                  count: user.postsCount,
+                ),
               ),
-            ),
-            SizedBox(
-              width: (MediaQuery.of(context).size.width) / 3,
-              child: ProfileStatColumn(
-                title: AppStrings.followers,
-                count: user.followersCount,
+              SizedBox(
+                width: (MediaQuery.of(context).size.width-90) / 3,
+                child: ProfileStatColumn(
+                  title: AppStrings.followers,
+                  count: user.followersCount,
+                ),
               ),
-            ),
-            SizedBox(
-              width: (MediaQuery.of(context).size.width) / 3,
-              child: ProfileStatColumn(
-                title: AppStrings.followed,
-                count: user.followingCount,
+              SizedBox(
+                width: (MediaQuery.of(context).size.width-90) / 3,
+                child: ProfileStatColumn(
+                  title: AppStrings.followed,
+                  count: user.followingCount,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

@@ -17,7 +17,7 @@ class UserInfo extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.only(
-          left: 15,
+          left: 16,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

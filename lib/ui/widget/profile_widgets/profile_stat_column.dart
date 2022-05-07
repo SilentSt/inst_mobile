@@ -18,14 +18,14 @@ class ProfileStatColumn extends StatelessWidget {
       children: [
         Text(
           count.toString(),
-          style: AppTextStyles.h3.black().bold600(),
+          style: AppTextStyles.h3.black().bold600().size(15),
         ),
         const SizedBox(
           height: 1,
         ),
         Text(
           title,
-          style: AppTextStyles.h3.black(),
+          style: AppTextStyles.h3.black().size(14),
         )
       ],
     );

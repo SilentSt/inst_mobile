@@ -23,7 +23,7 @@ class UserActions extends StatelessWidget {
         context.read<NavigationCubit>().pushToProfileEditScene();
       },
       text: AppStrings.editProfile,
-      size: Size(343, 30),
+      size: Size(MediaQuery.of(context).size.width-32, 30),
       textStyle: AppTextStyles.h4.black(),
     );
   }

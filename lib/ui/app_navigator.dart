@@ -17,52 +17,52 @@ class AppNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationCubit, NavigationState>(
-        builder: (context, state) => Navigator(
-              pages: [
-                if (state is NavigationStartPageState)
-                  const MaterialPage(
-                    child: StartScene(),
-                  ),
-                if (state is NavigationAuthState)
-                  const MaterialPage(
-                    child: AuthScene(),
-                  ),
-                if (state is NavigationGlobalSearchState)
-                  const MaterialPage(
-                    child: GlobalSearchScene(),
-                  ),
-                if (state is NavigationNewsState)
-                  const MaterialPage(
-                    child: NewsScene(),
-                  ),
-                if (state is NavigationProfileState)
-                  MaterialPage(
-                    child: ProfileScene(
-                        smallUser:
-                            state.smallUser == null ? null : state.smallUser!),
-                  ),
-                if (state is NavigationRegistrationState)
-                  const MaterialPage(
-                    child: RegistrationScene(),
-                  ),
-                if (state is NavigationCreatePostState)
-                  const MaterialPage(
-                    child: CreatePostScene(),
-                  ),
-                if (state is NavigationProfileEditState)
-                  MaterialPage(
-                    child: ProfileEditScene(),
-                  ),
-                if (state is NavigationPostDetailsState)
-                  MaterialPage(
-                    child: PostDetailsScene(
-                      post: state.post,
-                    ),
-                  )
-              ],
-              onPopPage: (route, result) {
-                return route.didPop(result);
-              },
-            ));
+      builder: (context, state) => Navigator(
+        pages: [
+          if (state is NavigationStartPageState)
+            const MaterialPage(
+              child: StartScene(),
+            ),
+          if (state is NavigationAuthState)
+            const MaterialPage(
+              child: AuthScene(),
+            ),
+          if (state is NavigationGlobalSearchState)
+            const MaterialPage(
+              child: GlobalSearchScene(),
+            ),
+          if (state is NavigationNewsState)
+            const MaterialPage(
+              child: NewsScene(),
+            ),
+          if (state is NavigationProfileState)
+            MaterialPage(
+              child: ProfileScene(
+                  smallUser: state.smallUser == null ? null : state.smallUser!),
+            ),
+          if (state is NavigationRegistrationState)
+            const MaterialPage(
+              child: RegistrationScene(),
+            ),
+          if (state is NavigationCreatePostState)
+            const MaterialPage(
+              child: CreatePostScene(),
+            ),
+          if (state is NavigationProfileEditState)
+            MaterialPage(
+              child: ProfileEditScene(),
+            ),
+          if (state is NavigationPostDetailsState)
+            MaterialPage(
+              child: PostDetailsScene(
+                post: state.post,
+              ),
+            )
+        ],
+        onPopPage: (route, result) {
+          return route.didPop(result);
+        },
+      ),
+    );
   }
 }

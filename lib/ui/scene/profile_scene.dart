@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/cubit/profile/cubit.dart';
 import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
-import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
-import 'package:inst_mobile/ui/widget/shimers/box.dart';
 import 'package:inst_mobile/ui/widget/shimers/profile_shimmer.dart';
 import '../widget/app_bottom_bar.dart';
 import '../widget/app_error.dart';
@@ -59,45 +56,41 @@ class ProfileScene extends StatelessWidget {
             _cubit.loadImages(_cubit.userPosts, context);
             return SafeArea(
               child: SingleChildScrollView(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.95,
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ProfileHeader(
-                            user: _cubit.user!,
-                          ),
-                          const SizedBox(
-                            height: 27,
-                          ),
-                          UserInfo(user: _cubit.user!),
-                          const SizedBox(
-                            height: 26,
-                          ),
-                          _cubit.user!.uuid == TempData.myId
-                              ? UserActions(
-                                  user: _cubit.user!,
-                                )
-                              : OtherUserActions(
-                                  user: _cubit.user!,
-                                ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      SingleChildScrollView(
-                        child: UserContent(
-                          cubit: _cubit,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ProfileHeader(
+                          user: _cubit.user!,
                         ),
+                        const SizedBox(
+                          height: 27,
+                        ),
+                        UserInfo(user: _cubit.user!),
+                        const SizedBox(
+                          height: 26,
+                        ),
+                        _cubit.user!.uuid == TempData.myId
+                            ? UserActions(
+                                user: _cubit.user!,
+                              )
+                            : OtherUserActions(
+                                user: _cubit.user!,
+                              ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SingleChildScrollView(
+                      child: UserContent(
+                        cubit: _cubit,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );
