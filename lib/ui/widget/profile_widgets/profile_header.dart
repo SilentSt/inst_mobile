@@ -32,6 +32,9 @@ class ProfileHeader extends StatelessWidget {
             image: user.photo,
             height: 110,
             width: 110,
+            onLoading: Center(
+              child: CircularProgressIndicator(),
+            ),
             borderRadius: BorderRadius.circular(90),
           ),
         ),

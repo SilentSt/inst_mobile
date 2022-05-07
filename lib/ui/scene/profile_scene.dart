@@ -9,6 +9,8 @@ import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
+import 'package:inst_mobile/ui/widget/shimers/box.dart';
+import 'package:inst_mobile/ui/widget/shimers/profile_shimmer.dart';
 import '../widget/app_bottom_bar.dart';
 import '../widget/app_error.dart';
 import '../widget/profile_widgets/other_user_actions.dart';
@@ -47,80 +49,75 @@ class ProfileScene extends StatelessWidget {
           ],
         ),
       ),
-      body: BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
-        var _cubit = context.read<ProfileCubit>();
-        if (state is ProfileLoadingState) {
-          return Center(
-            child: const CircularProgressIndicator(
-              color: AppColors.darkGreen,
-            ),
-          );
-        }
-        if (state is ProfileLoadedState) {
-          _cubit.loadImages(_cubit.userPosts, context);
-          return SafeArea(
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.95,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ProfileHeader(
-                          user: _cubit.user!,
-                        ),
-                        const SizedBox(
-                          height: 27,
-                        ),
-                        UserInfo(user: _cubit.user!),
-                        const SizedBox(
-                          height: 26,
-                        ),
-                        _cubit.user!.uuid == TempData.myId
-                            ? UserActions(
-                                user: _cubit.user!,
-                              )
-                            : OtherUserActions(
-                                user: _cubit.user!,
-                              ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    SingleChildScrollView(
-                      child: UserContent(
-                        cubit: _cubit,
+      body: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, state) {
+          var _cubit = context.read<ProfileCubit>();
+          if (state is ProfileLoadingState) {
+            return ProfileShimmer();
+          }
+          if (state is ProfileLoadedState) {
+            _cubit.loadImages(_cubit.userPosts, context);
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.95,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ProfileHeader(
+                            user: _cubit.user!,
+                          ),
+                          const SizedBox(
+                            height: 27,
+                          ),
+                          UserInfo(user: _cubit.user!),
+                          const SizedBox(
+                            height: 26,
+                          ),
+                          _cubit.user!.uuid == TempData.myId
+                              ? UserActions(
+                                  user: _cubit.user!,
+                                )
+                              : OtherUserActions(
+                                  user: _cubit.user!,
+                                ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      SingleChildScrollView(
+                        child: UserContent(
+                          cubit: _cubit,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }
-        if (state is ProfileEmptyState) {
-          _cubit.loadData(userUuid: smallUser!.uuid);
-          _cubit.pushForceLoaded();
-        }
-        if (state is ProfileErrorState) {
-          return AppError(
-            error: state.error,
-            action: () {
-              context.read<NewsCubit>().loadData();
-              context.read<NavigationCubit>().pushToNewsScene();
-            },
-          );
-        }
-        return const Center(
-            child: CircularProgressIndicator(
-          color: AppColors.darkGreen,
-        ));
-      }),
+            );
+          }
+          if (state is ProfileEmptyState) {
+            _cubit.loadData(userUuid: smallUser!.uuid);
+            _cubit.pushForceLoaded();
+          }
+          if (state is ProfileErrorState) {
+            return AppError(
+              error: state.error,
+              action: () {
+                context.read<NewsCubit>().loadData();
+                context.read<NavigationCubit>().pushToNewsScene();
+              },
+            );
+          }
+          return ProfileShimmer();
+        },
+      ),
       bottomNavigationBar: const AppBottomBar(),
     );
   }
