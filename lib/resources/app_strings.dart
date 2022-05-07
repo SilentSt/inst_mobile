@@ -73,5 +73,6 @@ class AppStrings {
   static const String logonIconPath = 'resources/images/logon_icon.svg';
   static const String userPath = 'resources/images/user.svg';
   static const String searchGreenPath = 'resources/images/search_green.svg';
+  static const String menuPath = 'resources/images/menu.svg';
   //asset image paths
 }

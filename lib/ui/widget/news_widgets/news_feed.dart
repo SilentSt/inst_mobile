@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
-import 'package:inst_mobile/ui/widget/news_widgets/news_card.dart';
+import 'package:inst_mobile/ui/widget/post_widgets/post_card.dart';
 
 class NewsFeed extends StatelessWidget {
   const NewsFeed({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class NewsFeed extends StatelessWidget {
           children: List.generate(
             _cubit.followingPosts.length,
             (index) {
-              return NewsCard(index: index);
+              return PostCard(index: index);
             },
           ),
         ),
