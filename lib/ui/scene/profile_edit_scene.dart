@@ -31,9 +31,7 @@ class ProfileEditScene extends StatelessWidget {
             shadowColor: Colors.transparent,
             leading: IconButton(
                 onPressed: () {
-                  context
-                      .read<NavigationCubit>()
-                      .pushToProfileScene(TempData.me!.toSmallUser());
+                  context.read<NavigationCubit>().pushToProfileScene(TempData.me!.toSmallUser());
                 },
                 icon: SvgPicture.asset(
                   AppStrings.arrowBackPath,

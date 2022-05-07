@@ -15,12 +15,15 @@ class AuthCubit extends Cubit<AuthState> {
   String? username;
   String? password;
 
-  Future<void> login() async {
+  Future<void> login(
+      {required String username, required String password}) async {
     emit(AuthLoadingState());
-    http.Response response = await UserApi.authorize({
-      'username': AuthSceneControllers.loginController.text.replaceAll(' ', ''),
-      'password': AuthSceneControllers.passwordController.text.replaceAll(' ', '')
-    });
+    http.Response response = await UserApi.authorize(
+      {
+        'username': username.replaceAll(' ', ''),
+        'password': password.replaceAll(' ', ''),
+      },
+    );
     Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
     if (response.statusCode > 299) {
       print(response.body);

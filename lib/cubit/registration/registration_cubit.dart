@@ -9,16 +9,17 @@ import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 class RegistrationCubit extends Cubit<RegistrationState> {
   RegistrationCubit() : super(RegistrationLoadedState());
 
-  String? username;
-  String? password;
-  String? nickname;
-
-  Future<void> createUser() async {
+  Future<void> createUser({
+    required String username,
+    required String email,
+    required String password,
+  }) async {
     emit(RegistrationLoadingState());
     var user = CreateUser(
-        email: RegistrationSceneControllers.loginController.text,
-        password: RegistrationSceneControllers.passwordController.text,
-        nickname: RegistrationSceneControllers.nicknameController.text);
+      email: email,
+      password: password,
+      nickname: username,
+    );
     var response = await UserApi.createUser(user);
     Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
     if (response.statusCode > 299) {

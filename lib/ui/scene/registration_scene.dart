@@ -58,9 +58,10 @@ class RegistrationScene extends StatelessWidget {
                               controller: RegistrationSceneControllers
                                   .nicknameController),
                           AppTextField(
-                              label: AppStrings.emailTitle,
-                              controller:
-                                  RegistrationSceneControllers.loginController),
+                            label: AppStrings.emailTitle,
+                            controller:
+                                RegistrationSceneControllers.loginController,
+                          ),
                           AppTextField(
                             label: AppStrings.passwordTitle,
                             controller:
@@ -76,7 +77,16 @@ class RegistrationScene extends StatelessWidget {
                         ],
                       ),
                       AppButton.accent(
-                        action: _cubit.createUser,
+                        action: () {
+                          _cubit.createUser(
+                            username: RegistrationSceneControllers
+                                .nicknameController.text,
+                            password: RegistrationSceneControllers
+                                .passwordController.text,
+                            email: RegistrationSceneControllers
+                                .loginController.text,
+                          );
+                        },
                         size: Size(343, 30),
                         text: AppStrings.registerButton,
                       ),
@@ -109,7 +119,7 @@ class RegistrationScene extends StatelessWidget {
           return CustomErrorWidget(
             error: state.error,
             action: () {
-              context.read<NavigationCubit>().pushToAuthScene();
+              _cubit.acceptError();
             },
           );
         }
@@ -117,7 +127,7 @@ class RegistrationScene extends StatelessWidget {
           return CustomErrorWidget(
             error: state.error,
             action: () {
-              context.read<NavigationCubit>().pushToAuthScene();
+              _cubit.acceptError();
             },
           );
         }
@@ -127,6 +137,7 @@ class RegistrationScene extends StatelessWidget {
             children: [
               TextButton(
                   onPressed: () {
+                    _cubit.acceptError();
                     context.read<NavigationCubit>().pushToAuthScene();
                   },
                   child: const Text('Ок'))

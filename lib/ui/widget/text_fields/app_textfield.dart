@@ -33,6 +33,7 @@ class _AppTextFieldState extends State<AppTextField> {
       height: widget.size.height,
       width: widget.size.width,
       child: TextField(
+        controller: widget.controller,
         decoration: InputDecoration(
           border: baseBorder(),
           disabledBorder: baseBorder(),

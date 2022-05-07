@@ -73,7 +73,10 @@ class AuthScene extends StatelessWidget {
                   ),
                   AppButton.accent(
                     action: () {
-                      _cubit.login();
+                      _cubit.login(
+                        username: AuthSceneControllers.loginController.text,
+                        password: AuthSceneControllers.passwordController.text,
+                      );
                     },
                     size: Size(343, 30),
                     text: AppStrings.loginButton,
