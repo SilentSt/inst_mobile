@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
+import 'package:inst_mobile/data/models/post.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
+import 'package:inst_mobile/ui/widget/post_widgets/post_header.dart';
 import 'package:inst_mobile/ui/widget/post_widgets/user_icon.dart';
 
 import '../news_widgets/content_card.dart';
@@ -20,36 +22,7 @@ class PostCard extends StatelessWidget {
     var _post = _cubit.followingPosts[index];
     return Column(
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                const SizedBox(width: 16,),
-                UserIcon(user: _post.author, size: 36),
-                const SizedBox(
-                  width: 5,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '@' + _post.author.nickname,
-                      style: AppTextStyles.h1,
-                    ),
-                  ],
-                )
-              ],
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                AppStrings.menuPath,
-              ),
-            ),
-          ],
-        ),
+        PostHeader(post: _post,),
         const SizedBox(height: 15),
         ContentCard(post: _post),
         const SizedBox(height: 10),
