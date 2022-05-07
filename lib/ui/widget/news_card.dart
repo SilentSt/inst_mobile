@@ -17,18 +17,20 @@ class NewsCard extends StatelessWidget {
     var _cubit = context.read<NewsCubit>();
     var _post = _cubit.followingPosts[index];
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.98,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        elevation: 0,
-        color: AppColors.lightGreen,
-        margin: const EdgeInsets.all(5),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(children: [
+      width: MediaQuery.of(context).size.width,
+      child: Container(
+        color: AppColors.snow,
+        padding: EdgeInsets.only(
+          bottom: 10,
+        ),
+        child: Column(
+          children: [
             Row(
               children: [
-                    UserIcon(user: _post.author, size: 36),
+                const SizedBox(
+                  width: 14,
+                ),
+                UserIcon(user: _post.author, size: 36),
                 const SizedBox(
                   width: 5,
                 ),
@@ -44,8 +46,8 @@ class NewsCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 15),
-            ContentCard(post: _post)
-          ]),
+            ContentCard(post: _post),
+          ],
         ),
       ),
     );

@@ -17,14 +17,13 @@ class ContentSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
-      child: SingleChildScrollView(
-        physics: const PageScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List.generate(
-              post.files.length, (index) {
+    return SingleChildScrollView(
+      physics: const PageScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          post.files.length,
+          (index) {
             var file = post.files[index];
             var fileType = file.title.split('.').last;
             if (AppLists.imageFormats.contains(fileType)) {
@@ -35,7 +34,7 @@ class ContentSlider extends StatelessWidget {
               return CustomErrorWidget(
                   error: AppStrings.unknownFileType, action: () {});
             }
-          }),
+          },
         ),
       ),
     );

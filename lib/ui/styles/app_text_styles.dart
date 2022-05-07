@@ -42,6 +42,8 @@ extension AppTextExtension on TextStyle {
 
   TextStyle grey() => copyWith(color: AppColors.darkGrey);
 
+  TextStyle lightGrey() => copyWith(color: AppColors.lightGrey);
+
   TextStyle bold900() => copyWith(fontWeight: FontWeight.w900);
 
   TextStyle bold600() => copyWith(fontWeight: FontWeight.w600);
@@ -51,6 +53,8 @@ extension AppTextExtension on TextStyle {
   TextStyle bold500() => copyWith(fontWeight: FontWeight.w500);
 
   TextStyle bold() => copyWith(fontWeight: FontWeight.bold);
+
+  TextStyle light400() => copyWith(fontWeight: FontWeight.w400);
 
   //TextStyle font() => copyWith(fontFamily: 'Arial');
 

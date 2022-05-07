@@ -18,27 +18,36 @@ class UserIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return Container(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(90),
-        child: ImageNetwork(
-          height: size,
-          width: size,
-          image: user.photo,
-          duration: 1500,
-          curve: Curves.easeIn,
-          fitAndroidIos: BoxFit.cover,
-          fitWeb: BoxFitWeb.cover,
-          onTap: (){
-            context.read<ProfileCubit>().clearData();
-            context.read<NavigationCubit>().pushToProfileScene(user);
-          },
-          onLoading: const CircularProgressIndicator(
-            color: AppColors.darkGreen,
-          ),
-          onError: const Icon(
-            Icons.error,
-            color: Colors.red,
-          ),
-        ));
+        border: Border.all(
+          color: AppColors.lightGrey,
+        ),
+      ),
+      padding: EdgeInsets.all(2),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(90),
+          child: ImageNetwork(
+            height: size - 4,
+            width: size - 4,
+            image: user.photo,
+            duration: 1500,
+            curve: Curves.easeIn,
+            fitAndroidIos: BoxFit.cover,
+            fitWeb: BoxFitWeb.cover,
+            onTap: () {
+              context.read<ProfileCubit>().clearData();
+              context.read<NavigationCubit>().pushToProfileScene(user);
+            },
+            onLoading: const CircularProgressIndicator(
+              color: AppColors.darkGreen,
+            ),
+            onError: const Icon(
+              Icons.error,
+              color: Colors.red,
+            ),
+          )),
+    );
   }
 }

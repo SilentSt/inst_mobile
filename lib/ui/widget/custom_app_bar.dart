@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inst_mobile/data/temp_data.dart';
 
 import '../../resources/app_strings.dart';
 import '../styles/app_text_styles.dart';
-import 'app_bar_button.dart';
 
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+class NewsAppBar extends StatelessWidget {
+  const NewsAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +15,15 @@ class CustomAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       elevation: 0,
-      leading: AppBarButton(iconPath: AppStrings.cameraPath, action: () {}),
-      centerTitle: true,
-      title: const Text(AppStrings.newsAppBarTitle, style: AppTextStyles.h1),
+      title: Text(TempData.me?.nickname ?? AppStrings.newsAppBarTitle,
+          style: AppTextStyles.h1),
       actions: [
-        AppBarButton(action: () {}, iconPath: AppStrings.bellPath),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(
+            AppStrings.chatPath,
+          ),
+        )
       ],
       automaticallyImplyLeading: false,
       systemOverlayStyle: SystemUiOverlayStyle.dark,

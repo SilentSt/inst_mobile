@@ -11,7 +11,7 @@ class ImagePost extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(child: ImageNetwork(
       height: 300,
-      width: MediaQuery.of(context).size.width*0.9,
+      width: MediaQuery.of(context).size.width,
       image: imageSrc,
       duration: 1500,
       curve: Curves.easeIn,

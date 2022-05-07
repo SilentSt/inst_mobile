@@ -39,7 +39,7 @@ class _VideoPostPlayerState extends State<VideoPostPlayer> {
             },
             child: SizedBox(
               height: 150,
-              width: 300,
+              width: MediaQuery.of(context).size.width,
               child: AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
                 child: VideoPlayer(_controller),
