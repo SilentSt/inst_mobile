@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
+import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/ui/widget/profile_widgets/profile_stat_column.dart';
 
 import '../../../data/models/user.dart';
@@ -18,33 +20,44 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ImageNetwork(
-          image: user.photo,
-          height: 110,
-          width: 110,
-          borderRadius: BorderRadius.circular(90),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.lightGrey,
+            ),
+            borderRadius: BorderRadius.circular(90),
+          ),
+          padding: EdgeInsets.all(2),
+          child: ImageNetwork(
+            image: user.photo,
+            height: 110,
+            width: 110,
+            borderRadius: BorderRadius.circular(90),
+          ),
         ),
-        const SizedBox(height: 12,),
+        const SizedBox(
+          height: 12,
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: (MediaQuery.of(context).size.width)/3,
+              width: (MediaQuery.of(context).size.width) / 3,
               child: ProfileStatColumn(
                 title: AppStrings.publications,
                 count: user.postsCount,
               ),
             ),
             SizedBox(
-              width: (MediaQuery.of(context).size.width)/3,
+              width: (MediaQuery.of(context).size.width) / 3,
               child: ProfileStatColumn(
                 title: AppStrings.followers,
                 count: user.followersCount,
               ),
             ),
             SizedBox(
-              width: (MediaQuery.of(context).size.width)/3,
+              width: (MediaQuery.of(context).size.width) / 3,
               child: ProfileStatColumn(
                 title: AppStrings.followed,
                 count: user.followingCount,
