@@ -4,12 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:inst_mobile/cubit/global_search/cubit.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
-import 'package:inst_mobile/ui/widget/custom_error_widget.dart';
+import 'package:inst_mobile/ui/widget/app_error.dart';
 import '../../resources/app_strings.dart';
 import '../controllers/text_editing_controllers.dart';
 import '../widget/app_bottom_bar.dart';
-import '../widget/global_search_bar.dart';
-import '../widget/users_search_result.dart';
+import '../widget/global_search_widgets/global_search_bar.dart';
+import '../widget/global_search_widgets/users_search_result.dart';
 
 class GlobalSearchScene extends StatelessWidget {
   const GlobalSearchScene({Key? key}) : super(key: key);
@@ -86,7 +86,7 @@ class GlobalSearchScene extends StatelessWidget {
           return const SizedBox.shrink();
         }
         if (state is GlobalSearchErrorState) {
-          return CustomErrorWidget(
+          return AppError(
             error: state.error,
             action: () {
               _cubit.acceptError();

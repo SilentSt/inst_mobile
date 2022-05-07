@@ -8,13 +8,13 @@ import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
-import 'package:inst_mobile/ui/widget/custom_error_widget.dart';
-import '../widget/commentaries_feed.dart';
-import '../widget/commentary_input_card.dart';
-import '../widget/post_description.dart';
-import '../widget/post_details_action_bar.dart';
-import '../widget/post_details_app_bar.dart';
-import '../widget/post_details_content.dart';
+import 'package:inst_mobile/ui/widget/app_error.dart';
+import '../widget/post_widgets/commentaries_feed.dart';
+import '../widget/post_widgets/commentary_input_card.dart';
+import '../widget/post_widgets/post_description.dart';
+import '../widget/post_widgets/post_details_action_bar.dart';
+import '../widget/post_widgets/post_details_app_bar.dart';
+import '../widget/post_widgets/post_details_content.dart';
 
 class PostDetailsScene extends StatelessWidget {
   const PostDetailsScene({Key? key, required this.post}) : super(key: key);
@@ -67,7 +67,7 @@ class PostDetailsScene extends StatelessWidget {
         _cubit.getCommentaries(post.uuid);
       }
       if (state is PostDetailsErrorState) {
-        return CustomErrorWidget(
+        return AppError(
             error: state.error,
             action: () {
               context.read<NavigationCubit>().pushToNewsScene();

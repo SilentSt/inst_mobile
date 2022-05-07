@@ -9,9 +9,8 @@ import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
-import 'package:inst_mobile/ui/widget/custom_text_field.dart';
-import 'package:inst_mobile/ui/widget/post_preview.dart';
-import 'package:inst_mobile/ui/widget/user_icon.dart';
+import 'package:inst_mobile/ui/widget/post_widgets/post_preview.dart';
+import 'package:inst_mobile/ui/widget/post_widgets/user_icon.dart';
 
 class CreatePostScene extends StatelessWidget {
   const CreatePostScene({Key? key}) : super(key: key);
@@ -68,17 +67,18 @@ class CreatePostScene extends StatelessWidget {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: size.width - 91,
-                                  child: CustomTextField(
-                                    title: AppStrings.title,
-                                    controller:
-                                        CreatePostControllers.titleController,
-                                    maxLines: 1,
-                                    titleStyle: AppTextStyles.h4.grey(),
-                                    textStyle: AppTextStyles.h4.black(),
-                                  ),
-                                ),
+                                //TODO: widget removed
+                                // SizedBox(
+                                //   width: size.width - 91,
+                                //   child: CustomTextField(
+                                //     title: AppStrings.title,
+                                //     controller:
+                                //         CreatePostControllers.titleController,
+                                //     maxLines: 1,
+                                //     titleStyle: AppTextStyles.h4.grey(),
+                                //     textStyle: AppTextStyles.h4.black(),
+                                //   ),
+                                // ),
                                 PopupMenuButton<Picker>(
                                   itemBuilder: (context) =>
                                       <PopupMenuEntry<Picker>>[

@@ -9,12 +9,12 @@ import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import '../widget/app_bottom_bar.dart';
-import '../widget/custom_error_widget.dart';
-import '../widget/other_user_actions.dart';
-import '../widget/profile_header.dart';
-import '../widget/user_actions.dart';
-import '../widget/user_content.dart';
-import '../widget/user_info.dart';
+import '../widget/app_error.dart';
+import '../widget/profile_widgets/other_user_actions.dart';
+import '../widget/profile_widgets/profile_header.dart';
+import '../widget/profile_widgets/user_actions.dart';
+import '../widget/profile_widgets/user_content.dart';
+import '../widget/profile_widgets/user_info.dart';
 
 class ProfileScene extends StatelessWidget {
   const ProfileScene({Key? key, this.smallUser}) : super(key: key);
@@ -87,7 +87,7 @@ class ProfileScene extends StatelessWidget {
           _cubit.pushForceLoaded();
         }
         if (state is ProfileErrorState) {
-          return CustomErrorWidget(
+          return AppError(
             error: state.error,
             action: () {
               context.read<NewsCubit>().loadData();

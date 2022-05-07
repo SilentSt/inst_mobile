@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
-import 'package:inst_mobile/ui/widget/custom_app_bar.dart';
+import 'package:inst_mobile/ui/widget/news_widgets/news_app_bar.dart';
 import '../widget/app_bottom_bar.dart';
-import '../widget/custom_error_widget.dart';
-import '../widget/history_bar.dart';
-import '../widget/news_feed.dart';
+import '../widget/app_error.dart';
+import '../widget/history_widgets/history_bar.dart';
+import '../widget/news_widgets/news_feed.dart';
 
 class NewsScene extends StatelessWidget {
   const NewsScene({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class NewsScene extends StatelessWidget {
                   return const SizedBox.shrink();
                 }
                 if (state is NewsErrorState) {
-                  return CustomErrorWidget(
+                  return AppError(
                       error: state.error, action: _cubit.acceptError);
                 }
                 context.read<NewsCubit>().loadData();

@@ -8,7 +8,7 @@ import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/buttons/app_button.dart';
 import 'package:inst_mobile/ui/widget/text_fields/app_textfield.dart';
 
-import '../widget/custom_error_widget.dart';
+import '../widget/app_error.dart';
 
 class AuthScene extends StatelessWidget {
   const AuthScene({Key? key}) : super(key: key);
@@ -117,7 +117,7 @@ class AuthScene extends StatelessWidget {
         );
       }
       if (state is AuthErrorState) {
-        return CustomErrorWidget(
+        return AppError(
           error: (state).error,
           action: () {
             _cubit.acceptError();
@@ -126,7 +126,7 @@ class AuthScene extends StatelessWidget {
         );
       }
       if (state is AuthWrongDataState) {
-        return CustomErrorWidget(
+        return AppError(
           error: AppStrings.wrongAuthData,
           action: () {
             _cubit.acceptError();

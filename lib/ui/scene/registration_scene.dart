@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/registration/cubit.dart';
-import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/buttons/app_button.dart';
-import 'package:inst_mobile/ui/widget/custom_buttons.dart';
-import 'package:inst_mobile/ui/widget/custom_text_field.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/widget/text_fields/app_textfield.dart';
 
-import '../widget/custom_error_widget.dart';
+import '../widget/app_error.dart';
 
 class RegistrationScene extends StatelessWidget {
   const RegistrationScene({Key? key}) : super(key: key);
@@ -116,7 +112,7 @@ class RegistrationScene extends StatelessWidget {
           );
         }
         if (state is RegistrationWrongDataState) {
-          return CustomErrorWidget(
+          return AppError(
             error: state.error,
             action: () {
               _cubit.acceptError();
@@ -124,7 +120,7 @@ class RegistrationScene extends StatelessWidget {
           );
         }
         if (state is RegistrationErrorState) {
-          return CustomErrorWidget(
+          return AppError(
             error: state.error,
             action: () {
               _cubit.acceptError();

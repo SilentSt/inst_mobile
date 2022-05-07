@@ -8,10 +8,7 @@ import 'package:inst_mobile/cubit/profile_edit/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
-import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
-import 'package:inst_mobile/ui/widget/custom_buttons.dart';
-import 'package:inst_mobile/ui/widget/custom_text_field.dart';
 
 class ProfileEditScene extends StatelessWidget {
   @override
@@ -136,27 +133,28 @@ class ProfileEditScene extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    CustomTextField(
-                        title: AppStrings.emailTitle,
-                        controller: ProfileEditControllers.emailController),
-                    CustomTextField(
-                      title: AppStrings.passwordTitle,
-                      controller: ProfileEditControllers.passwordController,
-                      obfuscation: true,
-                    ),
-                    SingleChildScrollView(
-                      child: CustomTextField(
-                          title: AppStrings.status,
-                          controller:
-                              ProfileEditControllers.descriptionController,
-                          maxLines: 2),
-                    ),
-                    CustomDarkButton(
-                        size: size,
-                        text: AppStrings.acceptEdit,
-                        func: () {
-                          context.read<ProfileEditCubit>().applyChanges();
-                        })
+                    // CustomTextField(
+                    //     title: AppStrings.emailTitle,
+                    //     controller: ProfileEditControllers.emailController),
+                    // CustomTextField(
+                    //   title: AppStrings.passwordTitle,
+                    //   controller: ProfileEditControllers.passwordController,
+                    //   obfuscation: true,
+                    // ),
+                    // SingleChildScrollView(
+                    //   child: CustomTextField(
+                    //       title: AppStrings.status,
+                    //       controller:
+                    //           ProfileEditControllers.descriptionController,
+                    //       maxLines: 2),
+                    // ),
+                    //TODO:button removed
+                    // CustomDarkButton(
+                    //     size: size,
+                    //     text: AppStrings.acceptEdit,
+                    //     func: () {
+                    //       context.read<ProfileEditCubit>().applyChanges();
+                    //     })
                   ],
                 ),
               ),
