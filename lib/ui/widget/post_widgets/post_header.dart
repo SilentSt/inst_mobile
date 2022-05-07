@@ -30,8 +30,8 @@ class PostHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '@' + _post.author.nickname,
-                  style: AppTextStyles.h1,
+                  _post.author.nickname,
+                  style: AppTextStyles.h1.bold600().size(14),
                 ),
               ],
             )
