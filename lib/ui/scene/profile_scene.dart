@@ -8,6 +8,7 @@ import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
+import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import '../widget/app_bottom_bar.dart';
 import '../widget/app_error.dart';
 import '../widget/profile_widgets/other_user_actions.dart';
@@ -26,56 +27,76 @@ class ProfileScene extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, 50),
         child: AppBar(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              onPressed: () {
-                context.read<NewsCubit>().loadData();
-                context.read<NavigationCubit>().pushToNewsScene();
-              },
-              icon: SvgPicture.asset(AppStrings.arrowBackPath),
-            )),
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          elevation: 0,
+          title: Text(
+            smallUser?.nickname ?? AppStrings.profileMockNickName,
+            style: AppTextStyles.h2.black().bold700(),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.menu,
+                color: Colors.black,
+              ),
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+          ],
+        ),
       ),
       body: BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
         var _cubit = context.read<ProfileCubit>();
         if (state is ProfileLoadingState) {
-          return Center(child: const CircularProgressIndicator(color: AppColors.darkGreen,));
+          return Center(
+            child: const CircularProgressIndicator(
+              color: AppColors.darkGreen,
+            ),
+          );
         }
         if (state is ProfileLoadedState) {
           _cubit.loadImages(_cubit.userPosts, context);
           return SafeArea(
             child: SingleChildScrollView(
               child: SizedBox(
-                height: MediaQuery.of(context).size.height*0.95,
+                height: MediaQuery.of(context).size.height * 0.95,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ProfileHeader(
                           user: _cubit.user!,
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 27,
                         ),
                         UserInfo(user: _cubit.user!),
                         const SizedBox(
-                          height: 20,
+                          height: 26,
                         ),
                         _cubit.user!.uuid == TempData.myId
                             ? UserActions(
-                          user: _cubit.user!,
-                        )
+                                user: _cubit.user!,
+                              )
                             : OtherUserActions(
-                          user: _cubit.user!,
-                        ),
+                                user: _cubit.user!,
+                              ),
                       ],
                     ),
-                    const SizedBox(height: 15,),
-                    SingleChildScrollView(child: UserContent(cubit: _cubit))
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SingleChildScrollView(
+                      child: UserContent(
+                        cubit: _cubit,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -95,10 +116,12 @@ class ProfileScene extends StatelessWidget {
             },
           );
         }
-        return const Center(child: CircularProgressIndicator(color: AppColors.darkGreen,));
+        return const Center(
+            child: CircularProgressIndicator(
+          color: AppColors.darkGreen,
+        ));
       }),
       bottomNavigationBar: const AppBottomBar(),
     );
-
   }
 }

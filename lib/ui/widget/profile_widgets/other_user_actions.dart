@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:inst_mobile/cubit/profile/cubit.dart';
 import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
+import 'package:inst_mobile/ui/widget/buttons/app_button.dart';
 
 import '../../../resources/app_colors.dart';
 import '../../../resources/app_strings.dart';
@@ -25,39 +26,31 @@ class OtherUserActions extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextButton(
-            onPressed: () {
-              _cubit.followed
-                  ? _cubit.unfollow(user.uuid)
-                  : _cubit.follow(user.uuid);
-            },
-            child: Text(
-              _cubit.followed ? AppStrings.unfollow : AppStrings.follow,
-              style: _cubit.followed
-                  ? AppTextStyles.h3
-                      .green()
-                      .copyWith(fontSize: 15, fontWeight: FontWeight.w300)
-                  : AppTextStyles.h3
-                      .white()
-                      .copyWith(fontSize: 15, fontWeight: FontWeight.w300),
-            ),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    _cubit.followed ? Colors.transparent : AppColors.darkGreen),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18), side: BorderSide(color: AppColors.darkGreen))))),
-        IconButton(
-            onPressed: () {},
-            icon: SizedBox(
-              height: 150,
-              width: 150,
-              child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.darkGreen, width: 1),
-                      borderRadius: BorderRadius.circular(90)),
-                  child: SvgPicture.asset(AppStrings.sendPath)),
-            ))
+        _cubit.followed
+            ? AppButton.outlined(
+                action: () {
+                  _cubit.unfollow(user.uuid);
+                },
+                text: AppStrings.unfollow,
+                size: Size(167, 30),
+                textStyle: AppTextStyles.h4.black(),
+              )
+            : AppButton.accent(
+                action: () {
+                  _cubit.follow(user.uuid);
+                },
+                text: AppStrings.follow,
+                size: Size(167, 30),
+              ),
+        const SizedBox(width: 10,),
+        AppButton.outlined(
+          action: () {
+            _cubit.unfollow(user.uuid);
+          },
+          text: AppStrings.openChat,
+          size: Size(167, 30),
+          textStyle: AppTextStyles.h4.black(),
+        )
       ],
     );
   }

@@ -26,12 +26,14 @@ class AppStrings {
   static const String title = "Заголовок";
   static const String description = "Описание";
   static const String fileChoose = "Выбранный файл";
-  static const String followed = 'Подписки';
-  static const String followers = 'Подпиcчики';
-  static const String insights = 'Статистика';
+  static const String followed = 'Подписок';
+  static const String profileMockNickName = 'профиль';
+  static const String followers = 'Подпиcчиков';
+  static const String publications = 'Публикаций';
   static const String editProfile = 'Редактировать';
   static const String follow = 'Подписаться';
   static const String unfollow = 'Отписаться';
+  static const String openChat = 'Написать';
   static const String noImages = 'Мы не нашли ваших публикаций';
   static const String usersResult = 'Пользователи';
   static const String postsResult = 'Публикации';

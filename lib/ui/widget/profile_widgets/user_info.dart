@@ -13,24 +13,31 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          '@' + user.nickname,
-          style: AppTextStyles.h2.black().bold900(),
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 15,
         ),
-        const SizedBox(
-          height: 20,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '@' + user.nickname,
+              style: AppTextStyles.h2.black().bold900(),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              user.bio == null
+                  ? 'Здесь мог бы быть замечательный статус'
+                  : user.bio!,
+              style: AppTextStyles.h3.black(),
+            ),
+          ],
         ),
-        SizedBox(
-          width: 280,
-          child: Text(
-            user.bio==null?'Здесь мог бы быть замечательный статус':user.bio!,
-            style: AppTextStyles.h3.grey(),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
