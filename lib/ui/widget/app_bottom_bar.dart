@@ -10,7 +10,19 @@ import 'package:inst_mobile/resources/app_colors.dart';
 import '../../resources/app_strings.dart';
 
 class AppBottomBar extends StatelessWidget {
-  const AppBottomBar({Key? key}) : super(key: key);
+  const AppBottomBar({
+    Key? key,
+    this.homePage = false,
+    this.searchPage = false,
+    this.notificationPage = false,
+    this.userPage = false,
+    this.addPage = false,
+  }) : super(key: key);
+  final bool homePage;
+  final bool searchPage;
+  final bool addPage;
+  final bool notificationPage;
+  final bool userPage;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +43,7 @@ class AppBottomBar extends StatelessWidget {
                   context.read<NavigationCubit>().pushToNewsScene();
                 },
                 icon: SvgPicture.asset(
-                  AppStrings.homePath,
+                  homePage ? AppStrings.homeHPath : AppStrings.homePath,
                 ),
               ),
               IconButton(
@@ -39,7 +51,7 @@ class AppBottomBar extends StatelessWidget {
                   context.read<NavigationCubit>().pushToGlobalSearchScene();
                 },
                 icon: SvgPicture.asset(
-                  AppStrings.searchPath,
+                  searchPage ? AppStrings.searchHPath : AppStrings.searchPath,
                 ),
               ),
               IconButton(
@@ -47,7 +59,7 @@ class AppBottomBar extends StatelessWidget {
                   context.read<NavigationCubit>().pushToCreatePostScene();
                 },
                 icon: SvgPicture.asset(
-                  AppStrings.addPath,
+                  addPage ? AppStrings.addHPath : AppStrings.addPath,
                 ),
               ),
               IconButton(
@@ -55,7 +67,7 @@ class AppBottomBar extends StatelessWidget {
                   //context.read<NavigationCubit>().pushToGlobalSearchScene();
                 },
                 icon: SvgPicture.asset(
-                  AppStrings.bellPath,
+                  notificationPage ? AppStrings.bellHPath : AppStrings.bellPath,
                 ),
               ),
               IconButton(
@@ -66,7 +78,7 @@ class AppBottomBar extends StatelessWidget {
                       .pushToProfileScene(TempData.me!.toSmallUser());
                 },
                 icon: SvgPicture.asset(
-                  AppStrings.userPath,
+                  userPage ? AppStrings.userHPath : AppStrings.userPath,
                 ),
               )
             ],

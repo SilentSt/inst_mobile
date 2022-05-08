@@ -111,7 +111,7 @@ class ProfileScene extends StatelessWidget {
           return ProfileShimmer();
         },
       ),
-      bottomNavigationBar: const AppBottomBar(),
+      bottomNavigationBar: const AppBottomBar(userPage: true,),
     );
   }
 }

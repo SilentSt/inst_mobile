@@ -49,7 +49,9 @@ class NewsScene extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const AppBottomBar(),
+      bottomNavigationBar: const AppBottomBar(
+        homePage: true,
+      ),
     );
   }
 }

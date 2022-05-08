@@ -59,14 +59,18 @@ class AppStrings {
   static const String testImage = 'resources/images/test_image.png';
   static const String cameraPath = 'resources/images/camera.svg';
   static const String bellPath = 'resources/images/bell.svg';
+  static const String bellHPath = 'resources/images/bellH.svg';
   static const String chatPath = 'resources/images/chat.svg';
   static const String commentaryPath = 'resources/images/commentary.svg';
   static const String homePath = 'resources/images/home.svg';
+  static const String homeHPath = 'resources/images/homeH.svg';
   static const String likePath = 'resources/images/large_like_outlined.svg';
   static const String likeFilledPath = 'resources/images/like_filled.svg';
   static const String searchPath = 'resources/images/search.svg';
+  static const String searchHPath = 'resources/images/searchH.svg';
   static const String sendPath = 'resources/images/send_outlined.svg';
   static const String addPath = 'resources/images/add.svg';
+  static const String addHPath = 'resources/images/addH.svg';
   static const String arrowBackPath = 'resources/images/arrow_back.svg';
   static const String largeLikeOutlinedPath = 'resources/images/large_like_outlined.svg';
   static const String sendOutlinedPath = 'resources/images/send_outlined.svg';
@@ -74,6 +78,7 @@ class AppStrings {
   static const String smallLikeOutlinedPath = 'resources/images/small_like_outlined.svg';
   static const String logonIconPath = 'resources/images/logon_icon.svg';
   static const String userPath = 'resources/images/user.svg';
+  static const String userHPath = 'resources/images/userH.svg';
   static const String searchGreenPath = 'resources/images/search_green.svg';
   static const String menuPath = 'resources/images/menu.svg';
   //asset image paths

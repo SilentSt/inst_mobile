@@ -96,7 +96,7 @@ class GlobalSearchScene extends StatelessWidget {
         }
         return const Center(child: CircularProgressIndicator());
       }),
-      bottomNavigationBar: const AppBottomBar(),
+      bottomNavigationBar: const AppBottomBar(searchPage: true,),
     );
   }
 }
