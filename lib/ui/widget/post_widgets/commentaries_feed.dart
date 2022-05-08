@@ -29,84 +29,81 @@ class CommentariesFeed extends StatelessWidget {
       }
       if(state is PostDetailsLoadedState)
         {
-          return SizedBox(
-            height: 100,
-            child: SingleChildScrollView(
-              child: Column(
-                children: List.generate(
-                    _cubit.commentaries.length,
-                        (index) => Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding:
-                              const EdgeInsets.only(top: 5, left: 2),
-                              child: ImageNetwork(
-                                height: 38,
-                                width: 38,
-                                onTap: () {
-                                  context.read<ProfileCubit>().clearData();
-                                  context
-                                      .read<NavigationCubit>()
-                                      .pushToProfileScene(post.author);
-                                },
-                                image:
-                                _cubit.commentaries[index].author.photo,
-                                borderRadius: BorderRadius.circular(90),
-                              ),
+          return SingleChildScrollView(
+            child: Column(
+              children: List.generate(
+                  _cubit.commentaries.length,
+                      (index) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(top: 5, left: 2),
+                            child: ImageNetwork(
+                              height: 38,
+                              width: 38,
+                              onTap: () {
+                                context.read<ProfileCubit>().clearData();
+                                context
+                                    .read<NavigationCubit>()
+                                    .pushToProfileScene(post.author);
+                              },
+                              image:
+                              _cubit.commentaries[index].author.photo,
+                              borderRadius: BorderRadius.circular(90),
                             ),
-                            const SizedBox(
-                              width: 10,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width:
+                            MediaQuery.of(context).size.width * 0.7,
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '@' +
+                                      _cubit.commentaries[index].author
+                                          .nickname,
+                                  style:
+                                  AppTextStyles.h3.black().bold900(),
+                                  textAlign: TextAlign.left,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  _cubit.commentaries[index].title,
+                                  style: AppTextStyles.h4.black(),
+                                )
+                              ],
                             ),
-                            SizedBox(
-                              width:
-                              MediaQuery.of(context).size.width * 0.7,
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '@' +
-                                        _cubit.commentaries[index].author
-                                            .nickname,
-                                    style:
-                                    AppTextStyles.h3.black().bold900(),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    _cubit.commentaries[index].title,
-                                    style: AppTextStyles.h4.black(),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              //TODO need to be fixed
-                              // _cubit.commentaries[index].isLiked!
-                              //     ? _cubit.removeLikeCommentary(
-                              //     _cubit.commentaries[index].uuid)
-                              //     : _cubit.likePost(
-                              //     _cubit.commentaries[index].uuid);
-                            },
-                            icon: SvgPicture.asset(
-                                _cubit.commentaries[index].isLiked!
-                                    ? AppStrings.smallLikeOutlinedPath
-                                    : AppStrings.smallLikeFilledPath))
-                      ],
-                    )),
-              ),
+                          )
+                        ],
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            //TODO need to be fixed
+                            // _cubit.commentaries[index].isLiked!
+                            //     ? _cubit.removeLikeCommentary(
+                            //     _cubit.commentaries[index].uuid)
+                            //     : _cubit.likePost(
+                            //     _cubit.commentaries[index].uuid);
+                          },
+                          icon: SvgPicture.asset(
+                              _cubit.commentaries[index].isLiked!
+                                  ? AppStrings.smallLikeOutlinedPath
+                                  : AppStrings.smallLikeFilledPath))
+                    ],
+                  )),
             ),
           );
         }

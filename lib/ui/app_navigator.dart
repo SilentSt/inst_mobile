@@ -5,7 +5,7 @@ import 'package:inst_mobile/ui/scene/auth_scene.dart';
 import 'package:inst_mobile/ui/scene/create_post_scene.dart';
 import 'package:inst_mobile/ui/scene/global_search_scene.dart';
 import 'package:inst_mobile/ui/scene/news_scene.dart';
-import 'package:inst_mobile/ui/scene/post_details_scene.dart';
+import 'package:inst_mobile/ui/scene/commentaries_scene.dart';
 import 'package:inst_mobile/ui/scene/profile_edit_scene.dart';
 import 'package:inst_mobile/ui/scene/profile_scene.dart';
 import 'package:inst_mobile/ui/scene/registration_scene.dart';
@@ -54,7 +54,7 @@ class AppNavigator extends StatelessWidget {
             ),
           if (state is NavigationPostDetailsState)
             MaterialPage(
-              child: PostDetailsScene(
+              child: CommentariesScene(
                 post: state.post,
               ),
             )
