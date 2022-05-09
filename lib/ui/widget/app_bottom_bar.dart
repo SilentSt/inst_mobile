@@ -6,6 +6,7 @@ import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/cubit/profile/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
+import 'package:inst_mobile/ui/widget/dialogs/base_dialog.dart';
 
 import '../../resources/app_strings.dart';
 
@@ -56,7 +57,22 @@ class AppBottomBar extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  context.read<NavigationCubit>().pushToCreatePostScene();
+                  //context.read<NavigationCubit>().pushToCreatePostScene();
+                  showBottomSheet(
+                    context: context,
+                    builder: (context) => BaseDialog(
+                      size: Size(
+                        MediaQuery.of(context).size.width,
+                        125,
+                      ),
+                      child: Column(
+                        children: [
+                          Text('Публикация'),
+                          Text('История'),
+                        ],
+                      ),
+                    ),
+                  );
                 },
                 icon: SvgPicture.asset(
                   addPage ? AppStrings.addHPath : AppStrings.addPath,

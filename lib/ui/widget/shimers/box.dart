@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ShimmerBox extends StatelessWidget {
   const ShimmerBox({
     Key? key,
     required this.size,
-    this.radius = 0,
+    this.radius = 5,
   }) : super(key: key);
 
   final Size size;
@@ -23,15 +22,9 @@ class ShimmerBox extends StatelessWidget {
         ),
         color: AppColors.lightAccentColor,
       ),
-      child: Shimmer.fromColors(
-        child: SizedBox(
-          height: 50,
-          width: 50,
-        ),
-        enabled: true,
-        baseColor: AppColors.lightGrey,
-        highlightColor: AppColors.lightAccentColor,
-        loop: 5,
+      child: SizedBox(
+        height: 50,
+        width: 50,
       ),
     );
   }

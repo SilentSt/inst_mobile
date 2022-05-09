@@ -26,55 +26,88 @@ class _ProfileShimmerState extends State<ProfileShimmer> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ShimmerBox(
-              size: Size(105, 105),
+              size: Size(100, 100),
               radius: 90,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ShimmerBox(
-                  size: Size(100, 40),
+            const SizedBox(height: 18,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  3,
+                  (index) => Column(
+                    children: [
+                      ShimmerBox(
+                        size: Size(
+                          20,
+                          12,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ShimmerBox(
+                        size: Size(
+                          78,
+                          14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                ShimmerBox(
-                  size: Size(100, 40),
-                ),
-                ShimmerBox(
-                  size: Size(100, 40),
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: ShimmerBox(
-                size: Size(80, 60),
               ),
             ),
-            ShimmerBox(
-              size: Size(300, 30),
+            const SizedBox(height: 27,),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ShimmerBox(
+                      size: Size(100, 14),
+                    ),
+                    const SizedBox(
+                      height: 11,
+                    ),
+                    ShimmerBox(
+                      size: Size(150, 14),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ShimmerBox(
-                  size: Size(
-                    MediaQuery.of(context).size.width / 3,
-                    MediaQuery.of(context).size.width / 3,
+            const SizedBox(height: 26,),
+            ShimmerBox(
+              size: Size(MediaQuery.of(context).size.width - 32, 30),
+            ),
+            const SizedBox(height: 48,),
+            Expanded(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 500,
+                child: GridView.count(
+                  crossAxisCount: 3,
+                  children: List.generate(
+                    12,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(0.5),
+                      child: ShimmerBox(
+                        size: Size(
+                          124,
+                          124,
+                        ),
+                        radius: 0,
+                      ),
+                    ),
                   ),
                 ),
-                ShimmerBox(
-                  size: Size(
-                    MediaQuery.of(context).size.width / 3,
-                    MediaQuery.of(context).size.width / 3,
-                  ),
-                ),
-                ShimmerBox(
-                  size: Size(
-                    MediaQuery.of(context).size.width / 3,
-                    MediaQuery.of(context).size.width / 3,
-                  ),
-                ),
-              ],
-            )
+              ),
+            ),
           ],
         ),
       ),
