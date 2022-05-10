@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:inst_mobile/cubit/auth/auth_cubit.dart';
 import 'package:inst_mobile/cubit/create_post/create_post_cubit.dart';
@@ -12,7 +14,11 @@ import 'package:inst_mobile/ui/app_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const Starter());
+  runApp(
+    DevicePreview(
+      builder: (context) => const Starter(),
+    ),
+  );
 }
 
 class Starter extends StatelessWidget {
@@ -20,25 +26,28 @@ class Starter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
-        BlocProvider<GlobalSearchCubit>(
-            create: (context) => GlobalSearchCubit()),
-        BlocProvider<NewsCubit>(create: (context) => NewsCubit()),
-        BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
-        BlocProvider<RegistrationCubit>(
-          create: (context) => RegistrationCubit(),
-        ),
-        BlocProvider<CreatePostCubit>(create: (context)=>CreatePostCubit()),
-        BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
-        BlocProvider<PostDetailsCubit>(create: (context) => PostDetailsCubit()),
-        BlocProvider<ProfileEditCubit>(create: (context)=>ProfileEditCubit())
-      ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        color: Colors.white,
-        home: Scaffold(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: DevicePreview.appBuilder,
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      color: Colors.white,
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+          BlocProvider<GlobalSearchCubit>(
+              create: (context) => GlobalSearchCubit()),
+          BlocProvider<NewsCubit>(create: (context) => NewsCubit()),
+          BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
+          BlocProvider<RegistrationCubit>(
+            create: (context) => RegistrationCubit(),
+          ),
+          BlocProvider<CreatePostCubit>(create: (context) => CreatePostCubit()),
+          BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
+          BlocProvider<PostDetailsCubit>(create: (context) => PostDetailsCubit()),
+          BlocProvider<ProfileEditCubit>(create: (context) => ProfileEditCubit())
+        ],
+        child: Scaffold(
           backgroundColor: Colors.white,
           body: AppNavigator(),
         ),

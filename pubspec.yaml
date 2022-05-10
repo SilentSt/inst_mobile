@@ -47,6 +47,7 @@ dependencies:
   flutter_svg: ^1.0.3
   intl: ^0.17.0
   shimmer: ^2.0.0
+  device_preview: ^1.0.0
 
 dev_dependencies:
   flutter_test:
