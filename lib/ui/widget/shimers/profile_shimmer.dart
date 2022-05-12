@@ -26,7 +26,7 @@ class _ProfileShimmerState extends State<ProfileShimmer> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ShimmerBox(
-              size: Size(100, 100),
+              size: Size(108, 108),
               radius: 90,
             ),
             const SizedBox(height: 18,),

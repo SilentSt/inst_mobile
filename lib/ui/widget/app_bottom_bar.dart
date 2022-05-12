@@ -1,11 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inst_mobile/cubit/create_post/create_post_cubit.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/cubit/profile/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
+import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/dialogs/base_dialog.dart';
 
 import '../../resources/app_strings.dart';
@@ -58,20 +61,107 @@ class AppBottomBar extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   //context.read<NavigationCubit>().pushToCreatePostScene();
-                  showBottomSheet(
+                  showCupertinoModalPopup(
                     context: context,
-                    builder: (context) => BaseDialog(
-                      size: Size(
-                        MediaQuery.of(context).size.width,
-                        125,
-                      ),
-                      child: Column(
-                        children: [
-                          Text('Публикация'),
-                          Text('История'),
-                        ],
-                      ),
-                    ),
+                    builder: (context) {
+                      return BaseDialog(
+                        size: Size(
+                          MediaQuery.of(context).size.width,
+                          135,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                showCupertinoModalPopup(
+                                  context: context,
+                                  builder: (context) {
+                                    return BaseDialog(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () async{
+                                              await context.read<CreatePostCubit>().dropState();
+                                              await context.read<CreatePostCubit>().addCameraContent([]);
+                                              context.read<NavigationCubit>().pushToCreatePostScene();
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 40,
+                                              child: Text(
+                                                'Камера',
+                                                textAlign: TextAlign.left,
+                                                style: AppTextStyles.h4
+                                                    .black()
+                                                    .light400(),
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () async{
+                                              await context.read<CreatePostCubit>().dropState();
+                                              await context.read<CreatePostCubit>().addGalleryContent([]);
+                                              context.read<NavigationCubit>().pushToCreatePostScene();
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 40,
+                                              child: Text(
+                                                'Галлерея',
+                                                textAlign: TextAlign.left,
+                                                style: AppTextStyles.h4
+                                                    .black()
+                                                    .light400(),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      size: Size(
+                                        MediaQuery.of(context).size.width,
+                                        135,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 40,
+                                child: Text(
+                                  'Публикация',
+                                  textAlign: TextAlign.left,
+                                  style: AppTextStyles.h4.black().light400(),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 40,
+                                child: Text(
+                                  'История',
+                                  textAlign: TextAlign.left,
+                                  style: AppTextStyles.h4.black().light400(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   );
                 },
                 icon: SvgPicture.asset(

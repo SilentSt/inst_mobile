@@ -20,25 +20,30 @@ class Starter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
-        BlocProvider<GlobalSearchCubit>(
-            create: (context) => GlobalSearchCubit()),
-        BlocProvider<NewsCubit>(create: (context) => NewsCubit()),
-        BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
-        BlocProvider<RegistrationCubit>(
-          create: (context) => RegistrationCubit(),
-        ),
-        BlocProvider<CreatePostCubit>(create: (context)=>CreatePostCubit()),
-        BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
-        BlocProvider<PostDetailsCubit>(create: (context) => PostDetailsCubit()),
-        BlocProvider<ProfileEditCubit>(create: (context)=>ProfileEditCubit())
-      ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        color: Colors.white,
-        home: Scaffold(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      useInheritedMediaQuery: true,
+      color: Colors.white,
+      builder: (context, widget) => MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+          BlocProvider<GlobalSearchCubit>(
+              create: (context) => GlobalSearchCubit()),
+          BlocProvider<NewsCubit>(create: (context) => NewsCubit()),
+          BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
+          BlocProvider<RegistrationCubit>(
+            create: (context) => RegistrationCubit(),
+          ),
+          BlocProvider<NavigationCubit>(create: (context) => NavigationCubit()),
+          BlocProvider<PostDetailsCubit>(
+              create: (context) => PostDetailsCubit()),
+          BlocProvider<ProfileEditCubit>(
+              create: (context) => ProfileEditCubit()),
+          BlocProvider<CreatePostCubit>(
+            create: (context) => CreatePostCubit(),
+          ),
+        ],
+        child: Scaffold(
           backgroundColor: Colors.white,
           body: AppNavigator(),
         ),

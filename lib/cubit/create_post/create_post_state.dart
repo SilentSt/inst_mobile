@@ -1,8 +1,13 @@
-abstract class CreatePostState {}
+import 'dart:io';
 
-class CreatePostLoadedState extends CreatePostState{}
+abstract class CreatePostState{}
+
+class CreatePostNoContentState extends CreatePostState{}
+
+class CreatePostWithContentState extends CreatePostState{
+  final List<File> content;
+
+  CreatePostWithContentState(this.content);
+}
 
 class CreatePostLoadingState extends CreatePostState{}
-
-class CreatedPostSuccessState extends CreatePostState{}
-

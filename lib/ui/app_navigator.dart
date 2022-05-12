@@ -27,6 +27,10 @@ class AppNavigator extends StatelessWidget {
             const MaterialPage(
               child: AuthScene(),
             ),
+          if (state is NavigationCreatePostState)
+            const MaterialPage(
+              child: CreatePostScene(),
+            ),
           if (state is NavigationGlobalSearchState)
             const MaterialPage(
               child: GlobalSearchScene(),
@@ -43,10 +47,6 @@ class AppNavigator extends StatelessWidget {
           if (state is NavigationRegistrationState)
             const MaterialPage(
               child: RegistrationScene(),
-            ),
-          if (state is NavigationCreatePostState)
-            const MaterialPage(
-              child: CreatePostScene(),
             ),
           if (state is NavigationProfileEditState)
             MaterialPage(

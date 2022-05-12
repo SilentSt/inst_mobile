@@ -1,67 +1,55 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:io';
+
+import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inst_mobile/cubit/create_post/create_post_state.dart';
+import 'package:inst_mobile/data/api/post.dart';
 import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 
-import '../../data/api/post.dart';
-
 class CreatePostCubit extends Cubit<CreatePostState> {
-  CreatePostCubit() : super(CreatePostLoadedState());
+  CreatePostCubit() : super(CreatePostNoContentState());
 
-  String fileName = "";
-  List<XFile>? files = [];
-
-  Future<void> pick(Picker type, PickStorage storage) async {
-    XFile? file;
-    var picker = ImagePicker();
-    ImageSource sour;
-    switch (storage) {
-      case PickStorage.gallery:
-        sour = ImageSource.gallery;
-        break;
-      case PickStorage.camera:
-        sour = ImageSource.camera;
-        break;
-    }
-    switch (type) {
-      case Picker.image:
-        file =
-        await picker.pickImage(source: sour, maxHeight: 2500, maxWidth: 1440);
-        break;
-      case Picker.video:
-        file =
-        await picker.pickVideo(source: sour, maxDuration: Duration(minutes: 5));
-        break;
-    }
-    if (file != null) files!.add(file);
-    if (files != null && files!.isNotEmpty) {
-      fileName = "";
-      files!.forEach((element) {
-        fileName += element.name + "\n";
-      });
-      emit(CreatePostLoadingState());
-      emit(CreatePostLoadedState());
-    }
+  Future<void> dropState() async {
+    emit(CreatePostNoContentState());
   }
 
-  Future<void> createPost() async {
-    List<String> filePath = List.generate(files!.length, (index) => files![index].path);
-    var response = await PostApi().createPost(title: CreatePostControllers.titleController.text,
-        description: CreatePostControllers.descriptionController.text,
-        files: filePath);
-    if(response.statusCode>299)
-      {
-        emit(CreatePostLoadedState());
+  Future<void> addCameraContent(List<File> content) async {
+    XFile? pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      File imageFile = File(pickedFile.path);
+      content.add(imageFile);
+    }
+    emit(CreatePostWithContentState(content));
+  }
+
+  Future<void> addGalleryContent(List<File> content) async {
+    List<XFile>? pickedFile = await ImagePicker().pickMultiImage(
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      for(var file in pickedFile){
+        content.add(File(file.path));
       }
-    else{
-      emit(CreatedPostSuccessState());
     }
+    emit(CreatePostWithContentState(content));
+  }
+
+  Future<void> create(List<File> content) async {
+    List<String> files = [];
+    content.forEach(
+      (element) {
+        files.add(element.path);
+      },
+    );
+    await PostApi().createPost(
+      title: 'title',
+      description: CreatePostControllers.descriptionController.text,
+      files: files,
+    );
   }
 }
-
-enum Picker {
-  image,
-  video,
-}
-
-enum PickStorage { gallery, camera }
