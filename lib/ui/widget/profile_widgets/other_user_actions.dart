@@ -48,7 +48,7 @@ class OtherUserActions extends StatelessWidget {
           ),
           AppButton.outlined(
             action: () {
-              _cubit.unfollow(user.uuid);
+
             },
             text: AppStrings.openChat,
             size: Size((MediaQuery.of(context).size.width - 42) / 2, 30),

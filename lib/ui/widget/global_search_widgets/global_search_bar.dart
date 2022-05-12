@@ -29,28 +29,22 @@ class GlobalSearchBar extends StatelessWidget {
       style: AppTextStyles.h3.green().size(20),
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(left: 8),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: const BorderSide(
-                  width: 2, color: AppColors.darkGreen)),
-          errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: const BorderSide(
-                  width: 2, color: Colors.red)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: const BorderSide(
-                  width: 2, color: AppColors.darkGreen)),
-          disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+          border: UnderlineInputBorder(
               borderSide: const BorderSide(
                   width: 2, color: AppColors.darkGrey)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+          errorBorder: UnderlineInputBorder(
               borderSide: const BorderSide(
-                  width: 2, color: AppColors.darkGreen)),
-          focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
+                  width: 2, color: Colors.red)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: const BorderSide(
+                  width: 2, color: AppColors.darkGrey)),
+          disabledBorder: UnderlineInputBorder(
+              borderSide: const BorderSide(
+                  width: 2, color: AppColors.darkGrey)),
+          focusedBorder: UnderlineInputBorder(
+              borderSide: const BorderSide(
+                  width: 2, color: AppColors.darkGrey)),
+          focusedErrorBorder: UnderlineInputBorder(
               borderSide: const BorderSide(
                   width: 2, color: Colors.red))),
     );

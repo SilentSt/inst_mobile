@@ -22,26 +22,7 @@ class GlobalSearchScene extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              context.read<NavigationCubit>().pushToNewsScene();
-            },
-            icon: SvgPicture.asset(
-              AppStrings.arrowBackPath,
-            )),
         title: GlobalSearchBar(cubit: _cubit),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-                onPressed: () {
-                  _cubit.find(GlobalSearchControllers.searchController.text);
-                },
-                icon: SvgPicture.asset(
-                  AppStrings.searchGreenPath,
-                )),
-          )
-        ],
       ),
       body: BlocBuilder<GlobalSearchCubit, GlobalSearchState>(
           builder: (context, state) {
@@ -52,34 +33,34 @@ class GlobalSearchScene extends StatelessWidget {
           var users = state.users;
           //var posts = state.posts;
           return SingleChildScrollView(
-              child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.9,
-            child: Column(
-              children: [
-                users.isEmpty?SizedBox.shrink():Column(
-                  children: [
-                    Text(
-                      AppStrings.usersResult,
-                      style: AppTextStyles.h2.black().bold900(),
+              child: Column(
+            children: [
+              users.isEmpty
+                  ? SizedBox.shrink()
+                  : SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Expanded(
+                        child: Wrap(
+                          children: List.generate(
+                            users.length,
+                            (index) => UsersSearchResult(users: users[index]),
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                        height: users.length*90,
-                        child: UsersSearchResult(users: users)),
-                  ],
-                ),
-                // posts.isEmpty?SizedBox.shrink():Column(
-                //   children: [
-                //     Text(
-                //       AppStrings.postsResult,
-                //       style: AppTextStyles.h2.black().bold900(),
-                //     ),
-                //     SizedBox(
-                //         height: posts.length*90,
-                //         child: PostsSearchResult(posts: posts))
-                //   ],
-                // ),
-              ],
-            ),
+              // posts.isEmpty?SizedBox.shrink():Column(
+              //   children: [
+              //     Text(
+              //       AppStrings.postsResult,
+              //       style: AppTextStyles.h2.black().bold900(),
+              //     ),
+              //     SizedBox(
+              //         height: posts.length*90,
+              //         child: PostsSearchResult(posts: posts))
+              //   ],
+              // ),
+            ],
           ));
         }
         if (state is GlobalSearchEmptyState) {
@@ -96,7 +77,9 @@ class GlobalSearchScene extends StatelessWidget {
         }
         return const Center(child: CircularProgressIndicator());
       }),
-      bottomNavigationBar: const AppBottomBar(searchPage: true,),
+      bottomNavigationBar: const AppBottomBar(
+        searchPage: true,
+      ),
     );
   }
 }

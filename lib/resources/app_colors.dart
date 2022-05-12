@@ -12,4 +12,5 @@ class AppColors {
   static const Color inputBorderColor = Color(0x3F000000);
   static const Color baseShimmer = Color(0xffE1E9F2);
   static const Color highlightShimmer = Color(0xffC8DDF2);
+  static const Color roseGold = Color(0xFFFFDBEB);
 }

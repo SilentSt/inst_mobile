@@ -40,6 +40,8 @@ extension AppTextExtension on TextStyle {
 
   TextStyle accent() => copyWith(color: AppColors.accentColor);
 
+  TextStyle roseGold() => copyWith(color: AppColors.roseGold);
+
   TextStyle grey() => copyWith(color: AppColors.darkGrey);
 
   TextStyle lightGrey() => copyWith(color: AppColors.lightGrey);
