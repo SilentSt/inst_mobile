@@ -9,7 +9,10 @@ import 'package:inst_mobile/cubit/profile_edit/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
+import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
+import 'package:inst_mobile/ui/widget/app_error.dart';
+import 'package:inst_mobile/ui/widget/text_fields/app_textfield.dart';
 
 class ProfileEditScene extends StatelessWidget {
   @override
@@ -28,136 +31,165 @@ class ProfileEditScene extends StatelessWidget {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             leading: IconButton(
-                onPressed: () {
-                  context.read<ProfileCubit>().dropState();
-                  context.read<NavigationCubit>().pushToProfileScene(TempData.me!.toSmallUser());
-                },
-                icon: SvgPicture.asset(
-                  AppStrings.arrowBackPath,
-                ),
+              onPressed: () {
+                context.read<ProfileCubit>().dropState();
+                context
+                    .read<NavigationCubit>()
+                    .pushToProfileScene(TempData.me!.toSmallUser());
+              },
+              icon: SvgPicture.asset(
+                AppStrings.arrowBackPath,
+              ),
             ),
             title: Text(
               AppStrings.editProfileTitle,
-              style: AppTextStyles.h1.black().bold900(),
+              style: AppTextStyles.h2.black().bold900(),
             ),
-            centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  context.read<ProfileEditCubit>().applyChanges();
+                },
+                icon: Icon(
+                  Icons.check,
+                  color: AppColors.accentColor,
+                ),
+              ),
+            ],
           ),
           body: SafeArea(
               child: SingleChildScrollView(
             child: SizedBox(
               width: size.width,
-              height: size.height*0.9,
+              height: size.height * 0.9,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Stack(alignment: AlignmentDirectional.center, children: [
-                      context.read<ProfileEditCubit>().changed
-                          ? (context.read<ProfileEditCubit>().file != null
-                              ? Container(
-                                  width: 180.0,
-                                  height: 180.0,
-                                  decoration: BoxDecoration(
+                    Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: [
+                        context.read<ProfileEditCubit>().changed
+                            ? (context.read<ProfileEditCubit>().file != null
+                                ? Container(
+                                    width: 180.0,
+                                    height: 180.0,
+                                    decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: FileImage(File(context
+                                        fit: BoxFit.fill,
+                                        image: FileImage(
+                                          File(context
                                               .read<ProfileEditCubit>()
                                               .file!
-                                              .path)))))
-                              : CircleAvatar(
-                                  backgroundColor: AppColors.lightGrey,
-                                  radius: 90))
-                          : (TempData.me!.photo.isNotEmpty
-                              ? Container(
-                                  width: 180.0,
-                                  height: 180.0,
-                                  decoration: BoxDecoration(
+                                              .path),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: AppColors.lightGrey,
+                                    radius: 90))
+                            : (TempData.me!.photo.isNotEmpty
+                                ? Container(
+                                    width: 180.0,
+                                    height: 180.0,
+                                    decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage(TempData.me!
-                                              .photo)))) //SizedBox(child: Image.network(TempData.me!.photo),width: 180,height: 180,)
-                              : CircleAvatar(
-                                  backgroundColor: AppColors.lightGrey,
-                                  radius: 90)),
-                      Center(
-                        child: IconButton(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(TempData.me!.photo),
+                                      ),
+                                    ),
+                                  ) //SizedBox(child: Image.network(TempData.me!.photo),width: 180,height: 180,)
+                                : CircleAvatar(
+                                    backgroundColor: AppColors.lightGrey,
+                                    radius: 90,
+                                  )),
+                        Center(
+                          child: IconButton(
                             icon: SvgPicture.asset(
-                              AppStrings.addPath,
-                              color: AppColors.snow,
+                              AppStrings.cameraPath,
                             ),
                             onPressed: () {
                               showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      contentPadding: EdgeInsets.zero,
-                                      content: Expanded(
-                                        child: SizedBox(
-                                          height: 80,
-                                          width: 110,
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                  height: 40,
-                                                  child: TextButton(
-                                                      onPressed: () {
-                                                        context.read<ProfileEditCubit>().replaceAvatar(true);
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        AppStrings.gallery,
-                                                        style: AppTextStyles.h2
-                                                            .green()
-                                                            .bold500(),
-                                                      ))),
-                                              SizedBox(
-                                                  height: 40,
-                                                  child: TextButton(
-                                                      onPressed: () {
-                                                        context.read<ProfileEditCubit>().replaceAvatar(false);
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(AppStrings.camera,
-                                                          style: AppTextStyles.h2
-                                                              .green()
-                                                              .bold500())))
-                                            ],
-                                          ),
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    contentPadding: EdgeInsets.zero,
+                                    content: Expanded(
+                                      child: SizedBox(
+                                        height: 80,
+                                        width: 110,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 40,
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  context
+                                                      .read<ProfileEditCubit>()
+                                                      .replaceAvatar(true);
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  AppStrings.gallery,
+                                                  style: AppTextStyles.h2
+                                                      .accent()
+                                                      .bold500(),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 40,
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  context
+                                                      .read<ProfileEditCubit>()
+                                                      .replaceAvatar(false);
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  AppStrings.camera,
+                                                  style: AppTextStyles.h2
+                                                      .accent()
+                                                      .bold500(),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    );
-                                  });
-                            }),
-                      )
-                    ]),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(
                       height: 10,
                     ),
-                    // CustomTextField(
-                    //     title: AppStrings.emailTitle,
-                    //     controller: ProfileEditControllers.emailController),
-                    // CustomTextField(
-                    //   title: AppStrings.passwordTitle,
-                    //   controller: ProfileEditControllers.passwordController,
-                    //   obfuscation: true,
-                    // ),
-                    // SingleChildScrollView(
-                    //   child: CustomTextField(
-                    //       title: AppStrings.status,
-                    //       controller:
-                    //           ProfileEditControllers.descriptionController,
-                    //       maxLines: 2),
-                    // ),
-                    //TODO:button removed
-                    // CustomDarkButton(
-                    //     size: size,
-                    //     text: AppStrings.acceptEdit,
-                    //     func: () {
-                    //       context.read<ProfileEditCubit>().applyChanges();
-                    //     })
+                    AppTextField(
+                        label: AppStrings.emailTitle,
+                        controller: ProfileEditControllers.emailController),
+                    AppTextField(
+                      label: AppStrings.passwordTitle,
+                      controller: ProfileEditControllers.passwordController,
+                      obscuredField: true,
+                      obscureWidgetActive: Icon(Icons.visibility),
+                      obscureWidgetDisabled: Icon(Icons.visibility_off),
+                    ),
+                    SingleChildScrollView(
+                      child: AppTextField(
+                          label: AppStrings.status,
+                          controller:
+                              ProfileEditControllers.descriptionController,
+                          maxLines: 2),
+                    ),
                   ],
                 ),
               ),
@@ -167,12 +199,21 @@ class ProfileEditScene extends StatelessWidget {
       }
       if (state is ProfileEditSuccessState) {
         context.read<ProfileCubit>().dropState();
-        context.read<NavigationCubit>().pushToProfileScene(TempData.me!.toSmallUser());
+        context
+            .read<NavigationCubit>()
+            .pushToProfileScene(TempData.me!.toSmallUser());
       }
-      if(state is ProfileEditAvatarChangedState)
-        {
-          context.read<ProfileEditCubit>().applyAvatar();
-        }
+      if (state is ProfileEditAvatarChangedState) {
+        context.read<ProfileEditCubit>().applyAvatar();
+      }
+      if (state is ProfileEditErrorState) {
+        return AppError(
+            error: 'Не получилось отредактировать профиль',
+            action: () {
+              context.read<NavigationCubit>().pushToNewsScene();
+              context.read<ProfileEditCubit>().applyAvatar();
+            });
+      }
 
       return SizedBox.shrink();
     });

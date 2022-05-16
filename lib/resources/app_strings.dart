@@ -41,7 +41,7 @@ class AppStrings {
   static const String status = "Статус ";
   static const String gallery = "Галлерея";
   static const String camera = "Камера";
-  static const String editProfileTitle = "Редактирование профиля";
+  static const String editProfileTitle = "Редактировать профиль";
   //ui strings
 
   //errors

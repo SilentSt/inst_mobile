@@ -11,6 +11,7 @@ class AppTextField extends StatefulWidget {
     this.obscuredField = false,
     this.size = const Size(344, 60),
     this.obscureWidgetDisabled,
+    this.maxLines = 1,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -19,6 +20,7 @@ class AppTextField extends StatefulWidget {
   final Widget? obscureWidgetDisabled;
   final bool obscuredField;
   final Size size;
+  final int maxLines;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -34,6 +36,7 @@ class _AppTextFieldState extends State<AppTextField> {
       width: widget.size.width,
       child: TextField(
         controller: widget.controller,
+        maxLines: widget.maxLines,
         decoration: InputDecoration(
           border: baseBorder(),
           disabledBorder: baseBorder(),
@@ -69,7 +72,7 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 
-  InputBorder baseBorder(){
+  InputBorder baseBorder() {
     return UnderlineInputBorder(
       borderSide: BorderSide(
         color: AppColors.inputBorderColor,

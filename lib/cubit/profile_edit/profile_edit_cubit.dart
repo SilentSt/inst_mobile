@@ -31,14 +31,14 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
       print(response.body);
       if(response.statusCode>299)
         {
-          emit(ProfileEditLoadedState());
+          emit(ProfileEditErrorState());
         }
       else{
         emit(ProfileEditSuccessState());
       }
     }
     catch (_) {
-      emit(ProfileEditLoadedState());
+      emit(ProfileEditErrorState());
     }
   }
 
