@@ -68,6 +68,8 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     var response = await PostApi().likePost(postUuid);
     if(response.statusCode>299)
     {
+      print(response.statusCode);
+      print(response.body);
       emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));
     }
     else{

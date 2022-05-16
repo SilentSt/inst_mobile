@@ -17,24 +17,30 @@ class PostsSearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(
-            posts.length,
-                (index) => Card(
-              elevation: 0,
-              child: Column(children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(90),
-                  child: ImageNetwork(
-                      height: 90,
-                      width: 90,
-                      onTap: (){
-                        context.read<ProfileCubit>().clearData();
-                        context.read<NavigationCubit>().pushToProfileScene(posts[index].author);
-                      },
-                      image: posts[index].files.first.url),
-                ),
-              ]),
-            )));
+      crossAxisCount: 3,
+      children: List.generate(
+        posts.length,
+        (index) => Card(
+          elevation: 0,
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(90),
+                child: ImageNetwork(
+                    height: 90,
+                    width: 90,
+                    onTap: () {
+                      context.read<ProfileCubit>().dropState();
+                      context
+                          .read<NavigationCubit>()
+                          .pushToProfileScene(posts[index].author);
+                    },
+                    image: posts[index].files.first.url),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

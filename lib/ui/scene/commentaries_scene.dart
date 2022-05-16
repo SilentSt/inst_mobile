@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_network/image_network.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
 import 'package:inst_mobile/cubit/post_details_cubit/cubit.dart';
+import 'package:inst_mobile/cubit/profile/profile_cubit.dart';
 import 'package:inst_mobile/data/models/post.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
 import 'package:inst_mobile/ui/styles/app_text_styles.dart';
 import 'package:inst_mobile/ui/widget/app_error.dart';
+import 'package:intl/intl.dart';
 import '../widget/post_widgets/commentaries_feed.dart';
 import '../widget/post_widgets/commentary_input_card.dart';
 import '../widget/post_widgets/post_description.dart';
@@ -58,22 +61,121 @@ class CommentariesScene extends StatelessWidget {
             ),
             backgroundColor: AppColors.snow,
             body: SafeArea(
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).padding.vertical,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CommentariesFeed(
-                        post: post,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 5, left: 2),
+                                  child: ImageNetwork(
+                                    height: 38,
+                                    width: 38,
+                                    onTap: () {
+                                      context
+                                          .read<ProfileCubit>()
+                                          .dropState();
+                                      context
+                                          .read<NavigationCubit>()
+                                          .pushToProfileScene(post.author);
+                                    },
+                                    image: post.author.photo,
+                                    borderRadius: BorderRadius.circular(90),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.7,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '@' + post.author.nickname,
+                                        style: AppTextStyles.h3
+                                            .black()
+                                            .bold900(),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        post.description,
+                                        style: AppTextStyles.h4.black(),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            DateFormat('dd.MM.yy').format(
+                                              post.createdAt,
+                                            ),
+                                            style: AppTextStyles.h4.grey(),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      CommentaryInputCard(
-                        postUuid: post.uuid,
-                      )
+                      SizedBox(
+                        height: 25,
+                        child: Center(
+                          child: SizedBox(
+                            height: 1,
+                            width: MediaQuery.of(context).size.width,
+                            child: ColoredBox(
+                              color: AppColors.baseShimmer,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height*.6,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: CommentariesFeed(
+                              post: post,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
+                  CommentaryInputCard(
+                    postUuid: post.uuid,
+                  )
+                ],
               ),
             ),
           );

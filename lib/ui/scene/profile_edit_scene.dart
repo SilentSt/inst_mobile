@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
+import 'package:inst_mobile/cubit/profile/profile_cubit.dart';
 import 'package:inst_mobile/cubit/profile_edit/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
@@ -28,11 +29,13 @@ class ProfileEditScene extends StatelessWidget {
             shadowColor: Colors.transparent,
             leading: IconButton(
                 onPressed: () {
+                  context.read<ProfileCubit>().dropState();
                   context.read<NavigationCubit>().pushToProfileScene(TempData.me!.toSmallUser());
                 },
                 icon: SvgPicture.asset(
                   AppStrings.arrowBackPath,
-                )),
+                ),
+            ),
             title: Text(
               AppStrings.editProfileTitle,
               style: AppTextStyles.h1.black().bold900(),
@@ -163,9 +166,8 @@ class ProfileEditScene extends StatelessWidget {
         );
       }
       if (state is ProfileEditSuccessState) {
-        context
-            .read<NavigationCubit>()
-            .pushToProfileScene(TempData.me!.toSmallUser());
+        context.read<ProfileCubit>().dropState();
+        context.read<NavigationCubit>().pushToProfileScene(TempData.me!.toSmallUser());
       }
       if(state is ProfileEditAvatarChangedState)
         {

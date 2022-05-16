@@ -28,7 +28,7 @@ class PostDescription extends StatelessWidget {
             width: 38,
             image: post.author.photo,
             onTap: (){
-              context.read<ProfileCubit>().clearData();
+              context.read<ProfileCubit>().dropState();
               context.read<NavigationCubit>().pushToProfileScene(post.author);
             },
             borderRadius:

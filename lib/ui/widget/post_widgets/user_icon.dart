@@ -37,7 +37,7 @@ class UserIcon extends StatelessWidget {
             fitAndroidIos: BoxFit.cover,
             fitWeb: BoxFitWeb.cover,
             onTap: () {
-              context.read<ProfileCubit>().clearData();
+              context.read<ProfileCubit>().dropState();
               context.read<NavigationCubit>().pushToProfileScene(user);
             },
             onLoading: const CircularProgressIndicator(

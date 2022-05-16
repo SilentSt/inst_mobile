@@ -21,7 +21,7 @@ class AppStrings {
   static const String alreadyHaveAccount = "Уже есть аккаунт? ";
   static const String forgotPassword = "Забыли пароль? ";
   static const String registerSuggestion = "Зарегестрируйтесь";
-  static const String sendCommentary = 'Отправить';
+  static const String sendCommentary = 'Опубликовать';
   static const String createPostTitle = "Создание публикации";
   static const String title = "Заголовок";
   static const String description = "Описание";

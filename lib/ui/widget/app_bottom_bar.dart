@@ -178,7 +178,7 @@ class AppBottomBar extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  context.read<ProfileCubit>().clearData();
+                  context.read<ProfileCubit>().dropState();
                   context
                       .read<NavigationCubit>()
                       .pushToProfileScene(TempData.me!.toSmallUser());

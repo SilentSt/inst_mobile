@@ -23,6 +23,10 @@ class UsersSearchResult extends StatelessWidget {
         ImageNetwork(
           image: users.photo,
           fitAndroidIos: BoxFit.cover,
+          onTap: () {
+            context.read<ProfileCubit>().dropState();
+            context.read<NavigationCubit>().pushToProfileScene(users);
+          },
           height: (MediaQuery.of(context).size.width - 2) / 3,
           width: (MediaQuery.of(context).size.width - 2) / 3,
         ),
@@ -31,11 +35,12 @@ class UsersSearchResult extends StatelessWidget {
           height: 25,
           child: DecoratedBox(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-              colors: [Colors.transparent, Colors.black12, Colors.black45],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            )),
+              gradient: LinearGradient(
+                colors: [Colors.transparent, Colors.black12, Colors.black45],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 15,

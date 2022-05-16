@@ -102,10 +102,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoadedState());
   }
 
-  Future<void> clearData() async {
-    emit(ProfileEmptyState());
-  }
-
   Future<void> follow(String uuid) async {
     emit(ProfileLoadingState());
     try {
@@ -136,5 +132,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     } catch (_) {
       emit(ProfileErrorState(error: AppStrings.errorLoadingProfile));
     }
+  }
+
+  void dropState(){
+    emit(ProfileEmptyState());
   }
 }
