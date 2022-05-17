@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_network/image_network.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
+import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/cubit/post_details_cubit/cubit.dart';
 import 'package:inst_mobile/cubit/profile/profile_cubit.dart';
 import 'package:inst_mobile/data/models/post.dart';
@@ -13,10 +14,6 @@ import 'package:inst_mobile/ui/widget/app_error.dart';
 import 'package:intl/intl.dart';
 import '../widget/post_widgets/commentaries_feed.dart';
 import '../widget/post_widgets/commentary_input_card.dart';
-import '../widget/post_widgets/post_description.dart';
-import '../widget/post_widgets/post_details_action_bar.dart';
-import '../widget/post_widgets/post_details_app_bar.dart';
-import '../widget/post_widgets/post_details_content.dart';
 
 class CommentariesScene extends StatelessWidget {
   const CommentariesScene({Key? key, required this.post}) : super(key: key);
@@ -38,6 +35,7 @@ class CommentariesScene extends StatelessWidget {
               shadowColor: Colors.transparent,
               leading: IconButton(
                 onPressed: () {
+                  context.read<NewsCubit>().dropState();
                   context.read<NavigationCubit>().pushToNewsScene();
                 },
                 icon: SvgPicture.asset(

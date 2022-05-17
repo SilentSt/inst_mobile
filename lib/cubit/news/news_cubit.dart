@@ -5,9 +5,6 @@ import 'package:inst_mobile/data/api/history.dart';
 import 'package:inst_mobile/data/api/post.dart';
 import 'package:inst_mobile/data/models/history.dart';
 import 'package:inst_mobile/data/models/post.dart';
-import 'package:inst_mobile/resources/app_strings.dart';
-
-import '../../data/api/user.dart';
 import 'news_state.dart';
 
 class NewsCubit extends Cubit<NewsState> {
@@ -92,4 +89,6 @@ class NewsCubit extends Cubit<NewsState> {
     }
     emit(NewsLoadedState());
   }
+
+  void dropState() => emit(NewsInitialState());
 }

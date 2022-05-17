@@ -52,6 +52,7 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     }
     emit(PostDetailsLoadingState());
     var response = await CommentaryApi().createCommentary(PostCommentary(text: CommentaryControllers.commentaryTitle.text), postUuid);
+    CommentaryControllers.commentaryTitle.clear();
     if(response.statusCode>299)
       {
         emit(PostDetailsErrorState(error: AppStrings.unhandledException));
