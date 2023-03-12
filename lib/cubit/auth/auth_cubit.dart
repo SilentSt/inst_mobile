@@ -6,12 +6,11 @@ import 'package:inst_mobile/cubit/auth/auth_state.dart';
 import 'package:inst_mobile/data/api/user.dart';
 import 'package:inst_mobile/data/models/user.dart';
 import 'package:inst_mobile/data/temp_data.dart';
-import 'package:inst_mobile/ui/controllers/text_editing_controllers.dart';
 
 import '../../resources/app_strings.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthLoadingState());
+  AuthCubit() : super(AuthLoadedState());
   String? username;
   String? password;
 
@@ -49,18 +48,19 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> checkAppReadyToStart() async {
-    emit(AuthLoadingState());
-    try {
-      final result = await InternetAddress.lookup(AppStrings.networkTesterUrl);
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        emit(AuthLoadedState());
-        return;
-      }
-    } on SocketException catch (_) {
-      emit(AuthErrorState(error: AppStrings.networkException));
-      return;
-    }
-    emit(AuthErrorState(error: AppStrings.unhandledException));
+    //emit(AuthLoadingState());
+    // try {
+    //   final result = await InternetAddress.lookup(AppStrings.networkTesterUrl);
+    //   if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        
+    //     return;
+    //   }
+    // } on SocketException catch (_) {
+    //   emit(AuthErrorState(error: AppStrings.networkException));
+    //   return;
+    // }
+    emit(AuthLoadedState());
+    // emit(AuthErrorState(error: AppStrings.unhandledException));
   }
 
   Future<void> acceptError() async {

@@ -89,10 +89,7 @@ class StartScene extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          FittedBox(
-            child: Image.asset(AppStrings.testImage),
-            fit: BoxFit.fill,
-          ),
+          Image.asset(AppStrings.testImage),
           const SizedBox(
             height: 20,
           ),
