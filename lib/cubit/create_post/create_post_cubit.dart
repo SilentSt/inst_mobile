@@ -13,43 +13,34 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(CreatePostNoContentState());
   }
 
-  Future<void> addCameraContent(List<File> content) async {
+  Future<void> addCameraContent(List<XFile> content) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
       maxWidth: 1800,
       maxHeight: 1800,
     );
     if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
-      content.add(imageFile);
+      content.add(pickedFile);
     }
     emit(CreatePostWithContentState(content));
   }
 
-  Future<void> addGalleryContent(List<File> content) async {
+  Future<void> addGalleryContent(List<XFile> content) async {
     List<XFile>? pickedFile = await ImagePicker().pickMultiImage(
       maxWidth: 1800,
       maxHeight: 1800,
     );
-    if (pickedFile != null) {
-      for(var file in pickedFile){
-        content.add(File(file.path));
-      }
+    for (var file in pickedFile) {
+      content.add(file);
     }
     emit(CreatePostWithContentState(content));
   }
 
-  Future<void> create(List<File> content) async {
-    List<String> files = [];
-    content.forEach(
-      (element) {
-        files.add(element.path);
-      },
-    );
+  Future<void> create(List<XFile> content) async {    
     await PostApi().createPost(
       title: 'title',
       description: CreatePostControllers.descriptionController.text,
-      files: files,
+      files: content,
     );
   }
 }

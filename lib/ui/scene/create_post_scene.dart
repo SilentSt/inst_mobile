@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +28,9 @@ class CreatePostScene extends StatelessWidget {
                 elevation: 1,
                 backgroundColor: AppColors.snow,
                 leading: IconButton(
-                  onPressed: (){context.read<NavigationCubit>().pushToNewsScene();},
+                  onPressed: () {
+                    context.read<NavigationCubit>().pushToNewsScene();
+                  },
                   icon: SvgPicture.asset(
                     AppStrings.arrowBackPath,
                   ),
@@ -52,8 +56,7 @@ class CreatePostScene extends StatelessWidget {
             backgroundColor: AppColors.snow,
             body: SafeArea(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,14 +73,15 @@ class CreatePostScene extends StatelessWidget {
                         maxLines: 20,
                         controller: CreatePostControllers.descriptionController,
                         decoration: InputDecoration(
-                            border: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            focusedErrorBorder: InputBorder.none,
-                            hintText: 'Добавьте подпись . . .',
-                            counter: SizedBox()),
+                          border: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          focusedErrorBorder: InputBorder.none,
+                          hintText: 'Добавьте подпись . . .',
+                          counter: SizedBox(),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -92,8 +96,16 @@ class CreatePostScene extends StatelessWidget {
                         ),
                         child: FittedBox(
                           fit: BoxFit.fill,
-                          child: Image.file(
-                            state.content.first,
+                          child: FutureBuilder<Uint8List>(
+                            future: state.content.first.readAsBytes(),
+                            builder: (context, snapshot) {
+                              if (snapshot.data == null) {
+                                return SizedBox();
+                              }
+                              return Image.memory(
+                                snapshot.data!,
+                              );
+                            },
                           ),
                         ),
                       ),
