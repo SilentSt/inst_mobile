@@ -92,9 +92,9 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     }
   }
 
-  Future<void> likeCommentary(String postUuid) async {
+  Future<void> likeCommentary(String commentUuid, String postUuid) async {
     emit(PostDetailsLoadingState());
-    var response = await CommentaryApi().likeComment(postUuid);
+    var response = await CommentaryApi().likeComment(commentUuid);
     if(response.statusCode>299)
     {
       emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));
@@ -105,9 +105,9 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
     }
   }
 
-  Future<void> removeLikeCommentary(String postUuid) async {
+  Future<void> removeLikeCommentary(String commentUuid, String postUuid) async {
     emit(PostDetailsLoadingState());
-    var response = await CommentaryApi().removeCommentLike(postUuid);
+    var response = await CommentaryApi().removeCommentLike(commentUuid);
     if(response.statusCode>299)
     {
       emit(PostDetailsErrorState(error: AppStrings.errorDialogTitle));

@@ -37,80 +37,83 @@ class AuthScene extends StatelessWidget {
             ),
           ),
           backgroundColor: Colors.white,
-          body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 60),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox.shrink(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Padding(
+          body: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 400),
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 60),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox.shrink(),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          AppTextField(
-                            controller: AuthSceneControllers.loginController,
-                            label: AppStrings.emailTitle,
-                          ),
-                          AppTextField(
-                            controller: AuthSceneControllers.passwordController,
-                            label: AppStrings.passwordTitle,
-                            obscuredField: true,
-                            obscureWidgetActive: Icon(
-                              Icons.visibility,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppTextField(
+                              controller: AuthSceneControllers.loginController,
+                              label: AppStrings.emailTitle,
                             ),
-                            obscureWidgetDisabled: Icon(
-                              Icons.visibility_off,
+                            AppTextField(
+                              controller: AuthSceneControllers.passwordController,
+                              label: AppStrings.passwordTitle,
+                              obscuredField: true,
+                              obscureWidgetActive: Icon(
+                                Icons.visibility,
+                              ),
+                              obscureWidgetDisabled: Icon(
+                                Icons.visibility_off,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  AppButton.accent(
-                    action: () {
-                      _cubit.login(
-                        username: AuthSceneControllers.loginController.text,
-                        password: AuthSceneControllers.passwordController.text,
-                      );
-                    },
-                    size: Size(343, 30),
-                    text: AppStrings.loginButton,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppStrings.notAccount,
-                            style: AppTextStyles.h4.black(),
-                          ),
-                          GestureDetector(
-                            onTap: context
-                                .read<NavigationCubit>()
-                                .pushToRegistrationScene,
-                            child: Text(
-                              AppStrings.registerSuggestion,
-                              style: AppTextStyles.h4.accent().underline(),
+                    AppButton.accent(
+                      action: () {
+                        _cubit.login(
+                          username: AuthSceneControllers.loginController.text,
+                          password: AuthSceneControllers.passwordController.text,
+                        );
+                      },
+                      size: Size(343, 30),
+                      text: AppStrings.loginButton,
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppStrings.notAccount,
+                              style: AppTextStyles.h4.black(),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Text(
-                        AppStrings.forgotPassword,
-                        style: AppTextStyles.h4.black(),
-                      ),
-                    ],
-                  ),
-                ],
+                            GestureDetector(
+                              onTap: context
+                                  .read<NavigationCubit>()
+                                  .pushToRegistrationScene,
+                              child: Text(
+                                AppStrings.registerSuggestion,
+                                style: AppTextStyles.h4.accent().underline(),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Text(
+                          AppStrings.forgotPassword,
+                          style: AppTextStyles.h4.black(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

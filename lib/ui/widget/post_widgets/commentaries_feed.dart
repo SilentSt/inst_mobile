@@ -106,9 +106,9 @@ class CommentariesFeed extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         !_cubit.commentaries[index].isLiked!
-                            ? _cubit.removeLikeCommentary(
-                                _cubit.commentaries[index].uuid)
-                            : _cubit.likePost(_cubit.commentaries[index].uuid);
+                            ? _cubit.likeCommentary(
+                                _cubit.commentaries[index].uuid, post.uuid)
+                            : _cubit.removeLikeCommentary(_cubit.commentaries[index].uuid, post.uuid);
                       },
                       icon: SvgPicture.asset(
                         !_cubit.commentaries[index].isLiked!
