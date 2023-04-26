@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:inst_mobile/data/http_headers.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
+import 'package:http_parser/http_parser.dart';
 
 class PostApi {
   Future<http.Response> createPost(
@@ -11,7 +12,13 @@ class PostApi {
       ..fields.addAll({'title': title, 'description': description});
     for (var f in files) {
       final file = await f.readAsBytes();
-      request.files.add(await http.MultipartFile.fromBytes('file', file));
+      request.files.add(
+        await http.MultipartFile.fromBytes(
+          'file',
+          file,
+          contentType: MediaType.parse('image/jpeg'),
+        ),
+      );
     }
     print(request);
     print(request.fields);
