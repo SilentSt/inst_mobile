@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inst_mobile/cubit/create_post/create_post_cubit.dart';
 import 'package:inst_mobile/cubit/create_post/create_post_state.dart';
 import 'package:inst_mobile/cubit/navigation/cubit.dart';
+import 'package:inst_mobile/cubit/news/cubit.dart';
 import 'package:inst_mobile/data/temp_data.dart';
 import 'package:inst_mobile/resources/app_colors.dart';
 import 'package:inst_mobile/resources/app_strings.dart';
@@ -41,9 +42,10 @@ class CreatePostScene extends StatelessWidget {
                 ),
                 actions: [
                   IconButton(
-                    onPressed: () {
-                      context.read<CreatePostCubit>().create(state.content);
+                    onPressed: () async {
+                      await context.read<CreatePostCubit>().create(state.content);
                       context.read<NavigationCubit>().pushToNewsScene();
+                      await context.read<NewsCubit>().loadData();
                     },
                     icon: Icon(
                       Icons.check,

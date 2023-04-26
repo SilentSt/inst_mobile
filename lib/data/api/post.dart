@@ -16,6 +16,7 @@ class PostApi {
         await http.MultipartFile.fromBytes(
           'file',
           file,
+          filename: f.name,
           contentType: MediaType.parse('image/jpeg'),
         ),
       );

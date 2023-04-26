@@ -36,7 +36,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(CreatePostWithContentState(content));
   }
 
-  Future<void> create(List<XFile> content) async {    
+  Future<void> create(List<XFile> content) async {
     await PostApi().createPost(
       title: 'title',
       description: CreatePostControllers.descriptionController.text,

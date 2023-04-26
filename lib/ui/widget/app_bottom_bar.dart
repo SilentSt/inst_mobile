@@ -59,9 +59,9 @@ class AppBottomBar extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {
+                onPressed: () async {
                   //context.read<NavigationCubit>().pushToCreatePostScene();
-                  showCupertinoModalPopup(
+                  await showCupertinoModalPopup(
                     context: context,
                     builder: (context) {
                       return BaseDialog(
@@ -163,6 +163,7 @@ class AppBottomBar extends StatelessWidget {
                       );
                     },
                   );
+                 
                 },
                 icon: SvgPicture.asset(
                   addPage ? AppStrings.addHPath : AppStrings.addPath,
